@@ -1,15 +1,34 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {
+  Image,
+  ImageBackground,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import useStatusBar from '../../services/useStatusBarCustom';
+import {centerAll, vh, vw} from '../../services/styleSheets';
 
 const LoadingScreen = () => {
-  useStatusBar('#A0DDFC');
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        <Text>LoadingScreen</Text>
-      </View>
+      <StatusBar hidden={true} />
+      <ImageBackground
+        source={require('../../assets/loading/loadingback.png')}
+        resizeMode="cover"
+        style={[styles.image, centerAll]}>
+        <View style={centerAll}>
+          <Text style={styles.txt}>Học qua nét cọ</Text>
+          <Text style={styles.txt}>Vui từng khoảnh khắc</Text>
+        </View>
+        <Image
+          width={vw(70)}
+          height={vw(70)}
+          resizeMode="cover"
+          source={require('../../assets/loading/loadingImage.png')}
+        />
+      </ImageBackground>
     </SafeAreaView>
   );
 };
@@ -18,4 +37,13 @@ export default LoadingScreen;
 
 const styles = StyleSheet.create({
   container: {flex: 1},
+  image: {
+    flex: 1,
+    rowGap: vh(10),
+  },
+  txt: {
+    color: '#000',
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
 });
