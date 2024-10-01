@@ -10,7 +10,7 @@ const App = () => {
   return (
     <NavigationContainer>
       {/* Main || Login */}
-      <Stack.Navigator initialRouteName="LoadingScreen">
+      <Stack.Navigator initialRouteName="StartScreen">
         <Stack.Screen
           name="LoadingScreen"
           component={LoadingScreen}
