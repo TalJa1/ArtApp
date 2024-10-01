@@ -74,16 +74,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   starImg: {
-    width: vw(11),
-    height: vw(11),
+    width: vw(12),
+    height: vw(12),
     resizeMode: 'contain',
     position: 'relative',
-    left: vw(4),
+    left: vw(4.5),
     zIndex: 2,
   },
   headerTxtContainer: {
     backgroundColor: '#EFBB00',
-    paddingVertical: vh(0.5),
+    paddingVertical: vh(0.3),
     paddingHorizontal: vw(5),
     borderTopRightRadius: vw(20),
     borderBottomRightRadius: vw(20),
@@ -91,8 +91,8 @@ const styles = StyleSheet.create({
     borderColor: '#C8E589',
   },
   headerTxt: {
-    fontSize: vw(4),
+    fontSize: 20,
     color: '#fff',
-    fontWeight: 'bold',
+    fontWeight: '900',
   },
 });
