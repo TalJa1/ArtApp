@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {
   Image,
   ScrollView,
@@ -9,16 +10,42 @@ import {
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBarCustom';
-import {vh, vw} from '../../services/styleSheets';
+import {centerAll, vh, vw} from '../../services/styleSheets';
+import {playStartIcon} from '../../assets/svgXml';
 
 const StartScreen = () => {
   useStatusBar('#8ACE5D');
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <Header />
+      <ScrollView contentContainerStyle={{flex: 1}}>
+        <View style={{flex: 1, justifyContent: 'space-between'}}>
+          <Header />
+          <CenterView />
+          <Footer />
+        </View>
       </ScrollView>
     </SafeAreaView>
+  );
+};
+
+const Footer: React.FC = () => {
+  return <View></View>;
+};
+
+const CenterView: React.FC = () => {
+  return (
+    <View style={centerAll}>
+      <Image
+        width={vw(80)}
+        height={vw(80)}
+        resizeMode="contain"
+        source={require('../../assets/start/start1.png')}
+      />
+      <TouchableOpacity style={styles.goOnBtn}>
+        {playStartIcon(vw(10), vw(10))}
+        <Text style={styles.goOnTxt}>Tiếp tục</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
@@ -94,5 +121,27 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#fff',
     fontWeight: '900',
+  },
+  goOnBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    paddingVertical: vw(3),
+    paddingHorizontal: vw(10),
+    borderRadius: vw(10),
+    marginTop: vh(5),
+    columnGap: vw(4),
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5, // For Android shadow
+  },
+  goOnTxt: {
+    fontSize: 32,
+    fontWeight: '900',
+    color: '#000000',
+    fontFamily: 'Nunito-Bold',
   },
 });
