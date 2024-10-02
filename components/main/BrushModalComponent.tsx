@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Image,
   Modal,
@@ -9,14 +9,25 @@ import {
 } from 'react-native';
 import {vh, vw} from '../../services/styleSheets';
 import {clockIcon} from '../../assets/svgXml';
-import { BrushModalProps } from '../../services/typeProps';
-
+import {BrushModalProps} from '../../services/typeProps';
 
 const BrushModalComponent: React.FC<BrushModalProps> = ({
   modalVisible,
   setModalVisible,
   BrushList,
 }) => {
+  const [selectedBrushIndex, setSelectedBrushIndex] = useState<number | null>(
+    null,
+  );
+
+  const handleBrushClick = (index: number) => {
+    setSelectedBrushIndex(index);
+  };
+
+  const handleBackClick = () => {
+    setSelectedBrushIndex(null);
+  };
+
   return (
     <Modal
       animationType="slide"
@@ -31,32 +42,52 @@ const BrushModalComponent: React.FC<BrushModalProps> = ({
             style={styles.penlistIconImg}
             source={require('../../assets/start/penlistIcon.png')}
           />
-          <View style={styles.brushContainer}>
-            {BrushList.map((brush, index) => (
-              <TouchableOpacity
-                key={index}
-                disabled={index === 2 || index === 3 ? false : true}
-                style={[
-                  styles.brushButton,
-                  index === 0 || index === 1
-                    ? styles.activeBrush
-                    : styles.inactiveBrush,
-                ]}>
-                <View style={styles.brushWrapper}>
-                  {brush}
-                  {index !== 0 && index !== 1 && (
-                    <View style={styles.clockIconOverlay}>
-                      {clockIcon(vw(7), vw(7))}
-                    </View>
-                  )}
-                </View>
-              </TouchableOpacity>
-            ))}
-          </View>
+          {selectedBrushIndex === null ? (
+            <View style={styles.brushContainer}>
+              {BrushList.map((brush, index) => (
+                <TouchableOpacity
+                  key={index}
+                  disabled={index === 2 || index === 3 ? false : true}
+                  style={[
+                    styles.brushButton,
+                    index === 0 || index === 1
+                      ? styles.activeBrush
+                      : styles.inactiveBrush,
+                  ]}
+                  onPress={() => handleBrushClick(index)}>
+                  <View style={styles.brushWrapper}>
+                    {brush}
+                    {index !== 0 && index !== 1 && (
+                      <View style={styles.clockIconOverlay}>
+                        {clockIcon(vw(7), vw(7))}
+                      </View>
+                    )}
+                  </View>
+                </TouchableOpacity>
+              ))}
+            </View>
+          ) : (
+            <View style={styles.selectedBrushContainer}>
+              <View style={styles.selectedBrushWrapper}>
+                {React.cloneElement(BrushList[selectedBrushIndex], {
+                  width: vw(20),
+                  height: vw(20),
+                })}
+              </View>
+            </View>
+          )}
           <TouchableOpacity
             style={styles.closeButton}
-            onPress={() => setModalVisible(!modalVisible)}>
-            <Text style={styles.closeButtonText}>Đóng</Text>
+            onPress={() => {
+              if (selectedBrushIndex !== null) {
+                handleBackClick();
+              } else {
+                setModalVisible(!modalVisible);
+              }
+            }}>
+            <Text style={styles.closeButtonText}>
+              {selectedBrushIndex !== null ? 'Trở lại' : 'Đóng'}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -133,5 +164,15 @@ const styles = StyleSheet.create({
     zIndex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  selectedBrushContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  selectedBrushWrapper: {
+    backgroundColor: 'grey',
+    padding: vw(5),
+    borderRadius: vw(10),
   },
 });
