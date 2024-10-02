@@ -9,12 +9,8 @@ import {
 } from 'react-native';
 import {vh, vw} from '../../services/styleSheets';
 import {clockIcon} from '../../assets/svgXml';
+import { BrushModalProps } from '../../services/typeProps';
 
-interface BrushModalProps {
-  modalVisible: boolean;
-  setModalVisible: (visible: boolean) => void;
-  BrushList: JSX.Element[];
-}
 
 const BrushModalComponent: React.FC<BrushModalProps> = ({
   modalVisible,
