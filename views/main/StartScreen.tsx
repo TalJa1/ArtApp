@@ -1,13 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
 import {
   Image,
+  Modal,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBarCustom';
 import {centerAll, vh, vw} from '../../services/styleSheets';
@@ -62,6 +63,7 @@ const StartScreen = () => {
 };
 
 const Footer: React.FC = () => {
+  const [modalVisible, setModalVisible] = useState(false);
   const handleBtnPress = (index: number) => {
     switch (index) {
       case 0:
@@ -74,7 +76,7 @@ const Footer: React.FC = () => {
         console.log('Cart');
         break;
       case 3:
-        console.log('PenList');
+        setModalVisible(true);
         break;
     }
   };
@@ -103,6 +105,27 @@ const Footer: React.FC = () => {
           source={require('../../assets/start/footer2.png')}
         />
       </View>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Image
+              style={styles.penlistIconImg}
+              source={require('../../assets/start/penlistIcon.png')}
+            />
+            <TouchableOpacity
+              style={styles.closeButton}
+              onPress={() => setModalVisible(!modalVisible)}>
+              <Text style={styles.closeButtonText}>Đóng</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -207,5 +230,40 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: vw(100),
     height: vh(100),
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    width: vw(90),
+    height: vh(60),
+    backgroundColor: 'white',
+    borderRadius: 30,
+    alignItems: 'center',
+    borderWidth: 3,
+    borderColor: 'black',
+    paddingVertical: vh(7),
+  },
+  closeButton: {
+    backgroundColor: '#8ACE5D',
+    paddingVertical: vh(0.6),
+    paddingHorizontal: vw(8),
+    borderRadius: 20,
+  },
+  closeButtonText: {
+    color: 'white',
+    fontSize: 32,
+    fontWeight: '900',
+  },
+  penlistIconImg: {
+    zIndex: 2,
+    width: vw(18),
+    height: vw(18),
+    resizeMode: 'cover',
+    position: 'absolute',
+    top: vh(-4),
   },
 });
