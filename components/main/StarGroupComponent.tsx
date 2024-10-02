@@ -1,9 +1,9 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import { vh, vw } from '../../services/styleSheets';
-import { StarGroupComponentProps } from '../../services/typeProps';
+import {vh, vw} from '../../services/styleSheets';
+import {StarGroupComponentProps} from '../../services/typeProps';
 
-const StarGroupComponent: React.FC<StarGroupComponentProps> = ({ starCount }) => {
+const StarGroupComponent: React.FC<StarGroupComponentProps> = ({starCount}) => {
   return (
     <View style={styles.starContainer}>
       <Image
