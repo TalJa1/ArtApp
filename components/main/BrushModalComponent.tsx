@@ -70,8 +70,8 @@ const BrushModalComponent: React.FC<BrushModalProps> = ({
             <View style={styles.selectedBrushContainer}>
               <View style={styles.selectedBrushWrapper}>
                 {React.cloneElement(BrushList[selectedBrushIndex], {
-                  width: vw(20),
-                  height: vw(20),
+                  width: vw(25),
+                  height: vw(25),
                 })}
               </View>
             </View>
@@ -171,8 +171,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   selectedBrushWrapper: {
-    backgroundColor: 'grey',
-    padding: vw(5),
-    borderRadius: vw(10),
+    backgroundColor: '#E0E0E0',
+    padding: vw(7),
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: 'black',
   },
 });

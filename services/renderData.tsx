@@ -19,7 +19,7 @@ export const BrushList = [
   brush1Icon(vw(12), vw(12)),
   brush2Icon(vw(12), vw(12)),
   brush3Icon(vw(12), vw(12)),
-  brush4Icon(vw(12), vw(12)),
   brush5Icon(vw(12), vw(12)),
+  brush4Icon(vw(12), vw(12)),
   brush6Icon(vw(12), vw(12)),
 ];
