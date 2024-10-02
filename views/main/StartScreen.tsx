@@ -12,6 +12,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBarCustom';
 import {centerAll, vh, vw} from '../../services/styleSheets';
 import {playStartIcon} from '../../assets/svgXml';
+import {FourBtn} from '../../services/renderData';
 
 const StartScreen = () => {
   useStatusBar('#8ACE5D');
@@ -29,7 +30,29 @@ const StartScreen = () => {
 };
 
 const Footer: React.FC = () => {
-  return <View></View>;
+  return (
+    <View>
+      <View style={styles.footerContainer}>
+        {FourBtn.map((btn, index) => {
+          return (
+            <TouchableOpacity key={index} style={styles.footerBtn}>
+              <Image source={btn} />
+            </TouchableOpacity>
+          );
+        })}
+      </View>
+      <View style={{flexDirection: 'row'}}>
+        <Image
+          style={[styles.footerImg, styles.footerImg1]}
+          source={require('../../assets/start/footer1.png')}
+        />
+        <Image
+          style={[styles.footerImg, styles.footerImg2]}
+          source={require('../../assets/start/footer2.png')}
+        />
+      </View>
+    </View>
+  );
 };
 
 const CenterView: React.FC = () => {
@@ -144,4 +167,23 @@ const styles = StyleSheet.create({
     color: '#000000',
     fontFamily: 'Nunito-Bold',
   },
+  footerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: vw(5),
+    marginBottom: vh(2),
+  },
+  footerBtn: {
+    width: vw(15),
+    height: vw(15),
+    resizeMode: 'contain',
+  },
+  footerImg: {
+    width: vw(100),
+    height: vh(15),
+    resizeMode: 'cover',
+  },
+  footerImg1: {},
+  footerImg2: {zIndex: 1, position: 'absolute', bottom: 0},
 });
