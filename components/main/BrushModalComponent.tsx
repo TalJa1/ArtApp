@@ -10,6 +10,7 @@ import {
 import {vh, vw} from '../../services/styleSheets';
 import {clockIcon} from '../../assets/svgXml';
 import {BrushModalProps} from '../../services/typeProps';
+import StarModalGroupComponent from './StarModalGroupComponent';
 
 const BrushModalComponent: React.FC<BrushModalProps> = ({
   modalVisible,
@@ -74,6 +75,11 @@ const BrushModalComponent: React.FC<BrushModalProps> = ({
                   height: vw(25),
                 })}
               </View>
+              <StarModalGroupComponent
+                starCount={selectedBrushIndex !== 2 ? 3000 : 2000}
+                borderColor="#E0E0E0"
+                color="#999999"
+              />
             </View>
           )}
           <TouchableOpacity
