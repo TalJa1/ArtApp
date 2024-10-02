@@ -29,6 +29,10 @@ const BrushModalComponent: React.FC<BrushModalProps> = ({
     setSelectedBrushIndex(null);
   };
 
+  const handleActiveBrush = () => {
+    console.log('Active brush');
+  };
+
   return (
     <Modal
       animationType="slide"
@@ -51,14 +55,14 @@ const BrushModalComponent: React.FC<BrushModalProps> = ({
                   disabled={index === 2 || index === 3 ? false : true}
                   style={[
                     styles.brushButton,
-                    index === 0 || index === 1
+                    brush.isAvailable
                       ? styles.activeBrush
                       : styles.inactiveBrush,
                   ]}
                   onPress={() => handleBrushClick(index)}>
                   <View style={styles.brushWrapper}>
                     {brush.icon}
-                    {index !== 0 && index !== 1 && (
+                    {brush.isAvailable === false && (
                       <View style={styles.clockIconOverlay}>
                         {clockIcon(vw(7), vw(7))}
                       </View>
@@ -88,7 +92,11 @@ const BrushModalComponent: React.FC<BrushModalProps> = ({
               if (selectedBrushIndex !== null) {
                 handleBackClick();
               } else {
-                setModalVisible(!modalVisible);
+                console.log(selectedBrushIndex);
+
+                selectedBrushIndex !== 2
+                  ? setModalVisible(!modalVisible)
+                  : handleActiveBrush();
               }
             }}>
             <Text style={styles.closeButtonText}>

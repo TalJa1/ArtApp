@@ -20,6 +20,6 @@ export const BrushList = [
   {icon: brush2Icon(vw(12), vw(12)), isAvailable: true},
   {icon: brush3Icon(vw(12), vw(12)), isAvailable: false},
   {icon: brush4Icon(vw(12), vw(12)), isAvailable: false},
-  {icon: brush5Icon(vw(12), vw(12)), isAvailable: true},
-  {icon: brush6Icon(vw(12), vw(12)), isAvailable: true},
+  {icon: brush5Icon(vw(12), vw(12)), isAvailable: false},
+  {icon: brush6Icon(vw(12), vw(12)), isAvailable: false},
 ];
