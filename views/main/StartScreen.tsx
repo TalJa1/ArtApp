@@ -178,7 +178,7 @@ const Header: React.FC = () => {
           source={require('../../assets/start/settingBtn.png')}
         />
       </TouchableOpacity>
-      <StarGroupComponent />
+      <StarGroupComponent starCount={2000}/>
       <TouchableOpacity>
         <Image
           style={styles.headerBtnImg}

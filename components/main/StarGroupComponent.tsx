@@ -1,8 +1,9 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import {vh, vw} from '../../services/styleSheets';
+import { vh, vw } from '../../services/styleSheets';
+import { StarGroupComponentProps } from '../../services/typeProps';
 
-const StarGroupComponent = () => {
+const StarGroupComponent: React.FC<StarGroupComponentProps> = ({ starCount }) => {
   return (
     <View style={styles.starContainer}>
       <Image
@@ -10,7 +11,7 @@ const StarGroupComponent = () => {
         source={require('../../assets/start/starCircle.png')}
       />
       <View style={styles.headerTxtContainer}>
-        <Text style={styles.headerTxt}>2000</Text>
+        <Text style={styles.headerTxt}>{starCount}</Text>
       </View>
     </View>
   );
