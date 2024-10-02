@@ -184,6 +184,6 @@ const styles = StyleSheet.create({
     height: vh(15),
     resizeMode: 'cover',
   },
-  footerImg1: {},
-  footerImg2: {zIndex: 1, position: 'absolute', bottom: 0},
+  footerImg1: {zIndex: 1},
+  footerImg2: {zIndex: 2, position: 'absolute', bottom: 0},
 });
