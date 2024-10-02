@@ -12,7 +12,7 @@ import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBarCustom';
 import {centerAll, vh, vw} from '../../services/styleSheets';
-import {grassIcon, playStartIcon} from '../../assets/svgXml';
+import {clockIcon, grassIcon, playStartIcon} from '../../assets/svgXml';
 import {BrushList, FourBtn} from '../../services/renderData';
 import StarGroupComponent from '../../components/main/StarGroupComponent';
 
@@ -122,14 +122,21 @@ const Footer: React.FC = () => {
               {BrushList.map((brush, index) => (
                 <TouchableOpacity
                   key={index}
-                  disabled={index === 0 || index === 1 ? false : true}
+                  disabled={index === 0 || index === 1}
                   style={[
                     styles.brushButton,
                     index === 0 || index === 1
                       ? styles.activeBrush
                       : styles.inactiveBrush,
                   ]}>
-                  {brush}
+                  <View style={styles.brushWrapper}>
+                    {brush}
+                    {index !== 0 && index !== 1 && (
+                      <View style={styles.clockIconOverlay}>
+                        {clockIcon(vw(7), vw(7))}
+                      </View>
+                    )}
+                  </View>
                 </TouchableOpacity>
               ))}
             </View>
@@ -301,5 +308,16 @@ const styles = StyleSheet.create({
   inactiveBrush: {
     backgroundColor: '#3A3A3A',
     opacity: 0.5,
+  },
+  brushWrapper: {
+    position: 'relative',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  clockIconOverlay: {
+    position: 'absolute',
+    zIndex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
