@@ -117,7 +117,7 @@ const CenterView: React.FC = () => {
       />
       <TouchableOpacity style={styles.goOnBtn}>
         {playStartIcon(vw(10), vw(10))}
-        <Text style={styles.goOnTxt}>Tiếp tục</Text>
+        <Text style={styles.goOnTxt}>Tiếp tục vẽ</Text>
       </TouchableOpacity>
     </View>
   );
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'white',
     paddingVertical: vw(3),
-    paddingHorizontal: vw(10),
+    paddingHorizontal: vw(5),
     borderRadius: vw(10),
     marginTop: vh(5),
     columnGap: vw(4),
