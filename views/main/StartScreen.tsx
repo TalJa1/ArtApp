@@ -21,8 +21,8 @@ const generateRandomGrassIcons = (numIcons: number) => {
     const left = Math.random() * 100; // Random position for left (0% to 100%)
     return {
       size,
-      top: `${top}%`,
-      left: `${left}%`,
+      top: vh(top),
+      left: vw(left),
     };
   });
 };
