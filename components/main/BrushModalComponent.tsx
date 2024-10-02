@@ -77,8 +77,8 @@ const BrushModalComponent: React.FC<BrushModalProps> = ({
               </View>
               <StarModalGroupComponent
                 starCount={selectedBrushIndex !== 2 ? 3000 : 2000}
-                borderColor="#E0E0E0"
-                color="#999999"
+                borderColor={selectedBrushIndex !== 2 ? '#E0E0E0' : '#FEF9BD'}
+                color={selectedBrushIndex !== 2 ? '#999999' : '#EFBB00'}
               />
             </View>
           )}
