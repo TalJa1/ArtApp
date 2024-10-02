@@ -11,15 +11,46 @@ import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBarCustom';
 import {centerAll, vh, vw} from '../../services/styleSheets';
-import {playStartIcon} from '../../assets/svgXml';
+import {grassIcon, playStartIcon} from '../../assets/svgXml';
 import {FourBtn} from '../../services/renderData';
+
+const generateRandomGrassIcons = (numIcons: number) => {
+  return Array.from({length: numIcons}).map(() => {
+    const size = vw(Math.random() * 5 + 5); // Random size between 5vw and 10vw
+    const top = Math.random() * 100; // Random position for top (0% to 100%)
+    const left = Math.random() * 100; // Random position for left (0% to 100%)
+    return {
+      size,
+      top: `${top}%`,
+      left: `${left}%`,
+    };
+  });
+};
 
 const StartScreen = () => {
   useStatusBar('#8ACE5D');
+
+  const grassIcons = generateRandomGrassIcons(10); // Generate 8 grass icons
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={{flex: 1}}>
         <View style={{flex: 1, justifyContent: 'space-between'}}>
+          <View style={styles.grassContainer}>
+            {grassIcons.map((icon, index) => (
+              <View
+                key={index}
+                style={{
+                  position: 'absolute',
+                  top: icon.top,
+                  left: icon.left,
+                  width: icon.size,
+                  height: icon.size,
+                }}>
+                {grassIcon(icon.size, icon.size)}
+              </View>
+            ))}
+          </View>
           <Header />
           <CenterView />
           <Footer />
@@ -30,12 +61,32 @@ const StartScreen = () => {
 };
 
 const Footer: React.FC = () => {
+  const handleBtnPress = (index: number) => {
+    switch (index) {
+      case 0:
+        console.log('Shopping');
+        break;
+      case 1:
+        console.log('Multi');
+        break;
+      case 2:
+        console.log('Cart');
+        break;
+      case 3:
+        console.log('PenList');
+        break;
+    }
+  };
+
   return (
     <View>
       <View style={styles.footerContainer}>
         {FourBtn.map((btn, index) => {
           return (
-            <TouchableOpacity key={index} style={styles.footerBtn}>
+            <TouchableOpacity
+              onPress={() => handleBtnPress(index)}
+              key={index}
+              style={styles.footerBtn}>
               <Image source={btn} />
             </TouchableOpacity>
           );
@@ -169,9 +220,8 @@ const styles = StyleSheet.create({
   },
   footerContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
-    paddingHorizontal: vw(5),
     marginBottom: vh(2),
   },
   footerBtn: {
@@ -186,4 +236,9 @@ const styles = StyleSheet.create({
   },
   footerImg1: {zIndex: 1},
   footerImg2: {zIndex: 2, position: 'absolute', bottom: 0},
+  grassContainer: {
+    position: 'absolute',
+    width: vw(100),
+    height: vh(100),
+  },
 });
