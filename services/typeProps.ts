@@ -4,8 +4,13 @@ export interface StarGroupComponentProps {
   borderColor?: string;
 }
 
+export interface BrushItem {
+  icon: JSX.Element;
+  isAvailable: boolean;
+}
+
 export interface BrushModalProps {
   modalVisible: boolean;
   setModalVisible: (visible: boolean) => void;
-  BrushList: JSX.Element[];
+  BrushList: BrushItem[];
 }

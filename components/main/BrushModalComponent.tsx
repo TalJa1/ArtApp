@@ -57,7 +57,7 @@ const BrushModalComponent: React.FC<BrushModalProps> = ({
                   ]}
                   onPress={() => handleBrushClick(index)}>
                   <View style={styles.brushWrapper}>
-                    {brush}
+                    {brush.icon}
                     {index !== 0 && index !== 1 && (
                       <View style={styles.clockIconOverlay}>
                         {clockIcon(vw(7), vw(7))}
@@ -70,7 +70,7 @@ const BrushModalComponent: React.FC<BrushModalProps> = ({
           ) : (
             <View style={styles.selectedBrushContainer}>
               <View style={styles.selectedBrushWrapper}>
-                {React.cloneElement(BrushList[selectedBrushIndex], {
+                {React.cloneElement(BrushList[selectedBrushIndex].icon, {
                   width: vw(25),
                   height: vw(25),
                 })}
@@ -92,7 +92,11 @@ const BrushModalComponent: React.FC<BrushModalProps> = ({
               }
             }}>
             <Text style={styles.closeButtonText}>
-              {selectedBrushIndex !== null ? 'Trở lại' : 'Đóng'}
+              {selectedBrushIndex !== null
+                ? selectedBrushIndex !== 2
+                  ? 'Trở lại'
+                  : 'Mua'
+                : 'Đóng'}
             </Text>
           </TouchableOpacity>
         </View>

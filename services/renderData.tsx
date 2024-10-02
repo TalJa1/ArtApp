@@ -16,10 +16,10 @@ export const FourBtn = [
 ];
 
 export const BrushList = [
-  brush1Icon(vw(12), vw(12)),
-  brush2Icon(vw(12), vw(12)),
-  brush3Icon(vw(12), vw(12)),
-  brush5Icon(vw(12), vw(12)),
-  brush4Icon(vw(12), vw(12)),
-  brush6Icon(vw(12), vw(12)),
+  {icon: brush1Icon(vw(12), vw(12)), isAvailable: true},
+  {icon: brush2Icon(vw(12), vw(12)), isAvailable: true},
+  {icon: brush3Icon(vw(12), vw(12)), isAvailable: false},
+  {icon: brush4Icon(vw(12), vw(12)), isAvailable: false},
+  {icon: brush5Icon(vw(12), vw(12)), isAvailable: true},
+  {icon: brush6Icon(vw(12), vw(12)), isAvailable: true},
 ];
