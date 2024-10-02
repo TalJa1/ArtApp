@@ -175,6 +175,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    rowGap: vh(3),
   },
   selectedBrushWrapper: {
     backgroundColor: '#E0E0E0',

@@ -1,7 +1,8 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {vh, vw} from '../../services/styleSheets';
+import {centerAll, vh, vw} from '../../services/styleSheets';
 import {StarGroupComponentProps} from '../../services/typeProps';
+import {starIcon} from '../../assets/svgXml';
 
 const StarModalGroupComponent: React.FC<StarGroupComponentProps> = ({
   starCount,
@@ -10,6 +11,9 @@ const StarModalGroupComponent: React.FC<StarGroupComponentProps> = ({
 }) => {
   return (
     <View style={styles.starContainer}>
+      <View style={[styles.starImg, {backgroundColor: color}, centerAll]}>
+        {starIcon(vw(7), vw(7))}
+      </View>
       <View
         style={[
           styles.headerTxtContainer,
@@ -34,6 +38,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     position: 'relative',
     left: vw(4.5),
+    borderRadius: 40,
     zIndex: 2,
   },
   headerTxtContainer: {
