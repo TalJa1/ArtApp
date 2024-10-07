@@ -9,6 +9,17 @@ export const test = (w?: any, h?: any, color?: any) => {
   return <SvgXml xml={xml} width={w} height={h} />;
 };
 
+export const uploadIcon = (w?: any, h?: any, color?: any) => {
+  const xml = `<svg width="28" height="30" viewBox="0 0 28 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M25.3334 16.4167V22.7917C25.3334 27.1235 19.6667 27.0417 14 27.0417C8.33335 27.0417 2.66669 27.1235 2.66669 22.7917V16.4167M14 2.25L14 19.25M14 2.25L19.6667 7.91667M14 2.25L8.33335 7.91666" stroke=${
+    color ?? 'white'
+  } stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
+  return <SvgXml xml={xml} width={w} height={h} />;
+};
+
 export const sketchBlockIcon = (w?: any, h?: any, color?: any) => {
   const xml = `<svg width="23" height="28" viewBox="0 0 23 28" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M17.1667 11.7756V6.91667C17.1667 3.78705 14.6296 1.25 11.5 1.25C8.3704 1.25 5.83334 3.78705 5.83334 6.91667V11.7756M17.1667 11.7756C15.7324 11.3462 13.8733 11.1667 11.5 11.1667C9.12671 11.1667 7.26762 11.3462 5.83334 11.7756M17.1667 11.7756C20.3153 12.7182 21.4167 14.8647 21.4167 18.9583C21.4167 24.9167 19.0833 26.75 11.5 26.75C3.91668 26.75 1.58334 24.9167 1.58334 18.9583C1.58334 14.8647 2.68472 12.7182 5.83334 11.7756" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
