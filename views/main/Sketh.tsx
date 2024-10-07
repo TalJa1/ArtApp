@@ -3,16 +3,18 @@ import {
   Image,
   ScrollView,
   StyleSheet,
+  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBarCustom';
 import StarGroupComponent from '../../components/main/StarGroupComponent';
 import {vh, vw} from '../../services/styleSheets';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {backIcon, nextIcon} from '../../assets/svgXml';
 
 const Sketh = () => {
   useStatusBar('#FCEFAD');
@@ -30,7 +32,40 @@ const Sketh = () => {
 };
 
 const Main: React.FC = () => {
-  return <View></View>;
+  const [level, setLevel] = useState(1);
+
+  const handlebackLevel = () => {
+    if (level > 1) {
+      setLevel(level - 1);
+    }
+  };
+
+  const handlenextLevel = () => {
+    if (level < 5) {
+      setLevel(level + 1);
+    }
+  };
+
+  return (
+    <View>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+        <TouchableOpacity onPress={handlebackLevel}>
+          {backIcon(vw(7), vw(7))}
+        </TouchableOpacity>
+        <View style={styles.mainLevel}>
+          <Text style={styles.levelTxt}>Level {level}</Text>
+        </View>
+        <TouchableOpacity onPress={handlenextLevel}>
+          {nextIcon(vw(7), vw(7))}
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
 };
 
 const Header: React.FC = () => {
@@ -65,5 +100,20 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginVertical: vh(2),
+  },
+  mainLevel: {
+    backgroundColor: '#EE7F68',
+    borderRadius: 20,
+    borderBottomWidth: 3,
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
+    borderColor: '#DB664F',
+    paddingHorizontal: vw(15),
+    paddingVertical: vh(1),
+  },
+  levelTxt: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
   },
 });
