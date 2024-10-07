@@ -9,6 +9,28 @@ export const test = (w?: any, h?: any, color?: any) => {
   return <SvgXml xml={xml} width={w} height={h} />;
 };
 
+export const nextIcon = (w?: any, h?: any, color?: any) => {
+  const xml = `<svg width="35" height="34" viewBox="0 0 35 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.25 28.3334L24.5833 17.0001L13.25 5.66675" stroke=${
+    color ?? '#EE7F68'
+  } style="stroke:#EE7F68;stroke:color(display-p3 0.9333 0.4980 0.4078);stroke-opacity:1;" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
+  return <SvgXml xml={xml} width={w} height={h} />;
+};
+
+export const backIcon = (w?: any, h?: any, color?: any) => {
+  const xml = `<svg width="35" height="34" viewBox="0 0 35 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M21.7501 5.66675L10.4167 17.0001L21.7501 28.3334" stroke=${
+    color ?? '#EE7F68'
+  } style="stroke:#EE7F68;stroke:color(display-p3 0.9333 0.4980 0.4078);stroke-opacity:1;" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
+  return <SvgXml xml={xml} width={w} height={h} />;
+};
+
 export const starIcon = (w?: any, h?: any, color?: any) => {
   const xml = `<svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M18.3944 25.0305C17.8314 24.749 17.1686 24.749 16.6056 25.0305L12.8894 26.8887C11.361 27.6528 9.64023 26.2724 10.0547 24.6147L10.867 21.3655C11.0283 20.7202 10.8582 20.0369 10.4133 19.5425L7.46834 16.2704C6.35808 15.0368 7.14676 13.0656 8.80154 12.9383L12.78 12.6323C13.5069 12.5764 14.1457 12.1294 14.4474 11.4658L15.6793 8.75561C16.3898 7.19242 18.6102 7.19242 19.3207 8.75561L20.5526 11.4658C20.8543 12.1294 21.4931 12.5764 22.22 12.6323L26.1985 12.9383C27.8532 13.0656 28.6419 15.0368 27.5317 16.2704L24.5867 19.5425C24.1418 20.0369 23.9717 20.7202 24.133 21.3655L24.9453 24.6147C25.3598 26.2724 23.6389 27.6528 22.1106 26.8887L18.3944 25.0305Z" fill="white" style="fill:white;fill-opacity:1;"/>

@@ -22,10 +22,15 @@ const Sketh = () => {
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View style={{flex: 1, paddingHorizontal: vw(5)}}>
           <Header />
+          <Main />
         </View>
       </ScrollView>
     </SafeAreaView>
   );
+};
+
+const Main: React.FC = () => {
+  return <View></View>;
 };
 
 const Header: React.FC = () => {
