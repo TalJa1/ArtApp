@@ -145,7 +145,11 @@ export const ArtTabRender: React.FC<ArtTabRenderProps> = ({data}) => {
   const renderStars = (starCount: number) => {
     const stars = [];
     for (let i = 0; i < 3; i++) {
-      stars.push(gradeStarIcon(10, 10, i < starCount ? '#E79F1C' : 'grey'));
+      stars.push(
+        <View key={i}>
+          {gradeStarIcon(10, 10, i < starCount ? '#E79F1C' : 'grey')}
+        </View>,
+      );
     }
     return stars;
   };
