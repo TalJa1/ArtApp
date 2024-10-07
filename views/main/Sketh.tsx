@@ -1,17 +1,25 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+/* eslint-disable react-native/no-inline-styles */
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBarCustom';
+import StarGroupComponent from '../../components/main/StarGroupComponent';
+import {vh, vw} from '../../services/styleSheets';
 
 const Sketh = () => {
-  useStatusBar('#FEF9BD');
+  useStatusBar('#FCEFAD');
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <Header />
-        <View>
-          <Text>Sketh</Text>
+      <ScrollView contentContainerStyle={{flexGrow: 1}}>
+        <View style={{flex: 1, paddingHorizontal: vw(5)}}>
+          <Header />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -19,7 +27,21 @@ const Sketh = () => {
 };
 
 const Header: React.FC = () => {
-  return <View></View>;
+  return (
+    <View style={styles.headerContainer}>
+      <TouchableOpacity>
+        <Image source={require('../../assets/mainSketh/backBtn.png')} />
+      </TouchableOpacity>
+      <StarGroupComponent
+        starCount={2000}
+        color="#EFBB00"
+        borderColor="#FEF9BD"
+      />
+      <TouchableOpacity>
+        <Image source={require('../../assets/mainSketh/settingBtn.png')} />
+      </TouchableOpacity>
+    </View>
+  );
 };
 
 export default Sketh;
@@ -27,6 +49,12 @@ export default Sketh;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FEF9BD',
+    backgroundColor: '#FCEFAD',
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginVertical: vh(2),
   },
 });

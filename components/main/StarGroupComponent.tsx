@@ -3,14 +3,23 @@ import React from 'react';
 import {vh, vw} from '../../services/styleSheets';
 import {StarGroupComponentProps} from '../../services/typeProps';
 
-const StarGroupComponent: React.FC<StarGroupComponentProps> = ({starCount}) => {
+const StarGroupComponent: React.FC<StarGroupComponentProps> = ({
+  starCount,
+  borderColor,
+  color,
+}) => {
   return (
     <View style={styles.starContainer}>
       <Image
         style={styles.starImg}
         source={require('../../assets/start/starCircle.png')}
       />
-      <View style={styles.headerTxtContainer}>
+      <View
+        style={[
+          styles.headerTxtContainer,
+          color && {backgroundColor: color},
+          borderColor && {borderColor: borderColor},
+        ]}>
         <Text style={styles.headerTxt}>{starCount}</Text>
       </View>
     </View>
@@ -34,12 +43,12 @@ const styles = StyleSheet.create({
   },
   headerTxtContainer: {
     backgroundColor: '#EFBB00',
+    borderColor: '#C8E589',
     paddingVertical: vh(0.3),
     paddingHorizontal: vw(5),
     borderTopRightRadius: vw(20),
     borderBottomRightRadius: vw(20),
     borderWidth: 4,
-    borderColor: '#C8E589',
   },
   headerTxt: {
     fontSize: 20,
