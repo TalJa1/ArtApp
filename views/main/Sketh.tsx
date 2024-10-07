@@ -14,7 +14,12 @@ import StarGroupComponent from '../../components/main/StarGroupComponent';
 import {centerAll, vh, vw} from '../../services/styleSheets';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {backIcon, gradeStarIcon, nextIcon} from '../../assets/svgXml';
+import {
+  backIcon,
+  gradeStarIcon,
+  nextIcon,
+  sketchBlockIcon,
+} from '../../assets/svgXml';
 import {ArtTabRenderProps, SketchArtItem} from '../../services/typeProps';
 import {loadData, saveData} from '../../services/storage';
 import {SketchArtList} from '../../services/renderData';
@@ -116,7 +121,11 @@ const Main: React.FC = () => {
         {sketchRender.map((item, index) => {
           return (
             <View key={index} style={{alignItems: 'center'}}>
-              <View style={styles.artNumberContainer}>
+              <View
+                style={[
+                  styles.artNumberContainer,
+                  item === null && {backgroundColor: '#585757'},
+                ]}>
                 <Text style={styles.artNumber}>{index + 1}</Text>
               </View>
               <ArtTabRender data={item} />
@@ -145,7 +154,9 @@ export const ArtTabRender: React.FC<ArtTabRenderProps> = ({data}) => {
           <Image source={data?.img} />
         </TouchableOpacity>
       ) : (
-        <View />
+        <View style={[styles.btnArt, centerAll, styles.disableBtn]}>
+          {sketchBlockIcon(vw(7), vw(7))}
+        </View>
       )}
     </View>
   );
@@ -248,5 +259,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 5,
     columnGap: vw(1),
+  },
+  disableBtn: {
+    backgroundColor: '#999999',
   },
 });
