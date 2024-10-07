@@ -23,3 +23,5 @@ export const BrushList = [
   {icon: brush5Icon(vw(12), vw(12)), isAvailable: false},
   {icon: brush6Icon(vw(12), vw(12)), isAvailable: false},
 ];
+
+export const SketchArtList = [{}];
