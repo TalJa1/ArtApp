@@ -31,6 +31,7 @@ const BrushModalComponent: React.FC<BrushModalProps> = ({
 
   const handleActiveBrush = () => {
     console.log('Active brush');
+    setSelectedBrushIndex(null);
   };
 
   return (
@@ -90,13 +91,11 @@ const BrushModalComponent: React.FC<BrushModalProps> = ({
             style={styles.closeButton}
             onPress={() => {
               if (selectedBrushIndex !== null) {
-                handleBackClick();
-              } else {
-                console.log(selectedBrushIndex);
-
                 selectedBrushIndex !== 2
                   ? setModalVisible(!modalVisible)
                   : handleActiveBrush();
+              } else {
+                handleBackClick();
               }
             }}>
             <Text style={styles.closeButtonText}>
