@@ -24,4 +24,5 @@ export interface SketchArtItem {
 
 export interface ArtTabRenderProps {
   data: SketchArtItem | null;
+  index: number;
 }

@@ -148,7 +148,7 @@ const Main: React.FC = () => {
                 ]}>
                 <Text style={styles.artNumber}>{index + 1}</Text>
               </View>
-              <ArtTabRender data={item} />
+              <ArtTabRender data={item} index={index} />
             </View>
           );
         })}
@@ -158,7 +158,7 @@ const Main: React.FC = () => {
   );
 };
 
-export const ArtTabRender: React.FC<ArtTabRenderProps> = ({data}) => {
+export const ArtTabRender: React.FC<ArtTabRenderProps> = ({data, index}) => {
   const renderStars = (starCount: number) => {
     const stars = [];
     for (let i = 0; i < 3; i++) {
@@ -171,10 +171,16 @@ export const ArtTabRender: React.FC<ArtTabRenderProps> = ({data}) => {
     return stars;
   };
 
+  const handleDraw = () => {
+    console.log('Draw', index);
+  };
+
   return (
     <View style={styles.artTabRenderContainer}>
       {data !== null ? (
-        <TouchableOpacity style={[styles.btnArt, centerAll]}>
+        <TouchableOpacity
+          onPress={handleDraw}
+          style={[styles.btnArt, centerAll]}>
           <View style={styles.starContainer}>{renderStars(data.star)}</View>
           <Image source={data?.img} />
         </TouchableOpacity>
