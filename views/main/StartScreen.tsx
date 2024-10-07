@@ -64,6 +64,7 @@ const StartScreen = () => {
 
 const Footer: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [brush, setBrush] = useState(BrushList);
   const handleBtnPress = (index: number) => {
     switch (index) {
       case 0:
@@ -108,7 +109,8 @@ const Footer: React.FC = () => {
       <BrushModalComponent
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
-        BrushList={BrushList}
+        BrushList={brush}
+        setBrushList={setBrush}
       />
     </View>
   );

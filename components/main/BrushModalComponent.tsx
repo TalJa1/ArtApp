@@ -16,6 +16,7 @@ const BrushModalComponent: React.FC<BrushModalProps> = ({
   modalVisible,
   setModalVisible,
   BrushList,
+  setBrushList,
 }) => {
   const [selectedBrushIndex, setSelectedBrushIndex] = useState<number | null>(
     null,
@@ -30,7 +31,18 @@ const BrushModalComponent: React.FC<BrushModalProps> = ({
   };
 
   const handleActiveBrush = () => {
-    console.log('Active brush');
+    setBrushList(
+      BrushList.map((brush, index) => {
+        if (index === selectedBrushIndex) {
+          return {
+            ...brush,
+            isAvailable: true,
+          };
+        } else {
+          return brush;
+        }
+      }),
+    );
     setSelectedBrushIndex(null);
   };
 
