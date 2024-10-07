@@ -15,6 +15,8 @@ import {grassIcon, playStartIcon} from '../../assets/svgXml';
 import {BrushList, FourBtn} from '../../services/renderData';
 import StarGroupComponent from '../../components/main/StarGroupComponent';
 import BrushModalComponent from '../../components/main/BrushModalComponent';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const generateRandomGrassIcons = (numIcons: number) => {
   return Array.from({length: numIcons}).map(() => {
@@ -117,6 +119,8 @@ const Footer: React.FC = () => {
 };
 
 const CenterView: React.FC = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+
   return (
     <View style={centerAll}>
       <Image
@@ -125,7 +129,9 @@ const CenterView: React.FC = () => {
         resizeMode="contain"
         source={require('../../assets/start/start1.png')}
       />
-      <TouchableOpacity style={styles.goOnBtn}>
+      <TouchableOpacity
+        style={styles.goOnBtn}
+        onPress={() => navigation.navigate('Sketh')}>
         {playStartIcon(vw(10), vw(10))}
         <Text style={styles.goOnTxt}>Tiếp tục vẽ</Text>
       </TouchableOpacity>
