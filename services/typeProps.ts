@@ -26,3 +26,10 @@ export interface ArtTabRenderProps {
   data: SketchArtItem | null;
   index: number;
 }
+
+export interface SketchModalComponentProps {
+  visible: boolean;
+  onClose: () => void;
+  data: SketchArtItem;
+  index: number;
+}

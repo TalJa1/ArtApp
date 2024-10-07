@@ -23,6 +23,7 @@ import {
 import {ArtTabRenderProps, SketchArtItem} from '../../services/typeProps';
 import {loadData, saveData} from '../../services/storage';
 import {SketchArtList} from '../../services/renderData';
+import SketchModalComponent from '../../components/main/SketchModalComponent';
 
 const Sketh = () => {
   useStatusBar('#FCEFAD');
@@ -159,6 +160,8 @@ const Main: React.FC = () => {
 };
 
 export const ArtTabRender: React.FC<ArtTabRenderProps> = ({data, index}) => {
+  const [modalVisible, setModalVisible] = useState(false);
+
   const renderStars = (starCount: number) => {
     const stars = [];
     for (let i = 0; i < 3; i++) {
@@ -172,18 +175,26 @@ export const ArtTabRender: React.FC<ArtTabRenderProps> = ({data, index}) => {
   };
 
   const handleDraw = () => {
-    console.log('Draw', index);
+    setModalVisible(true);
   };
 
   return (
     <View style={styles.artTabRenderContainer}>
       {data !== null ? (
-        <TouchableOpacity
-          onPress={handleDraw}
-          style={[styles.btnArt, centerAll]}>
-          <View style={styles.starContainer}>{renderStars(data.star)}</View>
-          <Image source={data?.img} />
-        </TouchableOpacity>
+        <>
+          <TouchableOpacity
+            onPress={handleDraw}
+            style={[styles.btnArt, centerAll]}>
+            <View style={styles.starContainer}>{renderStars(data.star)}</View>
+            <Image source={data?.img} />
+          </TouchableOpacity>
+          <SketchModalComponent
+            visible={modalVisible}
+            onClose={() => setModalVisible(false)}
+            data={data}
+            index={index}
+          />
+        </>
       ) : (
         <View style={[styles.btnArt, centerAll, styles.disableBtn]}>
           {sketchBlockIcon(vw(7), vw(7))}
