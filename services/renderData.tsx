@@ -28,37 +28,46 @@ export const SketchArtList = [
   {
     img: require('../assets/mainSketh/sketch/moon.png'),
     star: 3,
+    title: 'Mặt Trăng',
   },
   {
     img: require('../assets/mainSketh/sketch/sky.png'),
     star: 2,
+    title: 'Bầu Trời',
   },
   {
     img: require('../assets/mainSketh/sketch/earth.png'),
     star: 3,
+    title: 'Trái Đất',
   },
   {
     img: require('../assets/mainSketh/sketch/cake.png'),
     star: 1,
+    title: 'Bánh',
   },
   {
     img: require('../assets/mainSketh/sketch/octobus.png'),
     star: 3,
+    title: 'Bạch Tuộc',
   },
   {
     img: require('../assets/mainSketh/sketch/fish1.png'),
     star: 3,
+    title: 'Cá hồng',
   },
   {
     img: require('../assets/mainSketh/sketch/fish2.png'),
     star: 3,
+    title: 'Cá vàng',
   },
   {
     img: require('../assets/mainSketh/sketch/iceCream.png'),
     star: 0,
+    title: 'Kem',
   },
   {
     img: require('../assets/mainSketh/sketch/spaceShip.png'),
     star: 0,
+    title: 'Tàu Vũ Trụ',
   },
 ];
