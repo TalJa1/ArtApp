@@ -19,6 +19,8 @@ const SketchModalComponent: React.FC<SketchModalComponentProps> = ({
   data,
   index,
 }) => {
+  var renderIndex = String(index + 1).padStart(2, '0');
+
   const renderStars = (starCount: number) => {
     const stars = [];
     for (let i = 0; i < 3; i++) {
@@ -41,6 +43,9 @@ const SketchModalComponent: React.FC<SketchModalComponentProps> = ({
         <View style={styles.modalContainer}>
           <TouchableWithoutFeedback>
             <View style={styles.modalContent}>
+              <View style={styles.indexContainer}>
+                <Text style={styles.index}>{renderIndex}</Text>
+              </View>
               <View
                 style={{
                   flexDirection: 'row',
@@ -80,7 +85,8 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     width: '80%',
-    padding: 20,
+    paddingHorizontal: vw(5),
+    paddingVertical: vh(3),
     backgroundColor: 'white',
     borderRadius: 10,
     alignItems: 'center',
@@ -117,5 +123,19 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: '900',
     color: 'white',
+  },
+  index: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#000000',
+  },
+  indexContainer: {
+    position: 'absolute',
+    top: -vh(2.4),
+    backgroundColor: '#FDD3A8',
+    paddingHorizontal: vw(8),
+    borderRadius: 16,
+    borderWidth: 3,
+    borderColor: 'black',
   },
 });

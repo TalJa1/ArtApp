@@ -140,6 +140,7 @@ const Main: React.FC = () => {
       </View>
       <View style={styles.artGroup}>
         {sketchRender.map((item, index) => {
+          var renderIndex = String(index + 1).padStart(2, '0');
           return (
             <View key={index} style={{alignItems: 'center'}}>
               <View
@@ -147,7 +148,7 @@ const Main: React.FC = () => {
                   styles.artNumberContainer,
                   item === null && {backgroundColor: '#585757'},
                 ]}>
-                <Text style={styles.artNumber}>{index + 1}</Text>
+                <Text style={styles.artNumber}>{renderIndex}</Text>
               </View>
               <ArtTabRender data={item} index={index} />
             </View>
@@ -290,7 +291,7 @@ const styles = StyleSheet.create({
     borderRadius: vw(20),
     borderWidth: 3,
     borderColor: 'black',
-    paddingHorizontal: vw(5),
+    paddingHorizontal: vw(4),
   },
   artNumber: {
     fontSize: 16,
