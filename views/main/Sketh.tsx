@@ -83,8 +83,12 @@ const Main: React.FC = () => {
 
   useFocusEffect(
     useCallback(() => {
-      fetchData();
-    }, []),
+      if (level === 1) {
+        fetchData();
+      } else {
+        setSketchRender(Array(16).fill(null));
+      }
+    }, [level]),
   );
 
   const handlebackLevel = () => {
