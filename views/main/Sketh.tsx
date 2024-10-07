@@ -11,6 +11,8 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBarCustom';
 import StarGroupComponent from '../../components/main/StarGroupComponent';
 import {vh, vw} from '../../services/styleSheets';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const Sketh = () => {
   useStatusBar('#FCEFAD');
@@ -27,9 +29,11 @@ const Sketh = () => {
 };
 
 const Header: React.FC = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+
   return (
     <View style={styles.headerContainer}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.goBack()}>
         <Image source={require('../../assets/mainSketh/backBtn.png')} />
       </TouchableOpacity>
       <StarGroupComponent
