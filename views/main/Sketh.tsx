@@ -103,6 +103,22 @@ const Main: React.FC = () => {
     }
   };
 
+  const renderDots = () => {
+    const dots = [];
+    for (let i = 1; i <= 5; i++) {
+      dots.push(
+        <View
+          key={i}
+          style={[
+            styles.dot,
+            {backgroundColor: i === level ? '#EE7F68' : '#E0E0E0'},
+          ]}
+        />,
+      );
+    }
+    return dots;
+  };
+
   return (
     <View>
       <View
@@ -137,6 +153,7 @@ const Main: React.FC = () => {
           );
         })}
       </View>
+      <View style={styles.dotContainer}>{renderDots()}</View>
     </View>
   );
 };
@@ -270,5 +287,16 @@ const styles = StyleSheet.create({
   },
   disableBtn: {
     backgroundColor: '#999999',
+  },
+  dotContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 10,
+  },
+  dot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    marginHorizontal: 5,
   },
 });
