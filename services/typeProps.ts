@@ -20,3 +20,7 @@ export interface SketchArtItem {
   img: any; // Use 'any' for require statements, or you can use a more specific type if you know it
   star: number;
 }
+
+export interface ArtTabRenderProps {
+  data: SketchArtItem | null;
+}

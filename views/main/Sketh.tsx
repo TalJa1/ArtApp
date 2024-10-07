@@ -7,14 +7,17 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBarCustom';
 import StarGroupComponent from '../../components/main/StarGroupComponent';
-import {vh, vw} from '../../services/styleSheets';
-import {useNavigation} from '@react-navigation/native';
+import {centerAll, vh, vw} from '../../services/styleSheets';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {backIcon, nextIcon} from '../../assets/svgXml';
+import {backIcon, gradeStarIcon, nextIcon} from '../../assets/svgXml';
+import {ArtTabRenderProps, SketchArtItem} from '../../services/typeProps';
+import {loadData, saveData} from '../../services/storage';
+import {SketchArtList} from '../../services/renderData';
 
 const Sketh = () => {
   useStatusBar('#FCEFAD');
@@ -53,6 +56,31 @@ const Footer: React.FC = () => {
 
 const Main: React.FC = () => {
   const [level, setLevel] = useState(1);
+  const [sketchRender, setSketchRender] = useState<(SketchArtItem | null)[]>(
+    Array(16).fill(null),
+  );
+
+  const fetchData = async () => {
+    await loadData<SketchArtItem[]>('sketchListStorage')
+      .then(data => {
+        const paddedData = [...data, ...Array(16 - data.length).fill(null)];
+        setSketchRender(paddedData);
+      })
+      .catch(() => {
+        const paddedData = [
+          ...SketchArtList,
+          ...Array(16 - SketchArtList.length).fill(null),
+        ];
+        saveData('sketchListStorage', SketchArtList);
+        setSketchRender(paddedData);
+      });
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchData();
+    }, []),
+  );
 
   const handlebackLevel = () => {
     if (level > 1) {
@@ -84,13 +112,43 @@ const Main: React.FC = () => {
           {nextIcon(vw(7), vw(7))}
         </TouchableOpacity>
       </View>
-      <View></View>
+      <View style={styles.artGroup}>
+        {sketchRender.map((item, index) => {
+          return (
+            <View key={index} style={{alignItems: 'center'}}>
+              <View style={styles.artNumberContainer}>
+                <Text style={styles.artNumber}>{index + 1}</Text>
+              </View>
+              <ArtTabRender data={item} />
+            </View>
+          );
+        })}
+      </View>
     </View>
   );
 };
 
-export const ArtTabRender: React.FC = () => {
-  return <View></View>;
+export const ArtTabRender: React.FC<ArtTabRenderProps> = ({data}) => {
+  const renderStars = (starCount: number) => {
+    const stars = [];
+    for (let i = 0; i < 3; i++) {
+      stars.push(gradeStarIcon(10, 10, i < starCount ? '#E79F1C' : 'grey'));
+    }
+    return stars;
+  };
+
+  return (
+    <View style={styles.artTabRenderContainer}>
+      {data !== null ? (
+        <TouchableOpacity style={[styles.btnArt, centerAll]}>
+          <View style={styles.starContainer}>{renderStars(data.star)}</View>
+          <Image source={data?.img} />
+        </TouchableOpacity>
+      ) : (
+        <View />
+      )}
+    </View>
+  );
 };
 
 const Header: React.FC = () => {
@@ -154,4 +212,41 @@ const styles = StyleSheet.create({
   },
   footerImg1: {zIndex: 2},
   footerImg2: {zIndex: 1, position: 'absolute', bottom: 0},
+  artTabRenderContainer: {
+    width: vw(20),
+  },
+  artGroup: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    rowGap: vh(3),
+    marginVertical: vh(3),
+  },
+  btnArt: {
+    height: vh(12),
+    backgroundColor: 'white',
+    borderWidth: 3,
+    borderColor: 'black',
+    borderRadius: 12,
+  },
+  artNumberContainer: {
+    zIndex: 2,
+    position: 'absolute',
+    top: -vh(1.3),
+    backgroundColor: '#FDD3A8',
+    borderRadius: vw(20),
+    borderWidth: 3,
+    borderColor: 'black',
+    paddingHorizontal: vw(5),
+  },
+  artNumber: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#000000',
+  },
+  starContainer: {
+    flexDirection: 'row',
+    marginTop: 5,
+    columnGap: vw(1),
+  },
 });

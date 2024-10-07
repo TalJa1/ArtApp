@@ -9,6 +9,15 @@ export const test = (w?: any, h?: any, color?: any) => {
   return <SvgXml xml={xml} width={w} height={h} />;
 };
 
+export const sketchBlockIcon = (w?: any, h?: any, color?: any) => {
+  const xml = `<svg width="23" height="28" viewBox="0 0 23 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.1667 11.7756V6.91667C17.1667 3.78705 14.6296 1.25 11.5 1.25C8.3704 1.25 5.83334 3.78705 5.83334 6.91667V11.7756M17.1667 11.7756C15.7324 11.3462 13.8733 11.1667 11.5 11.1667C9.12671 11.1667 7.26762 11.3462 5.83334 11.7756M17.1667 11.7756C20.3153 12.7182 21.4167 14.8647 21.4167 18.9583C21.4167 24.9167 19.0833 26.75 11.5 26.75C3.91668 26.75 1.58334 24.9167 1.58334 18.9583C1.58334 14.8647 2.68472 12.7182 5.83334 11.7756" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
+  return <SvgXml xml={xml} width={w} height={h} />;
+};
+
 export const gradeStarIcon = (w?: any, h?: any, color?: any) => {
   const xml = `<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M5 7.08333L2.5 8.33333L3.125 5.83333L1.25 3.75L3.95833 3.54167L5 1.25L6.04167 3.54167L8.75 3.75L6.875 5.83333L7.5 8.33333L5 7.08333Z" fill=${
