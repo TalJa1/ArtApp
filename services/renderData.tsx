@@ -24,4 +24,41 @@ export const BrushList = [
   {icon: brush6Icon(vw(12), vw(12)), isAvailable: false},
 ];
 
-export const SketchArtList = [{}];
+export const SketchArtList = [
+  {
+    img: require('../assets/mainSketh/sketch/moon.png'),
+    star: 3,
+  },
+  {
+    img: require('../assets/mainSketh/sketch/sky.png'),
+    star: 2,
+  },
+  {
+    img: require('../assets/mainSketh/sketch/earth.png'),
+    star: 3,
+  },
+  {
+    img: require('../assets/mainSketh/sketch/cake.png'),
+    star: 1,
+  },
+  {
+    img: require('../assets/mainSketh/sketch/octobus.png'),
+    star: 3,
+  },
+  {
+    img: require('../assets/mainSketh/sketch/fish1.png'),
+    star: 3,
+  },
+  {
+    img: require('../assets/mainSketh/sketch/fish2.png'),
+    star: 3,
+  },
+  {
+    img: require('../assets/mainSketh/sketch/iceCream.png'),
+    star: 0,
+  },
+  {
+    img: require('../assets/mainSketh/sketch/spaceShip.png'),
+    star: 0,
+  },
+];

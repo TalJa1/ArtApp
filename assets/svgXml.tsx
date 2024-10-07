@@ -9,6 +9,20 @@ export const test = (w?: any, h?: any, color?: any) => {
   return <SvgXml xml={xml} width={w} height={h} />;
 };
 
+export const gradeStarIcon = (w?: any, h?: any, color?: any) => {
+  const xml = `<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M5 7.08333L2.5 8.33333L3.125 5.83333L1.25 3.75L3.95833 3.54167L5 1.25L6.04167 3.54167L8.75 3.75L6.875 5.83333L7.5 8.33333L5 7.08333Z" fill=${
+    color ?? '#E79F1C'
+  } style="fill:#E79F1C;fill:color(display-p3 0.9059 0.6235 0.1098);fill-opacity:1;"/>
+<path d="M5 7.08333L2.5 8.33333L3.125 5.83333L1.25 3.75L3.95833 3.54167L5 1.25L6.04167 3.54167L8.75 3.75L6.875 5.83333L7.5 8.33333L5 7.08333Z" stroke=${
+    color ?? '#E79F1C'
+  } style="stroke:#E79F1C;stroke:color(display-p3 0.9059 0.6235 0.1098);stroke-opacity:1;" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
+  return <SvgXml xml={xml} width={w} height={h} />;
+};
+
 export const nextIcon = (w?: any, h?: any, color?: any) => {
   const xml = `<svg width="35" height="34" viewBox="0 0 35 34" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M13.25 28.3334L24.5833 17.0001L13.25 5.66675" stroke=${

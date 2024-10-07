@@ -43,7 +43,10 @@ const Footer: React.FC = () => {
         style={[styles.footerImg, styles.footerImg2]}
         source={require('../../assets/mainSketh/footer2.png')}
       />
-      <Image style={styles.icon1} source={require('../../assets/mainSketh/icon1.png')}/>
+      <Image
+        style={styles.icon1}
+        source={require('../../assets/mainSketh/icon1.png')}
+      />
     </View>
   );
 };
@@ -81,8 +84,13 @@ const Main: React.FC = () => {
           {nextIcon(vw(7), vw(7))}
         </TouchableOpacity>
       </View>
+      <View></View>
     </View>
   );
+};
+
+export const ArtTabRender: React.FC = () => {
+  return <View></View>;
 };
 
 const Header: React.FC = () => {
@@ -138,7 +146,7 @@ const styles = StyleSheet.create({
     height: vh(15),
     resizeMode: 'cover',
   },
-  icon1:{
+  icon1: {
     zIndex: 3,
     position: 'absolute',
     bottom: vh(3),
