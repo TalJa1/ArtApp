@@ -21,6 +21,7 @@ import {centerAll, vh, vw} from '../../services/styleSheets';
 import FooterAutumn from '../../components/FooterAutumn';
 import HeaderSketch from '../../components/HeaderSketch';
 import {BtnGroupList} from '../../services/renderData';
+import DrawingCanvasComponent from '../../components/draw/DrawingCanvasComponent';
 
 const DrawScreen = () => {
   useStatusBar('white');
@@ -33,6 +34,7 @@ const DrawScreen = () => {
         <View style={{flex: 1, marginBottom: vh(2), paddingHorizontal: vw(5)}}>
           <HeaderSketch />
           <TabTitle data={data} />
+          <DrawingCanvasComponent />
         </View>
         <View style={{paddingHorizontal: vw(5)}}>
           <BtnGroup index={index} />
