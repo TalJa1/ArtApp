@@ -37,6 +37,7 @@ const SketchModalComponent: React.FC<SketchModalComponentProps> = ({
   };
 
   const handleDraw = () => {
+    onClose();
     navigation.navigate('DrawScreen', {data: data, index: index});
   };
 
