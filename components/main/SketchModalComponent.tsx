@@ -12,6 +12,8 @@ import React from 'react';
 import {SketchModalComponentProps} from '../../services/typeProps';
 import {gradeStarIcon, uploadIcon} from '../../assets/svgXml';
 import {centerAll, vh, vw} from '../../services/styleSheets';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const SketchModalComponent: React.FC<SketchModalComponentProps> = ({
   onClose,
@@ -19,6 +21,7 @@ const SketchModalComponent: React.FC<SketchModalComponentProps> = ({
   data,
   index,
 }) => {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
   var renderIndex = String(index + 1).padStart(2, '0');
 
   const renderStars = (starCount: number) => {
@@ -31,6 +34,10 @@ const SketchModalComponent: React.FC<SketchModalComponentProps> = ({
       );
     }
     return stars;
+  };
+
+  const handleDraw = () => {
+    navigation.navigate('DrawScreen', {data: data, index: index});
   };
 
   return (
@@ -60,7 +67,9 @@ const SketchModalComponent: React.FC<SketchModalComponentProps> = ({
                 <TouchableOpacity style={styles.uploadBtn}>
                   {uploadIcon(vw(7), vw(7))}
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.drawBtn, centerAll]}>
+                <TouchableOpacity
+                  onPress={handleDraw}
+                  style={[styles.drawBtn, centerAll]}>
                   <Text style={styles.drawTxt}>
                     Vẽ {data.star > 0 && 'lại'}
                   </Text>

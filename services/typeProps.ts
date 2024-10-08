@@ -33,3 +33,10 @@ export interface SketchModalComponentProps {
   data: SketchArtItem;
   index: number;
 }
+
+export type DetailRouteParams = {
+  DrawScreen: {
+    data: SketchArtItem;
+    index: number;
+  };
+};

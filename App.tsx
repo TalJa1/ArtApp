@@ -4,6 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import LoadingScreen from './views/init/LoadingScreen';
 import StartScreen from './views/main/StartScreen';
 import Sketh from './views/main/Sketh';
+import DrawScreen from './views/draw/DrawScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,11 @@ const App = () => {
           options={{headerShown: false}}
         />
         {/* Main View */}
+        <Stack.Screen
+          name="DrawScreen"
+          component={DrawScreen}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="Sketh"
           component={Sketh}
