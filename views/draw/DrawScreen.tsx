@@ -45,8 +45,8 @@ const DrawScreen = () => {
 
 const BtnGroup: React.FC<BtnGroupProps> = () => {
   const BtnList: BtnGroupItem[] = BtnGroupList;
-  const handlePress = () => {
-    console.log('BtnGroup');
+  const handlePress = (i: number) => {
+    console.log('BtnGroup', i);
   };
   return (
     <View style={styles.btnGroupContainer}>
@@ -59,7 +59,7 @@ const BtnGroup: React.FC<BtnGroupProps> = () => {
               {backgroundColor: item.backColor, borderColor: item.borderColor},
             ]}
             key={index}
-            onPress={handlePress}>
+            onPress={() => handlePress(index)}>
             {item.img !== null ? (
               <Image
                 style={{width: vw(9), height: vw(9), resizeMode: 'contain'}}
