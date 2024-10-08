@@ -1,17 +1,26 @@
 /* eslint-disable react-native/no-inline-styles */
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBarCustom';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import {
+  BtnGroupItem,
   BtnGroupProps,
   DetailRouteParams,
   TabTitleProps,
 } from '../../services/typeProps';
-import {vh, vw} from '../../services/styleSheets';
+import {centerAll, vh, vw} from '../../services/styleSheets';
 import FooterAutumn from '../../components/FooterAutumn';
 import HeaderSketch from '../../components/HeaderSketch';
+import {BtnGroupList} from '../../services/renderData';
 
 const DrawScreen = () => {
   useStatusBar('white');
@@ -24,6 +33,8 @@ const DrawScreen = () => {
         <View style={{flex: 1, marginBottom: vh(2), paddingHorizontal: vw(5)}}>
           <HeaderSketch />
           <TabTitle data={data} />
+        </View>
+        <View style={{paddingHorizontal: vw(5)}}>
           <BtnGroup index={index} />
         </View>
         <FooterAutumn showIcon1={false} showIcon2={false} />
@@ -33,7 +44,35 @@ const DrawScreen = () => {
 };
 
 const BtnGroup: React.FC<BtnGroupProps> = () => {
-  return <View></View>;
+  const BtnList: BtnGroupItem[] = BtnGroupList;
+  const handlePress = () => {
+    console.log('BtnGroup');
+  };
+  return (
+    <View style={styles.btnGroupContainer}>
+      {BtnList.map((item, index) => {
+        return (
+          <TouchableOpacity
+            style={[
+              styles.btnGroupItem,
+              centerAll,
+              {backgroundColor: item.backColor, borderColor: item.borderColor},
+            ]}
+            key={index}
+            onPress={handlePress}>
+            {item.img !== null ? (
+              <Image
+                style={{width: vw(9), height: vw(9), resizeMode: 'contain'}}
+                source={item.img}
+              />
+            ) : (
+              <>{item.icon}</>
+            )}
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
 };
 
 const TabTitle: React.FC<TabTitleProps> = ({data}) => {
@@ -87,5 +126,22 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#000000',
     fontWeight: 'bold',
+  },
+  btnGroupContainer: {
+    flexDirection: 'row',
+    columnGap: vw(2),
+    backgroundColor: '#E5F0FE',
+    paddingVertical: vh(1.5),
+    paddingHorizontal: vw(4),
+    justifyContent: 'space-between',
+    borderRadius: 20,
+  },
+  btnGroupItem: {
+    width: vw(15),
+    height: vw(15),
+    borderRadius: 20,
+    borderBottomWidth: 3,
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
   },
 });
