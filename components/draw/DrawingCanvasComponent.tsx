@@ -8,7 +8,7 @@ import {
   DEFAULT_COLORS,
 } from '@benjeau/react-native-draw-extras';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import { vh } from '../../services/styleSheets';
+import {vh} from '../../services/styleSheets';
 
 const DrawingCanvasComponent = () => {
   const canvasRef = useRef<CanvasRef>(null);
@@ -58,7 +58,7 @@ const DrawingCanvasComponent = () => {
     <GestureHandlerRootView style={{flex: 1}}>
       <Canvas
         ref={canvasRef}
-        height={vh(30)}
+        height={vh(40)}
         color={color}
         thickness={thickness}
         opacity={opacity}

@@ -52,6 +52,8 @@ export interface TabTitleProps {
 
 export interface BtnGroupProps {
   index: number;
+  handleToggleEraser: () => void;
+  handleToggleBrushProperties: () => void
 }
 
 export interface BtnGroupItem {

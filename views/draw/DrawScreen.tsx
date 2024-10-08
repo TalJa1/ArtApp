@@ -1,5 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import {
+  Animated,
   Image,
   ScrollView,
   StyleSheet,
@@ -7,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBarCustom';
 import {RouteProp, useRoute} from '@react-navigation/native';
@@ -20,13 +21,53 @@ import {
 import {centerAll, vh, vw} from '../../services/styleSheets';
 import FooterAutumn from '../../components/FooterAutumn';
 import HeaderSketch from '../../components/HeaderSketch';
-import {BtnGroupList} from '../../services/renderData';
-import DrawingCanvasComponent from '../../components/draw/DrawingCanvasComponent';
+import {BrushList, BtnGroupList} from '../../services/renderData';
+import {Canvas, CanvasRef, DrawingTool} from '@benjeau/react-native-draw';
+import {
+  DEFAULT_COLORS,
+} from '@benjeau/react-native-draw-extras';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import BrushModalComponent from '../../components/main/BrushModalComponent';
 
 const DrawScreen = () => {
   useStatusBar('white');
   const route = useRoute<RouteProp<DetailRouteParams, 'DrawScreen'>>();
   const {data, index} = route.params;
+
+  const canvasRef = useRef<CanvasRef>(null);
+
+  const [color, setColor] = useState(DEFAULT_COLORS[0][0][0]);
+  const [thickness, setThickness] = useState(5);
+  const [tool, setTool] = useState(DrawingTool.Brush);
+  const [visibleBrushProperties, setVisibleBrushProperties] = useState(false);
+  const [brush, setBrush] = useState(BrushList);
+
+  const handleToggleEraser = () => {
+    setTool(prev =>
+      prev === DrawingTool.Brush ? DrawingTool.Eraser : DrawingTool.Brush,
+    );
+  };
+
+  const [overlayOpacity] = useState(new Animated.Value(0));
+  const handleToggleBrushProperties = () => {
+    if (!visibleBrushProperties) {
+      setVisibleBrushProperties(true);
+
+      Animated.timing(overlayOpacity, {
+        toValue: 1,
+        duration: 200,
+        useNativeDriver: true,
+      }).start();
+    } else {
+      Animated.timing(overlayOpacity, {
+        toValue: 0,
+        duration: 200,
+        useNativeDriver: true,
+      }).start(() => {
+        setVisibleBrushProperties(false);
+      });
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -34,29 +75,53 @@ const DrawScreen = () => {
         <View style={{flex: 1, marginBottom: vh(2), paddingHorizontal: vw(5)}}>
           <HeaderSketch />
           <TabTitle data={data} />
-          <DrawingCanvasComponent />
+          <GestureHandlerRootView style={{flex: 1}}>
+            <Canvas
+              ref={canvasRef}
+              height={vh(50)}
+              color={color}
+              thickness={thickness}
+              opacity={100}
+              tool={tool}
+            />
+          </GestureHandlerRootView>
         </View>
         <View style={{paddingHorizontal: vw(5)}}>
-          <BtnGroup index={index} />
+          <BtnGroup
+            index={index}
+            handleToggleEraser={handleToggleEraser}
+            handleToggleBrushProperties={handleToggleBrushProperties}
+          />
         </View>
         <FooterAutumn showIcon1={false} showIcon2={false} />
       </ScrollView>
+      {visibleBrushProperties && (
+        <BrushModalComponent
+          modalVisible={visibleBrushProperties}
+          setModalVisible={setVisibleBrushProperties}
+          BrushList={brush}
+          setBrushList={setBrush}
+        />
+      )}
     </SafeAreaView>
   );
 };
 
-const BtnGroup: React.FC<BtnGroupProps> = () => {
+const BtnGroup: React.FC<BtnGroupProps> = ({
+  handleToggleEraser,
+  handleToggleBrushProperties,
+}) => {
   const BtnList: BtnGroupItem[] = BtnGroupList;
   const handlePress = (i: number) => {
     switch (i) {
       case 0:
-        console.log('Color');
+        handleToggleBrushProperties();
         break;
       case 1:
         console.log('Suggestion');
         break;
       case 2:
-        console.log('Eraser');
+        handleToggleEraser();
         break;
       case 3:
         console.log('Finish');
