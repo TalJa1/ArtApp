@@ -4,7 +4,11 @@ import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBarCustom';
 import {RouteProp, useRoute} from '@react-navigation/native';
-import {DetailRouteParams, TabTitleProps} from '../../services/typeProps';
+import {
+  BtnGroupProps,
+  DetailRouteParams,
+  TabTitleProps,
+} from '../../services/typeProps';
 import {vh, vw} from '../../services/styleSheets';
 import FooterAutumn from '../../components/FooterAutumn';
 import HeaderSketch from '../../components/HeaderSketch';
@@ -14,19 +18,22 @@ const DrawScreen = () => {
   const route = useRoute<RouteProp<DetailRouteParams, 'DrawScreen'>>();
   const {data, index} = route.params;
 
-  console.log(data, index);
-
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View style={{flex: 1, marginBottom: vh(2), paddingHorizontal: vw(5)}}>
           <HeaderSketch />
           <TabTitle data={data} />
+          <BtnGroup index={index} />
         </View>
         <FooterAutumn showIcon1={false} showIcon2={false} />
       </ScrollView>
     </SafeAreaView>
   );
+};
+
+const BtnGroup: React.FC<BtnGroupProps> = () => {
+  return <View></View>;
 };
 
 const TabTitle: React.FC<TabTitleProps> = ({data}) => {

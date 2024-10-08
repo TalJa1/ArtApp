@@ -49,3 +49,14 @@ export interface FooterAutumnProps {
 export interface TabTitleProps {
   data: SketchArtItem;
 }
+
+export interface BtnGroupProps {
+  index: number;
+}
+
+export interface BtnGroupItem {
+  img: any | null;
+  icon: JSX.Element | null;
+  backColor: string;
+  borderColor: string;
+}

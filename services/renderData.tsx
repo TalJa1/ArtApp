@@ -5,6 +5,9 @@ import {
   brush4Icon,
   brush5Icon,
   brush6Icon,
+  nextIcon,
+  questionIcon,
+  redoIcon,
 } from '../assets/svgXml';
 import {vw} from './styleSheets';
 
@@ -69,5 +72,32 @@ export const SketchArtList = [
     img: require('../assets/mainSketh/sketch/spaceShip.png'),
     star: 0,
     title: 'Tàu Vũ Trụ',
+  },
+];
+
+export const BtnGroupList = [
+  {
+    img: require('../assets/mainSketh/paintIcon.png'),
+    icon: null,
+    backColor: '#7CBFF9',
+    borderColor: '#5CA7EF',
+  },
+  {
+    img: null,
+    icon: questionIcon(vw(8), vw(8)),
+    backColor: '#EFBB00',
+    borderColor: '#F09D3C',
+  },
+  {
+    img: null,
+    icon: redoIcon(vw(8), vw(8)),
+    backColor: '#EF99DA',
+    borderColor: '#DB80C2',
+  },
+  {
+    img: null,
+    icon: nextIcon(vw(8), vw(8), 'white'),
+    backColor: '#EE7F68',
+    borderColor: '#DB664F',
   },
 ];

@@ -9,6 +9,24 @@ export const test = (w?: any, h?: any, color?: any) => {
   return <SvgXml xml={xml} width={w} height={h} />;
 };
 
+export const redoIcon = (w?: any, h?: any, color?: any) => {
+  const xml = `<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2.25 2.25V10.75M2.25 10.75H10.75M2.25 10.75C5.54721 7.79116 8.60074 4.44125 13.2225 3.79103C15.9601 3.40591 18.7486 3.92082 21.168 5.2582C23.5874 6.59557 25.5066 8.68296 26.6364 11.2058M27.75 27.75V19.25M27.75 19.25H19.25M27.75 19.25C24.4528 22.2088 21.3992 25.5587 16.7774 26.209C14.0399 26.5941 11.2514 26.0792 8.83198 24.7418C6.41258 23.4044 4.49338 21.317 3.36356 18.7941" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
+  return <SvgXml xml={xml} width={w} height={h} />;
+};
+
+export const questionIcon = (w?: any, h?: any, color?: any) => {
+  const xml = `<svg width="15" height="24" viewBox="0 0 15 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7.00004 21.9167V21.9025M6.99998 17.6667C6.99998 11.2917 12.6666 12.7084 12.6666 7.75004C12.6666 4.62043 10.1296 2.08337 6.99998 2.08337C4.35954 2.08337 2.1409 3.8893 1.51184 6.33337" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
+  return <SvgXml xml={xml} width={w} height={h} />;
+};
+
 export const uploadIcon = (w?: any, h?: any, color?: any) => {
   const xml = `<svg width="28" height="30" viewBox="0 0 28 30" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M25.3334 16.4167V22.7917C25.3334 27.1235 19.6667 27.0417 14 27.0417C8.33335 27.0417 2.66669 27.1235 2.66669 22.7917V16.4167M14 2.25L14 19.25M14 2.25L19.6667 7.91667M14 2.25L8.33335 7.91666" stroke=${
