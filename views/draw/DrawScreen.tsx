@@ -4,18 +4,16 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBarCustom';
-import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
+import {RouteProp, useRoute} from '@react-navigation/native';
 import {DetailRouteParams} from '../../services/typeProps';
-import StarGroupComponent from '../../components/main/StarGroupComponent';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {vh, vw} from '../../services/styleSheets';
 import FooterAutumn from '../../components/FooterAutumn';
+import HeaderSketch from '../../components/HeaderSketch';
 
 const DrawScreen = () => {
   useStatusBar('white');
@@ -28,7 +26,7 @@ const DrawScreen = () => {
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View style={{flex: 1, marginBottom: vh(2), paddingHorizontal: vw(5)}}>
-          <Header />
+          <HeaderSketch />
           <View style={styles.iconGroup}>
             <View style={styles.iconGroupImgContainer}>
               <Image
@@ -47,38 +45,12 @@ const DrawScreen = () => {
   );
 };
 
-const Header: React.FC = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<any>>();
-
-  return (
-    <View style={styles.headerContainer}>
-      <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Image source={require('../../assets/mainSketh/backBtn.png')} />
-      </TouchableOpacity>
-      <StarGroupComponent
-        starCount={2000}
-        color="#EFBB00"
-        borderColor="#FEF9BD"
-      />
-      <TouchableOpacity disabled>
-        <Image source={require('../../assets/mainSketh/settingBtn.png')} />
-      </TouchableOpacity>
-    </View>
-  );
-};
-
 export default DrawScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-  },
-  headerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginVertical: vh(2),
   },
   iconGroup: {
     flexDirection: 'row',

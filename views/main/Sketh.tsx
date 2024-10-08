@@ -10,10 +10,8 @@ import {
 import React, {useCallback, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBarCustom';
-import StarGroupComponent from '../../components/main/StarGroupComponent';
 import {centerAll, vh, vw} from '../../services/styleSheets';
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {useFocusEffect} from '@react-navigation/native';
 import {
   backIcon,
   gradeStarIcon,
@@ -25,6 +23,7 @@ import {loadData, saveData} from '../../services/storage';
 import {SketchArtList} from '../../services/renderData';
 import SketchModalComponent from '../../components/main/SketchModalComponent';
 import FooterAutumn from '../../components/FooterAutumn';
+import HeaderSketch from '../../components/HeaderSketch';
 
 const Sketh = () => {
   useStatusBar('#FCEFAD');
@@ -33,7 +32,7 @@ const Sketh = () => {
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View style={{flex: 1, paddingHorizontal: vw(5)}}>
-          <Header />
+          <HeaderSketch />
           <Main />
         </View>
         <FooterAutumn showIcon1={true} showIcon2={false} />
@@ -187,38 +186,12 @@ export const ArtTabRender: React.FC<ArtTabRenderProps> = ({data, index}) => {
   );
 };
 
-const Header: React.FC = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<any>>();
-
-  return (
-    <View style={styles.headerContainer}>
-      <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Image source={require('../../assets/mainSketh/backBtn.png')} />
-      </TouchableOpacity>
-      <StarGroupComponent
-        starCount={2000}
-        color="#EFBB00"
-        borderColor="#FEF9BD"
-      />
-      <TouchableOpacity>
-        <Image source={require('../../assets/mainSketh/settingBtn.png')} />
-      </TouchableOpacity>
-    </View>
-  );
-};
-
 export default Sketh;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FCEFAD',
-  },
-  headerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginVertical: vh(2),
   },
   mainLevel: {
     backgroundColor: '#EE7F68',
