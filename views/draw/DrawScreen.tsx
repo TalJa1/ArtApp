@@ -15,6 +15,7 @@ import {DetailRouteParams} from '../../services/typeProps';
 import StarGroupComponent from '../../components/main/StarGroupComponent';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {vh, vw} from '../../services/styleSheets';
+import FooterAutumn from '../../components/FooterAutumn';
 
 const DrawScreen = () => {
   useStatusBar('white');
@@ -40,6 +41,7 @@ const DrawScreen = () => {
             </View>
           </View>
         </View>
+        <FooterAutumn showIcon1={false} showIcon2={false} />
       </ScrollView>
     </SafeAreaView>
   );
@@ -83,10 +85,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
   },
-  iconGroupImgContainer:{
+  iconGroupImgContainer: {
     zIndex: 2,
-    position:'relative',
-    left: vw(9),
   },
   iconGroupImg: {
     width: vw(20),
@@ -102,7 +102,6 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    // Elevation for Android
     elevation: 5,
   },
   iconGroupTxt: {

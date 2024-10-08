@@ -40,3 +40,8 @@ export type DetailRouteParams = {
     index: number;
   };
 };
+
+export interface FooterAutumnProps {
+  showIcon1: boolean;
+  showIcon2: boolean;
+}
