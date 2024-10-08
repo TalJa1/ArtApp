@@ -27,7 +27,7 @@ import {
   DEFAULT_COLORS,
 } from '@benjeau/react-native-draw-extras';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import BrushModalComponent from '../../components/main/BrushModalComponent';
+import BrushPropertiesComponent from '../../components/draw/BrushPropertiesComponent';
 
 const DrawScreen = () => {
   useStatusBar('white');
@@ -96,11 +96,16 @@ const DrawScreen = () => {
         <FooterAutumn showIcon1={false} showIcon2={false} />
       </ScrollView>
       {visibleBrushProperties && (
-        <BrushModalComponent
-          modalVisible={visibleBrushProperties}
-          setModalVisible={setVisibleBrushProperties}
+        <BrushPropertiesComponent
+          visibleBrushProperties={visibleBrushProperties}
+          setVisibleBrushProperties={setVisibleBrushProperties}
           BrushList={brush}
           setBrushList={setBrush}
+          brushColor={color}
+          setBrushColor={setColor}
+          thickness={thickness}
+          setThickness={setThickness}
+          
         />
       )}
     </SafeAreaView>

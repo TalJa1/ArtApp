@@ -53,7 +53,7 @@ export interface TabTitleProps {
 export interface BtnGroupProps {
   index: number;
   handleToggleEraser: () => void;
-  handleToggleBrushProperties: () => void
+  handleToggleBrushProperties: () => void;
 }
 
 export interface BtnGroupItem {
@@ -61,4 +61,15 @@ export interface BtnGroupItem {
   icon: JSX.Element | null;
   backColor: string;
   borderColor: string;
+}
+
+export interface BrushPropertiesComponentProps {
+  visibleBrushProperties: boolean;
+  setVisibleBrushProperties: React.Dispatch<React.SetStateAction<boolean>>;
+  BrushList: BrushItem[];
+  setBrushList: (list: BrushItem[]) => void;
+  brushColor: string;
+  setBrushColor: React.Dispatch<React.SetStateAction<string>>
+  thickness: number;
+  setThickness: React.Dispatch<React.SetStateAction<number>>;
 }
