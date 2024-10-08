@@ -46,7 +46,20 @@ const DrawScreen = () => {
 const BtnGroup: React.FC<BtnGroupProps> = () => {
   const BtnList: BtnGroupItem[] = BtnGroupList;
   const handlePress = (i: number) => {
-    console.log('BtnGroup', i);
+    switch (i) {
+      case 0:
+        console.log('Color');
+        break;
+      case 1:
+        console.log('Suggestion');
+        break;
+      case 2:
+        console.log('Eraser');
+        break;
+      case 3:
+        console.log('Finish');
+        break;
+    }
   };
   return (
     <View style={styles.btnGroupContainer}>
