@@ -5,6 +5,7 @@ import {BrushPropertiesComponentProps} from '../../services/typeProps';
 import {clockIcon, penIcon} from '../../assets/svgXml';
 import {centerAll, vh, vw} from '../../services/styleSheets';
 import Slider from '@react-native-community/slider';
+import {colors} from '../../services/renderData';
 
 const BrushPropertiesComponent: React.FC<BrushPropertiesComponentProps> = ({
   BrushList,
@@ -13,10 +14,12 @@ const BrushPropertiesComponent: React.FC<BrushPropertiesComponentProps> = ({
   brushColor,
   setThickness,
   thickness,
+  setBrushColor,
 }) => {
   const [selectedBrushIndex, setSelectedBrushIndex] = useState<number | null>(
     null,
   );
+  const [selectedColor, setSelectedColor] = useState<string>(brushColor);
   const [selectedButton, setSelectedButton] = useState<string>('color');
 
   const handleBrushClick = (index: number) => {
@@ -25,6 +28,11 @@ const BrushPropertiesComponent: React.FC<BrushPropertiesComponentProps> = ({
 
   const handleButtonClick = (button: string) => {
     setSelectedButton(button);
+  };
+
+  const handleColorClick = (color: string) => {
+    setSelectedColor(color);
+    setBrushColor(color);
   };
 
   return (
@@ -58,7 +66,19 @@ const BrushPropertiesComponent: React.FC<BrushPropertiesComponentProps> = ({
             </TouchableOpacity>
           </View>
           {selectedButton === 'color' ? (
-            <></>
+            <View style={styles.colorContainer}>
+              {colors.map((color, index) => (
+                <TouchableOpacity
+                  key={index}
+                  style={[
+                    styles.colorButton,
+                    {backgroundColor: color},
+                    selectedColor === color && styles.selectedColor,
+                  ]}
+                  onPress={() => handleColorClick(color)}
+                />
+              ))}
+            </View>
           ) : (
             <View>
               <View style={styles.brushContainer}>
@@ -231,5 +251,21 @@ const styles = StyleSheet.create({
     borderBottomWidth: 3,
     borderLeftWidth: 1,
     borderRightWidth: 1,
+  },
+  colorContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    marginVertical: vh(2),
+  },
+  colorButton: {
+    width: vw(15),
+    height: vw(15),
+    margin: vw(1),
+    borderRadius: 15,
+  },
+  selectedColor: {
+    borderColor: 'black',
+    borderWidth: 2,
   },
 });

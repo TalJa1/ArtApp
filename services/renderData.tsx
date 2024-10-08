@@ -101,3 +101,22 @@ export const BtnGroupList = [
     borderColor: '#DB664F',
   },
 ];
+
+export const colors = [
+  '#FF0000',
+  '#00FF00',
+  '#0000FF',
+  '#FFFF00',
+  '#FF00FF',
+  '#00FFFF',
+  '#800000',
+  '#008000',
+  '#000080',
+  '#808000',
+  '#800080',
+  '#008080',
+  '#C0C0C0',
+  '#808080',
+  '#FFA500',
+  '#A52A2A',
+];

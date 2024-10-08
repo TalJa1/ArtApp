@@ -23,9 +23,7 @@ import FooterAutumn from '../../components/FooterAutumn';
 import HeaderSketch from '../../components/HeaderSketch';
 import {BrushList, BtnGroupList} from '../../services/renderData';
 import {Canvas, CanvasRef, DrawingTool} from '@benjeau/react-native-draw';
-import {
-  DEFAULT_COLORS,
-} from '@benjeau/react-native-draw-extras';
+import {DEFAULT_COLORS} from '@benjeau/react-native-draw-extras';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import BrushPropertiesComponent from '../../components/draw/BrushPropertiesComponent';
 
@@ -105,7 +103,6 @@ const DrawScreen = () => {
           setBrushColor={setColor}
           thickness={thickness}
           setThickness={setThickness}
-          
         />
       )}
     </SafeAreaView>
