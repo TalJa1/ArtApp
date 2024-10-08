@@ -45,3 +45,7 @@ export interface FooterAutumnProps {
   showIcon1: boolean;
   showIcon2: boolean;
 }
+
+export interface TabTitleProps {
+  data: SketchArtItem;
+}

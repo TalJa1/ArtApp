@@ -1,16 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
-import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBarCustom';
 import {RouteProp, useRoute} from '@react-navigation/native';
-import {DetailRouteParams} from '../../services/typeProps';
+import {DetailRouteParams, TabTitleProps} from '../../services/typeProps';
 import {vh, vw} from '../../services/styleSheets';
 import FooterAutumn from '../../components/FooterAutumn';
 import HeaderSketch from '../../components/HeaderSketch';
@@ -27,21 +21,27 @@ const DrawScreen = () => {
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View style={{flex: 1, marginBottom: vh(2), paddingHorizontal: vw(5)}}>
           <HeaderSketch />
-          <View style={styles.iconGroup}>
-            <View style={styles.iconGroupImgContainer}>
-              <Image
-                style={styles.iconGroupImg}
-                source={require('../../assets/mainSketh/drawIcon.png')}
-              />
-            </View>
-            <View style={styles.iconGroupTxtContainer}>
-              <Text style={styles.iconGroupTxt}>Hãy vẽ {data.title}</Text>
-            </View>
-          </View>
+          <TabTitle data={data} />
         </View>
         <FooterAutumn showIcon1={false} showIcon2={false} />
       </ScrollView>
     </SafeAreaView>
+  );
+};
+
+const TabTitle: React.FC<TabTitleProps> = ({data}) => {
+  return (
+    <View style={styles.iconGroup}>
+      <View style={styles.iconGroupImgContainer}>
+        <Image
+          style={styles.iconGroupImg}
+          source={require('../../assets/mainSketh/drawIcon.png')}
+        />
+      </View>
+      <View style={styles.iconGroupTxtContainer}>
+        <Text style={styles.iconGroupTxt}>Hãy vẽ {data.title}</Text>
+      </View>
+    </View>
   );
 };
 
