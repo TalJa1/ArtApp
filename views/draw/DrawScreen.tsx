@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
   iconGroupTxtContainer: {
     backgroundColor: '#E5F0FE',
     paddingVertical: vh(1.5),
-    paddingHorizontal: vw(10),
+    paddingHorizontal: vw(4),
     borderRadius: vw(25),
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
