@@ -131,3 +131,18 @@ export const colors = [
 ];
 
 export const CoinsData = 2000;
+
+export const SuggestionBtnGroupData = [
+  {
+    title: 'Xem hình thực tế',
+    star: 200,
+  },
+  {
+    title: 'Bỏ qua',
+    star: 200,
+  },
+  {
+    title: 'Hình học sử dụng',
+    star: 200,
+  },
+];

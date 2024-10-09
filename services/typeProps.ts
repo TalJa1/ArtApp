@@ -96,3 +96,8 @@ export type SuggestionProps = {
 export interface HeaderSketchProps {
   coins: number;
 }
+
+export interface SuggestionBtnGroupItem {
+  title: string;
+  star: number;
+}

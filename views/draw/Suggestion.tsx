@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {useCallback, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {RouteProp, useFocusEffect, useRoute} from '@react-navigation/native';
@@ -36,7 +36,7 @@ const Suggestion = () => {
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View style={{paddingHorizontal: vw(5), flex: 1}}>
           <HeaderSketch coins={coins} />
-          <Text>Suggestion</Text>
+          <Main />
         </View>
         <FooterSpring />
       </ScrollView>
@@ -44,11 +44,31 @@ const Suggestion = () => {
   );
 };
 
+const Main: React.FC = () => {
+  return (
+    <View style={styles.mainContainer}>
+      <Image
+        style={styles.img}
+        source={require('../../assets/mainSketh/sketch/suggestIcon.png')}
+      />
+    </View>
+  );
+};
+
+
 export default Suggestion;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
+  },
+  mainContainer: {
+    alignItems: 'center',
+  },
+  img: {
+    width: vw(50),
+    height: vw(50),
+    resizeMode: 'contain',
   },
 });
