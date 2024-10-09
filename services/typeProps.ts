@@ -107,3 +107,9 @@ export interface MainSuggestionProps {
   coins: number;
   setCoins: React.Dispatch<React.SetStateAction<number>>;
 }
+
+export type RealSuggestionRoute = {
+  RealSuggestion: {
+    imgIndex: number;
+  };
+};

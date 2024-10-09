@@ -59,7 +59,7 @@ const Suggestion = () => {
   );
 };
 
-const Main: React.FC<MainSuggestionProps> = ({setCoins, coins}) => {
+const Main: React.FC<MainSuggestionProps> = ({setCoins, coins, drawIndex}) => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const [clickedIndex, setClickedIndex] = useState<number | null>(null);
 
@@ -69,7 +69,11 @@ const Main: React.FC<MainSuggestionProps> = ({setCoins, coins}) => {
     setClickedIndex(index);
   };
 
-  const handleSuggestionUse = () => {};
+  const handleSuggestionUse = () => {
+    navigation.navigate('RealSuggestion', {
+      imgIndex: drawIndex,
+    });
+  };
 
   return (
     <View style={styles.mainContainer}>

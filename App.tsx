@@ -6,6 +6,7 @@ import StartScreen from './views/main/StartScreen';
 import Sketh from './views/main/Sketh';
 import DrawScreen from './views/draw/DrawScreen';
 import Suggestion from './views/draw/Suggestion';
+import RealSuggestion from './views/draw/RealSuggestion';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +21,11 @@ const App = () => {
           options={{headerShown: false}}
         />
         {/* Main View */}
+        <Stack.Screen
+          name="RealSuggestion"
+          component={RealSuggestion}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="Suggestion"
           component={Suggestion}
