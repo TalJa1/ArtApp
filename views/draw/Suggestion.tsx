@@ -87,7 +87,15 @@ const Main: React.FC<MainSuggestionProps> = ({setCoins, coins}) => {
           );
         })}
       </View>
-      <TouchableOpacity style={styles.btnUseSuggestion}>
+      <TouchableOpacity
+        disabled={clickedIndex === null}
+        style={[
+          styles.btnUseSuggestion,
+          clickedIndex === null && {
+            backgroundColor: '#999999',
+            borderColor: '#585757',
+          },
+        ]}>
         <Text style={styles.btnUseSuggestionTxt}>Sử dụng gợi ý</Text>
       </TouchableOpacity>
     </View>
