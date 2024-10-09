@@ -5,7 +5,7 @@ import {BrushPropertiesComponentProps} from '../../services/typeProps';
 import {clockIcon, penIcon} from '../../assets/svgXml';
 import {centerAll, vh, vw} from '../../services/styleSheets';
 import Slider from '@react-native-community/slider';
-import {colors} from '../../services/renderData';
+import {BrushTmpData, colors} from '../../services/renderData';
 
 const BrushPropertiesComponent: React.FC<BrushPropertiesComponentProps> = ({
   BrushList,
@@ -95,7 +95,7 @@ const BrushPropertiesComponent: React.FC<BrushPropertiesComponentProps> = ({
                     ]}
                     onPress={() => handleBrushClick(index)}>
                     <View style={styles.brushWrapper}>
-                      {brush.icon}
+                      {BrushTmpData[index]}
                       {brush.isAvailable === false && (
                         <View style={styles.clockIconOverlay}>
                           {clockIcon(vw(7), vw(7))}

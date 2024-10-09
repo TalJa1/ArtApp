@@ -8,11 +8,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useRef, useState} from 'react';
+import React, {useCallback, useRef, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBarCustom';
-import {RouteProp, useRoute} from '@react-navigation/native';
+import {RouteProp, useFocusEffect, useRoute} from '@react-navigation/native';
 import {
+  BrushItem,
   BtnGroupItem,
   BtnGroupProps,
   DetailRouteParams,
@@ -26,6 +27,7 @@ import {Canvas, CanvasRef, DrawingTool} from '@benjeau/react-native-draw';
 import {DEFAULT_COLORS} from '@benjeau/react-native-draw-extras';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import BrushPropertiesComponent from '../../components/draw/BrushPropertiesComponent';
+import {loadData, saveData} from '../../services/storage';
 
 const DrawScreen = () => {
   useStatusBar('white');
@@ -38,13 +40,30 @@ const DrawScreen = () => {
   const [thickness, setThickness] = useState(5);
   const [tool, setTool] = useState(DrawingTool.Brush);
   const [visibleBrushProperties, setVisibleBrushProperties] = useState(false);
-  const [brush, setBrush] = useState(BrushList);
+  const [brush, setBrush] = useState<BrushItem[]>([]);
 
   const handleToggleEraser = () => {
     setTool(prev =>
       prev === DrawingTool.Brush ? DrawingTool.Eraser : DrawingTool.Brush,
     );
   };
+
+  const fetchData = async () => {
+    await loadData<BrushItem[]>('brushListStorage')
+      .then(dataBrush => {
+        setBrush(dataBrush);
+      })
+      .catch(() => {
+        saveData('brushListStorage', BrushList);
+        setBrush(BrushList);
+      });
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchData();
+    }, []),
+  );
 
   const [overlayOpacity] = useState(new Animated.Value(0));
   const handleToggleBrushProperties = () => {
