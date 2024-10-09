@@ -18,7 +18,7 @@ import BrushModalComponent from '../../components/main/BrushModalComponent';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {loadData, saveData} from '../../services/storage';
-import {BrushItem} from '../../services/typeProps';
+import {BrushItem, StartScreenFooterProps, StartScreenHeaderProps} from '../../services/typeProps';
 
 const generateRandomGrassIcons = (numIcons: number) => {
   return Array.from({length: numIcons}).map(() => {
@@ -35,6 +35,7 @@ const generateRandomGrassIcons = (numIcons: number) => {
 
 const StartScreen = () => {
   useStatusBar('#8ACE5D');
+  const [coins, setCoins] = useState<number>(0);
 
   const grassIcons = generateRandomGrassIcons(10); // Generate 8 grass icons
 
@@ -57,16 +58,16 @@ const StartScreen = () => {
               </View>
             ))}
           </View>
-          <Header />
+          <Header coins={coins} setCoins={setCoins} />
           <CenterView />
-          <Footer />
+          <Footer setCoins={setCoins}/>
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
 
-const Footer: React.FC = () => {
+const Footer: React.FC<StartScreenFooterProps> = ({setCoins}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [brush, setBrush] = useState<BrushItem[]>([]);
   const handleBtnPress = (index: number) => {
@@ -132,6 +133,7 @@ const Footer: React.FC = () => {
         setModalVisible={setModalVisible}
         BrushListData={brush}
         setBrushList={setBrush}
+        setCoins={setCoins}
       />
     </View>
   );
@@ -158,9 +160,7 @@ const CenterView: React.FC = () => {
   );
 };
 
-const Header: React.FC = () => {
-  const [coins, setCoins] = useState<number>(0);
-
+const Header: React.FC<StartScreenHeaderProps> = ({coins, setCoins}) => {
   const fetchData = async () => {
     await loadData<number>('CoinsStorage')
       .then(data => {
@@ -175,6 +175,7 @@ const Header: React.FC = () => {
   useFocusEffect(
     useCallback(() => {
       fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []),
   );
 

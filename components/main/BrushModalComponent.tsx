@@ -19,6 +19,7 @@ const BrushModalComponent: React.FC<BrushModalProps> = ({
   setModalVisible,
   BrushListData,
   setBrushList,
+  setCoins,
 }) => {
   const [selectedBrushIndex, setSelectedBrushIndex] = useState<number | null>(
     null,
@@ -49,10 +50,12 @@ const BrushModalComponent: React.FC<BrushModalProps> = ({
     loadData<number>('CoinsStorage')
       .then(data => {
         if (selectedBrushIndex !== null) {
+          setCoins(data - BrushList[selectedBrushIndex].price);
           saveData('CoinsStorage', data - BrushList[selectedBrushIndex].price);
         }
       })
       .catch(() => {
+        setCoins(2000);
         saveData('CoinsStorage', 2000);
       });
     setSelectedBrushIndex(null);

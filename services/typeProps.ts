@@ -17,6 +17,7 @@ export interface BrushModalProps {
   setModalVisible: (visible: boolean) => void;
   BrushListData: BrushItem[];
   setBrushList: (list: BrushItem[]) => void;
+  setCoins: (coins: number) => void;
 }
 
 export interface SketchArtItem {
@@ -75,4 +76,13 @@ export interface BrushPropertiesComponentProps {
   setBrushColor: React.Dispatch<React.SetStateAction<string>>;
   thickness: number;
   setThickness: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export interface StartScreenHeaderProps {
+  coins: number;
+  setCoins: (coins: number) => void;
+}
+
+export interface StartScreenFooterProps {
+  setCoins: (coins: number) => void;
 }
