@@ -4,8 +4,9 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import StarGroupComponent from './main/StarGroupComponent';
 import {vh} from '../services/styleSheets';
+import { HeaderSketchProps } from '../services/typeProps';
 
-const HeaderSketch: React.FC = () => {
+const HeaderSketch: React.FC<HeaderSketchProps> = ({coins}) => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
   return (
@@ -14,7 +15,7 @@ const HeaderSketch: React.FC = () => {
         <Image source={require('../assets/mainSketh/backBtn.png')} />
       </TouchableOpacity>
       <StarGroupComponent
-        starCount={2000}
+        starCount={coins}
         color="#EFBB00"
         borderColor="#FEF9BD"
       />

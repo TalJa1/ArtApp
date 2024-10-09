@@ -47,6 +47,7 @@ const DrawScreen = () => {
   const [tool, setTool] = useState(DrawingTool.Brush);
   const [visibleBrushProperties, setVisibleBrushProperties] = useState(false);
   const [brush, setBrush] = useState<BrushItem[]>([]);
+  const [coins, setCoins] = useState<number>(0);
 
   const handleToggleEraser = () => {
     setTool(prev =>
@@ -62,6 +63,14 @@ const DrawScreen = () => {
       .catch(() => {
         saveData('brushListStorage', BrushList);
         setBrush(BrushList);
+      });
+    await loadData<number>('CoinsStorage')
+      .then(dataCoins => {
+        setCoins(dataCoins);
+      })
+      .catch(() => {
+        setCoins(2000);
+        saveData('CoinsStorage', 2000);
       });
   };
 
@@ -96,7 +105,7 @@ const DrawScreen = () => {
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View style={{flex: 1, marginBottom: vh(2), paddingHorizontal: vw(5)}}>
-          <HeaderSketch />
+          <HeaderSketch coins={coins} />
           <TabTitle data={data} />
           <GestureHandlerRootView style={{flex: 1}}>
             <Canvas

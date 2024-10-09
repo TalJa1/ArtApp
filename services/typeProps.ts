@@ -92,3 +92,7 @@ export type SuggestionProps = {
     imgIndex: number;
   };
 };
+
+export interface HeaderSketchProps {
+  coins: number;
+}

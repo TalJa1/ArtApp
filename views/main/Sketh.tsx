@@ -27,12 +27,30 @@ import HeaderSketch from '../../components/HeaderSketch';
 
 const Sketh = () => {
   useStatusBar('#FCEFAD');
+  const [coins, setCoins] = useState<number>(0);
+
+  const fetchData = async () => {
+    await loadData<number>('CoinsStorage')
+      .then(dataCoins => {
+        setCoins(dataCoins);
+      })
+      .catch(() => {
+        setCoins(2000);
+        saveData('CoinsStorage', 2000);
+      });
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchData();
+    }, []),
+  );
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View style={{flex: 1, paddingHorizontal: vw(5)}}>
-          <HeaderSketch />
+          <HeaderSketch coins={coins}/>
           <Main />
         </View>
         <FooterAutumn showIcon1={true} showIcon2={false} />
