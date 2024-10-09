@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
   starGrp: {
     padding: vw(2),
-    borderRadius: vw(30),
+    borderRadius: vw(40),
     resizeMode: 'contain',
     position: 'relative',
     left: vw(4.5),

@@ -18,7 +18,11 @@ import BrushModalComponent from '../../components/main/BrushModalComponent';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {loadData, saveData} from '../../services/storage';
-import {BrushItem, StartScreenFooterProps, StartScreenHeaderProps} from '../../services/typeProps';
+import {
+  BrushItem,
+  StartScreenFooterProps,
+  StartScreenHeaderProps,
+} from '../../services/typeProps';
 
 const generateRandomGrassIcons = (numIcons: number) => {
   return Array.from({length: numIcons}).map(() => {
@@ -60,7 +64,7 @@ const StartScreen = () => {
           </View>
           <Header coins={coins} setCoins={setCoins} />
           <CenterView />
-          <Footer setCoins={setCoins}/>
+          <Footer setCoins={setCoins} />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -175,7 +179,7 @@ const Header: React.FC<StartScreenHeaderProps> = ({coins, setCoins}) => {
   useFocusEffect(
     useCallback(() => {
       fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []),
   );
 
@@ -187,7 +191,11 @@ const Header: React.FC<StartScreenHeaderProps> = ({coins, setCoins}) => {
           source={require('../../assets/start/settingBtn.png')}
         />
       </TouchableOpacity>
-      <StarGroupComponent starCount={coins} />
+      <StarGroupComponent
+        starCount={coins}
+        color="#EFBB00"
+        borderColor="#FEF9BD"
+      />
       <TouchableOpacity>
         <Image
           style={styles.headerBtnImg}
