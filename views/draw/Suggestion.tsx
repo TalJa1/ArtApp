@@ -76,6 +76,9 @@ const Main: React.FC = () => {
           );
         })}
       </View>
+      <TouchableOpacity style={styles.btnUseSuggestion}>
+        <Text style={styles.btnUseSuggestionTxt}>Sử dụng gợi ý</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -89,6 +92,7 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     rowGap: vh(2),
+    flex: 1,
   },
   img: {
     width: vw(50),
@@ -109,5 +113,23 @@ const styles = StyleSheet.create({
     color: '#000000',
     fontSize: 20,
     fontWeight: '600',
+  },
+  btnUseSuggestion: {
+    backgroundColor: '#EF99DA',
+    paddingVertical: vh(1),
+    paddingHorizontal: vw(10),
+    borderRadius: 20,
+    alignSelf: 'center',
+    borderBottomWidth: 3,
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
+    borderColor: '#DB80C2',
+    position: 'absolute',
+    bottom: 0,
+  },
+  btnUseSuggestionTxt: {
+    color: 'white',
+    fontSize: 32,
+    fontWeight: '900',
   },
 });
