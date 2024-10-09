@@ -9,7 +9,12 @@ import {
 } from 'react-native';
 import React, {useCallback, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {RouteProp, useFocusEffect, useRoute} from '@react-navigation/native';
+import {
+  RouteProp,
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 import {MainSuggestionProps, SuggestionProps} from '../../services/typeProps';
 import {loadData, saveData} from '../../services/storage';
 import HeaderSketch from '../../components/HeaderSketch';
@@ -17,6 +22,7 @@ import {vh, vw} from '../../services/styleSheets';
 import FooterSpring from '../../components/FooterSpring';
 import {SuggestionBtnGroupData} from '../../services/renderData';
 import StarGroupComponent from '../../components/main/StarGroupComponent';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const Suggestion = () => {
   const route = useRoute<RouteProp<SuggestionProps, 'SuggestionItem'>>();
@@ -45,7 +51,7 @@ const Suggestion = () => {
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View style={{paddingHorizontal: vw(5), flex: 1}}>
           <HeaderSketch coins={coins} />
-          <Main setCoins={setCoins} coins={coins} />
+          <Main setCoins={setCoins} coins={coins} drawIndex={imgIndex} />
         </View>
         <FooterSpring />
       </ScrollView>
@@ -54,13 +60,16 @@ const Suggestion = () => {
 };
 
 const Main: React.FC<MainSuggestionProps> = ({setCoins, coins}) => {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const [clickedIndex, setClickedIndex] = useState<number | null>(null);
 
   const handleButtonClick = (index: number) => {
     setCoins(coins - 200);
-    saveData('CoinsStorage', coins - 200);
+    // saveData('CoinsStorage', coins - 200);
     setClickedIndex(index);
   };
+
+  const handleSuggestionUse = () => {};
 
   return (
     <View style={styles.mainContainer}>
@@ -88,6 +97,7 @@ const Main: React.FC<MainSuggestionProps> = ({setCoins, coins}) => {
         })}
       </View>
       <TouchableOpacity
+        onPress={handleSuggestionUse}
         disabled={clickedIndex === null}
         style={[
           styles.btnUseSuggestion,

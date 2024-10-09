@@ -103,6 +103,7 @@ export interface SuggestionBtnGroupItem {
 }
 
 export interface MainSuggestionProps {
+  drawIndex: number;
   coins: number;
   setCoins: React.Dispatch<React.SetStateAction<number>>;
 }
