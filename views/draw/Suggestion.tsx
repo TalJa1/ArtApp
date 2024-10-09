@@ -7,6 +7,7 @@ import {SuggestionProps} from '../../services/typeProps';
 import {loadData, saveData} from '../../services/storage';
 import HeaderSketch from '../../components/HeaderSketch';
 import {vw} from '../../services/styleSheets';
+import FooterSpring from '../../components/FooterSpring';
 
 const Suggestion = () => {
   const route = useRoute<RouteProp<SuggestionProps, 'SuggestionItem'>>();
@@ -33,10 +34,11 @@ const Suggestion = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
-        <View style={{paddingHorizontal: vw(5)}}>
+        <View style={{paddingHorizontal: vw(5), flex: 1}}>
           <HeaderSketch coins={coins} />
           <Text>Suggestion</Text>
         </View>
+        <FooterSpring />
       </ScrollView>
     </SafeAreaView>
   );
