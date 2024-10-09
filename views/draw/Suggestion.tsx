@@ -1,13 +1,22 @@
 /* eslint-disable react-native/no-inline-styles */
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useCallback, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {RouteProp, useFocusEffect, useRoute} from '@react-navigation/native';
 import {SuggestionProps} from '../../services/typeProps';
 import {loadData, saveData} from '../../services/storage';
 import HeaderSketch from '../../components/HeaderSketch';
-import {vw} from '../../services/styleSheets';
+import {vh, vw} from '../../services/styleSheets';
 import FooterSpring from '../../components/FooterSpring';
+import {SuggestionBtnGroupData} from '../../services/renderData';
+import StarGroupComponent from '../../components/main/StarGroupComponent';
 
 const Suggestion = () => {
   const route = useRoute<RouteProp<SuggestionProps, 'SuggestionItem'>>();
@@ -51,10 +60,25 @@ const Main: React.FC = () => {
         style={styles.img}
         source={require('../../assets/mainSketh/sketch/suggestIcon.png')}
       />
+      <View style={{rowGap: vh(1)}}>
+        {SuggestionBtnGroupData.map((item, index) => {
+          return (
+            <View key={index} style={styles.btnGroupContainer}>
+              <Text style={styles.title}>{item.title}</Text>
+              <TouchableOpacity>
+                <StarGroupComponent
+                  starCount={item.star}
+                  color="#EFBB00"
+                  borderColor="#FEF9BD"
+                />
+              </TouchableOpacity>
+            </View>
+          );
+        })}
+      </View>
     </View>
   );
 };
-
 
 export default Suggestion;
 
@@ -64,11 +88,26 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   mainContainer: {
-    alignItems: 'center',
+    rowGap: vh(2),
   },
   img: {
     width: vw(50),
     height: vw(50),
     resizeMode: 'contain',
+    alignSelf: 'center',
+  },
+  btnGroupContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: '#C8E589',
+    alignItems: 'center',
+    paddingHorizontal: vw(5),
+    paddingVertical: vh(1),
+    borderRadius: 24,
+  },
+  title: {
+    color: '#000000',
+    fontSize: 20,
+    fontWeight: '600',
   },
 });
