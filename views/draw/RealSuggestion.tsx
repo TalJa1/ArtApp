@@ -11,15 +11,19 @@ import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {centerAll, vh, vw} from '../../services/styleSheets';
 import {RealSuggestionRoute} from '../../services/typeProps';
-import {RouteProp, useRoute} from '@react-navigation/native';
+import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import FooterSpring from '../../components/FooterSpring';
 import {SketchArtList} from '../../services/renderData';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const RealSuggestion = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const route = useRoute<RouteProp<RealSuggestionRoute, 'RealSuggestion'>>();
   const {imgIndex} = route.params;
 
-  const handleSuggestionUse = () => {};
+  const handleSuggestionUse = () => {
+    navigation.navigate('DrawScreen', {data: SketchArtList[imgIndex], index: imgIndex});
+  };
 
   return (
     <SafeAreaView style={styles.container}>
