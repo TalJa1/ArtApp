@@ -120,3 +120,5 @@ export const colors = [
   '#FFA500',
   '#A52A2A',
 ];
+
+export const CoinsData = 2000;

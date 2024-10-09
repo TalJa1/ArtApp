@@ -7,16 +7,17 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBarCustom';
 import {centerAll, vh, vw} from '../../services/styleSheets';
 import {grassIcon, playStartIcon} from '../../assets/svgXml';
-import {BrushList, FourBtn} from '../../services/renderData';
+import {BrushList, CoinsData, FourBtn} from '../../services/renderData';
 import StarGroupComponent from '../../components/main/StarGroupComponent';
 import BrushModalComponent from '../../components/main/BrushModalComponent';
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {loadData, saveData} from '../../services/storage';
 
 const generateRandomGrassIcons = (numIcons: number) => {
   return Array.from({length: numIcons}).map(() => {
@@ -140,6 +141,25 @@ const CenterView: React.FC = () => {
 };
 
 const Header: React.FC = () => {
+  const [coins, setCoins] = useState<number>(0);
+
+  const fetchData = async () => {
+    await loadData<number>('CoinsStorage')
+      .then(data => {
+        setCoins(data);
+      })
+      .catch(() => {
+        saveData('CoinsStorage', CoinsData);
+        setCoins(CoinsData);
+      });
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchData();
+    }, []),
+  );
+
   return (
     <View style={styles.headerContainer}>
       <TouchableOpacity>
@@ -148,7 +168,7 @@ const Header: React.FC = () => {
           source={require('../../assets/start/settingBtn.png')}
         />
       </TouchableOpacity>
-      <StarGroupComponent starCount={2000} />
+      <StarGroupComponent starCount={coins} />
       <TouchableOpacity>
         <Image
           style={styles.headerBtnImg}
