@@ -7,6 +7,7 @@ export interface StarGroupComponentProps {
 export interface BrushItem {
   icon: JSX.Element;
   isAvailable: boolean;
+  price: number;
 }
 
 export interface BrushModalProps {
