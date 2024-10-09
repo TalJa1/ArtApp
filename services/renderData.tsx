@@ -18,13 +18,22 @@ export const FourBtn = [
   require('../assets/start/penListBtn.png'),
 ];
 
+export const BrushTmpData = [
+  brush1Icon(vw(12), vw(12)),
+  brush2Icon(vw(12), vw(12)),
+  brush3Icon(vw(12), vw(12)),
+  brush4Icon(vw(12), vw(12)),
+  brush5Icon(vw(12), vw(12)),
+  brush6Icon(vw(12), vw(12)),
+];
+
 export const BrushList = [
-  {icon: brush1Icon(vw(12), vw(12)), isAvailable: true, price: 100},
-  {icon: brush2Icon(vw(12), vw(12)), isAvailable: true, price: 200},
-  {icon: brush3Icon(vw(12), vw(12)), isAvailable: false, price: 500},
-  {icon: brush4Icon(vw(12), vw(12)), isAvailable: false, price: 3000},
-  {icon: brush5Icon(vw(12), vw(12)), isAvailable: false, price: 4000},
-  {icon: brush6Icon(vw(12), vw(12)), isAvailable: false, price: 5000},
+  {isAvailable: true, price: 100},
+  {isAvailable: true, price: 200},
+  {isAvailable: false, price: 500},
+  {isAvailable: false, price: 3000},
+  {isAvailable: false, price: 4000},
+  {isAvailable: false, price: 5000},
 ];
 
 export const SketchArtList = [

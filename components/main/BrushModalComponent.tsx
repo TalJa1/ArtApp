@@ -7,12 +7,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {vh, vw} from '../../services/styleSheets';
+import {centerAll, vh, vw} from '../../services/styleSheets';
 import {clockIcon} from '../../assets/svgXml';
 import {BrushModalProps} from '../../services/typeProps';
 import StarModalGroupComponent from './StarModalGroupComponent';
 import {loadData, saveData} from '../../services/storage';
-import {BrushList} from '../../services/renderData';
+import {BrushList, BrushTmpData} from '../../services/renderData';
 
 const BrushModalComponent: React.FC<BrushModalProps> = ({
   modalVisible,
@@ -86,11 +86,7 @@ const BrushModalComponent: React.FC<BrushModalProps> = ({
                   ]}
                   onPress={() => handleBrushClick(index)}>
                   <View style={styles.brushWrapper}>
-                    {React.isValidElement(brush.icon) ? (
-                      brush.icon
-                    ) : (
-                      <Text>Loading Icon</Text>
-                    )}
+                    {BrushTmpData[index]}
                     {brush.isAvailable === false && (
                       <View style={styles.clockIconOverlay}>
                         {clockIcon(vw(7), vw(7))}
@@ -103,13 +99,9 @@ const BrushModalComponent: React.FC<BrushModalProps> = ({
           ) : (
             <View style={styles.selectedBrushContainer}>
               <View style={styles.selectedBrushWrapper}>
-                {React.isValidElement(BrushListData[selectedBrushIndex].icon) ? (
-                  <View style={{ width: vw(25), height: vw(25) }}>
-                    {BrushListData[selectedBrushIndex].icon}
-                  </View>
-                ) : (
-                  <Text>Loading Icon</Text>
-                )}
+                <View style={[{width: vw(20), height: vw(20)}, centerAll]}>
+                  {BrushTmpData[selectedBrushIndex]}
+                </View>
               </View>
               <StarModalGroupComponent
                 starCount={BrushListData[selectedBrushIndex].price}

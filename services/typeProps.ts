@@ -4,8 +4,10 @@ export interface StarGroupComponentProps {
   borderColor?: string;
 }
 
-export interface BrushItem {
+export interface BrushTmpData {
   icon: JSX.Element;
+}
+export interface BrushItem {
   isAvailable: boolean;
   price: number;
 }
@@ -70,7 +72,7 @@ export interface BrushPropertiesComponentProps {
   BrushList: BrushItem[];
   setBrushList: (list: BrushItem[]) => void;
   brushColor: string;
-  setBrushColor: React.Dispatch<React.SetStateAction<string>>
+  setBrushColor: React.Dispatch<React.SetStateAction<string>>;
   thickness: number;
   setThickness: React.Dispatch<React.SetStateAction<number>>;
 }

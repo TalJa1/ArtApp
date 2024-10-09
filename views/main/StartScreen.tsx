@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBarCustom';
 import {centerAll, vh, vw} from '../../services/styleSheets';
@@ -68,7 +68,7 @@ const StartScreen = () => {
 
 const Footer: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [brush, setBrush] = useState(BrushList);
+  const [brush, setBrush] = useState<BrushItem[]>([]);
   const handleBtnPress = (index: number) => {
     switch (index) {
       case 0:
@@ -97,15 +97,11 @@ const Footer: React.FC = () => {
       });
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     fetchData();
-  //   }, []),
-  // );
+  useFocusEffect(
+    useCallback(() => {
+      fetchData();
+    }, []),
+  );
 
   return (
     <View>
