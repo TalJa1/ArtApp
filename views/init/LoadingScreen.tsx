@@ -1,19 +1,31 @@
 import {
   Image,
   ImageBackground,
-  StatusBar,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {centerAll, vh, vw} from '../../services/styleSheets';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import useStatusBar from '../../services/useStatusBarCustom';
 
 const LoadingScreen = () => {
+  useStatusBar('transparent');
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigation.navigate('StartScreen');
+    }, 1500);
+
+    return () => clearTimeout(timer); // Cleanup the timer on component unmount
+  }, [navigation]);
+
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar hidden={true} />
       <ImageBackground
         source={require('../../assets/loading/loadingback.png')}
         resizeMode="cover"
