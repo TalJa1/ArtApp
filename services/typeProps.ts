@@ -13,7 +13,7 @@ export interface BrushItem {
 export interface BrushModalProps {
   modalVisible: boolean;
   setModalVisible: (visible: boolean) => void;
-  BrushList: BrushItem[];
+  BrushListData: BrushItem[];
   setBrushList: (list: BrushItem[]) => void;
 }
 

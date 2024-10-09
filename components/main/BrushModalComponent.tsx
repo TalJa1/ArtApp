@@ -11,11 +11,13 @@ import {vh, vw} from '../../services/styleSheets';
 import {clockIcon} from '../../assets/svgXml';
 import {BrushModalProps} from '../../services/typeProps';
 import StarModalGroupComponent from './StarModalGroupComponent';
+import {loadData, saveData} from '../../services/storage';
+import {BrushList} from '../../services/renderData';
 
 const BrushModalComponent: React.FC<BrushModalProps> = ({
   modalVisible,
   setModalVisible,
-  BrushList,
+  BrushListData,
   setBrushList,
 }) => {
   const [selectedBrushIndex, setSelectedBrushIndex] = useState<number | null>(
@@ -30,19 +32,29 @@ const BrushModalComponent: React.FC<BrushModalProps> = ({
     setSelectedBrushIndex(null);
   };
 
-  const handleActiveBrush = () => {
-    setBrushList(
-      BrushList.map((brush, index) => {
-        if (index === selectedBrushIndex) {
-          return {
-            ...brush,
-            isAvailable: true,
-          };
-        } else {
-          return brush;
+  const handleActiveBrush = async () => {
+    const newBrushList = BrushListData.map((brush, index) => {
+      if (index === selectedBrushIndex) {
+        return {
+          ...brush,
+          isAvailable: true,
+        };
+      } else {
+        return brush;
+      }
+    });
+    setBrushList(newBrushList);
+    saveData('brushListStorage', newBrushList);
+
+    loadData<number>('CoinsStorage')
+      .then(data => {
+        if (selectedBrushIndex !== null) {
+          saveData('CoinsStorage', data - BrushList[selectedBrushIndex].price);
         }
-      }),
-    );
+      })
+      .catch(() => {
+        saveData('CoinsStorage', 2000);
+      });
     setSelectedBrushIndex(null);
   };
 
@@ -62,10 +74,10 @@ const BrushModalComponent: React.FC<BrushModalProps> = ({
           />
           {selectedBrushIndex === null ? (
             <View style={styles.brushContainer}>
-              {BrushList.map((brush, index) => (
+              {BrushListData.map((brush, index) => (
                 <TouchableOpacity
                   key={index}
-                  disabled={index === 2 || index === 3 ? false : true}
+                  disabled={brush.isAvailable}
                   style={[
                     styles.brushButton,
                     brush.isAvailable
@@ -74,7 +86,11 @@ const BrushModalComponent: React.FC<BrushModalProps> = ({
                   ]}
                   onPress={() => handleBrushClick(index)}>
                   <View style={styles.brushWrapper}>
-                    {brush.icon}
+                    {React.isValidElement(brush.icon) ? (
+                      brush.icon
+                    ) : (
+                      <Text>Loading Icon</Text>
+                    )}
                     {brush.isAvailable === false && (
                       <View style={styles.clockIconOverlay}>
                         {clockIcon(vw(7), vw(7))}
@@ -87,13 +103,16 @@ const BrushModalComponent: React.FC<BrushModalProps> = ({
           ) : (
             <View style={styles.selectedBrushContainer}>
               <View style={styles.selectedBrushWrapper}>
-                {React.cloneElement(BrushList[selectedBrushIndex].icon, {
-                  width: vw(25),
-                  height: vw(25),
-                })}
+                {React.isValidElement(BrushListData[selectedBrushIndex].icon) ? (
+                  <View style={{ width: vw(25), height: vw(25) }}>
+                    {BrushListData[selectedBrushIndex].icon}
+                  </View>
+                ) : (
+                  <Text>Loading Icon</Text>
+                )}
               </View>
               <StarModalGroupComponent
-                starCount={selectedBrushIndex !== 2 ? 3000 : 2000}
+                starCount={BrushListData[selectedBrushIndex].price}
                 borderColor={selectedBrushIndex !== 2 ? '#E0E0E0' : '#FEF9BD'}
                 color={selectedBrushIndex !== 2 ? '#999999' : '#EFBB00'}
               />

@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBarCustom';
 import {centerAll, vh, vw} from '../../services/styleSheets';
@@ -18,6 +18,7 @@ import BrushModalComponent from '../../components/main/BrushModalComponent';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {loadData, saveData} from '../../services/storage';
+import {BrushItem} from '../../services/typeProps';
 
 const generateRandomGrassIcons = (numIcons: number) => {
   return Array.from({length: numIcons}).map(() => {
@@ -85,6 +86,27 @@ const Footer: React.FC = () => {
     }
   };
 
+  const fetchData = async () => {
+    await loadData<BrushItem[]>('brushListStorage')
+      .then(data => {
+        setBrush(data);
+      })
+      .catch(() => {
+        saveData('brushListStorage', BrushList);
+        setBrush(BrushList);
+      });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     fetchData();
+  //   }, []),
+  // );
+
   return (
     <View>
       <View style={styles.footerContainer}>
@@ -112,7 +134,7 @@ const Footer: React.FC = () => {
       <BrushModalComponent
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
-        BrushList={brush}
+        BrushListData={brush}
         setBrushList={setBrush}
       />
     </View>
