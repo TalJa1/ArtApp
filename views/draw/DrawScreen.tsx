@@ -11,7 +11,12 @@ import {
 import React, {useCallback, useRef, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBarCustom';
-import {RouteProp, useFocusEffect, useRoute} from '@react-navigation/native';
+import {
+  RouteProp,
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 import {
   BrushItem,
   BtnGroupItem,
@@ -28,6 +33,7 @@ import {DEFAULT_COLORS} from '@benjeau/react-native-draw-extras';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import BrushPropertiesComponent from '../../components/draw/BrushPropertiesComponent';
 import {loadData, saveData} from '../../services/storage';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const DrawScreen = () => {
   useStatusBar('white');
@@ -131,7 +137,9 @@ const DrawScreen = () => {
 const BtnGroup: React.FC<BtnGroupProps> = ({
   handleToggleEraser,
   handleToggleBrushProperties,
+  index,
 }) => {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const BtnList: BtnGroupItem[] = BtnGroupList;
   const handlePress = (i: number) => {
     switch (i) {
@@ -139,7 +147,7 @@ const BtnGroup: React.FC<BtnGroupProps> = ({
         handleToggleBrushProperties();
         break;
       case 1:
-        console.log('Suggestion');
+        navigation.navigate('Suggestion', {imgIndex: index});
         break;
       case 2:
         handleToggleEraser();
@@ -151,7 +159,7 @@ const BtnGroup: React.FC<BtnGroupProps> = ({
   };
   return (
     <View style={styles.btnGroupContainer}>
-      {BtnList.map((item, index) => {
+      {BtnList.map((item, indexLoop) => {
         return (
           <TouchableOpacity
             style={[
@@ -159,8 +167,8 @@ const BtnGroup: React.FC<BtnGroupProps> = ({
               centerAll,
               {backgroundColor: item.backColor, borderColor: item.borderColor},
             ]}
-            key={index}
-            onPress={() => handlePress(index)}>
+            key={indexLoop}
+            onPress={() => handlePress(indexLoop)}>
             {item.img !== null ? (
               <Image
                 style={{width: vw(9), height: vw(9), resizeMode: 'contain'}}

@@ -86,3 +86,9 @@ export interface StartScreenHeaderProps {
 export interface StartScreenFooterProps {
   setCoins: (coins: number) => void;
 }
+
+export type SuggestionProps = {
+  SuggestionItem: {
+    imgIndex: number;
+  };
+};
