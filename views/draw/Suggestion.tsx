@@ -10,7 +10,7 @@ import {
 import React, {useCallback, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {RouteProp, useFocusEffect, useRoute} from '@react-navigation/native';
-import {SuggestionProps} from '../../services/typeProps';
+import {MainSuggestionProps, SuggestionProps} from '../../services/typeProps';
 import {loadData, saveData} from '../../services/storage';
 import HeaderSketch from '../../components/HeaderSketch';
 import {vh, vw} from '../../services/styleSheets';
@@ -45,7 +45,7 @@ const Suggestion = () => {
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View style={{paddingHorizontal: vw(5), flex: 1}}>
           <HeaderSketch coins={coins} />
-          <Main />
+          <Main setCoins={setCoins} coins={coins} />
         </View>
         <FooterSpring />
       </ScrollView>
@@ -53,7 +53,15 @@ const Suggestion = () => {
   );
 };
 
-const Main: React.FC = () => {
+const Main: React.FC<MainSuggestionProps> = ({setCoins, coins}) => {
+  const [clickedIndex, setClickedIndex] = useState<number | null>(null);
+
+  const handleButtonClick = (index: number) => {
+    setCoins(coins - 200);
+    saveData('CoinsStorage', coins - 200);
+    setClickedIndex(index);
+  };
+
   return (
     <View style={styles.mainContainer}>
       <Image
@@ -62,14 +70,17 @@ const Main: React.FC = () => {
       />
       <View style={{rowGap: vh(1)}}>
         {SuggestionBtnGroupData.map((item, index) => {
+          const isClicked = index === clickedIndex;
           return (
             <View key={index} style={styles.btnGroupContainer}>
               <Text style={styles.title}>{item.title}</Text>
-              <TouchableOpacity>
+              <TouchableOpacity
+                disabled={index > 0}
+                onPress={() => handleButtonClick(index)}>
                 <StarGroupComponent
                   starCount={item.star}
-                  color="#EFBB00"
-                  borderColor="#FEF9BD"
+                  color={isClicked ? '#999999' : '#EFBB00'}
+                  borderColor={isClicked ? 'white' : '#FEF9BD'}
                 />
               </TouchableOpacity>
             </View>

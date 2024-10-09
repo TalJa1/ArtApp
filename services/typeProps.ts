@@ -101,3 +101,8 @@ export interface SuggestionBtnGroupItem {
   title: string;
   star: number;
 }
+
+export interface MainSuggestionProps {
+  coins: number;
+  setCoins: React.Dispatch<React.SetStateAction<number>>;
+}
