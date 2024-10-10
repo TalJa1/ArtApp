@@ -52,12 +52,17 @@ const TopView: React.FC = () => {
   );
 };
 
-const SketchView: React.FC<SketchViewDrawResultProps> = ({paths}) => {
+const SketchView: React.FC<SketchViewDrawResultProps> = ({paths, index}) => {
   return (
-    <View style={styles.sketchViewContainer}>
-      <GestureHandlerRootView style={styles.centeredCanvasContainer}>
-        <Canvas enabled={false} initialPaths={paths} style={styles.canvas} />
-      </GestureHandlerRootView>
+    <View style={{alignItems: 'center'}}>
+      <View style={styles.SketchIndexContainer}>
+        <Text style={styles.SketchIndexTxt}>{index}</Text>
+      </View>
+      <View style={styles.sketchViewContainer}>
+        <GestureHandlerRootView style={styles.centeredCanvasContainer}>
+          <Canvas enabled={false} initialPaths={paths} style={styles.canvas} />
+        </GestureHandlerRootView>
+      </View>
     </View>
   );
 };
@@ -116,5 +121,21 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     resizeMode: 'contain', // Ensure the drawing is contained within the container
+  },
+  SketchIndexContainer: {
+    position: 'absolute',
+    top: vh(-2.5),
+    backgroundColor: '#FDD3A8',
+    borderWidth: 2,
+    borderColor: 'black',
+    borderRadius: 16,
+    zIndex: 2,
+    paddingVertical: vh(0.4),
+    paddingHorizontal: vw(10),
+  },
+  SketchIndexTxt: {
+    color: 'black',
+    fontSize: 24,
+    fontWeight: '700',
   },
 });
