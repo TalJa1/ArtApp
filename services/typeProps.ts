@@ -128,3 +128,8 @@ export interface SketchViewDrawResultProps {
   paths: PathType[];
   index: number;
 }
+
+export interface HeaderInterface {
+  title: string;
+  img: any;
+}
