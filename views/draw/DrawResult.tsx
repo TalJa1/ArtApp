@@ -17,10 +17,11 @@ import {
 } from '../../services/typeProps';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {Canvas} from '@benjeau/react-native-draw';
-import {vh, vw} from '../../services/styleSheets';
+import {centerAll, vh, vw} from '../../services/styleSheets';
 import FooterSpring from '../../components/FooterSpring';
-import {homeIcon} from '../../assets/svgXml';
+import {gradeStarIcon, homeIcon, starIcon} from '../../assets/svgXml';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {darkenColor} from '../../services/renderData';
 
 const DrawResult = () => {
   useStatusBar('white');
@@ -38,11 +39,38 @@ const DrawResult = () => {
           }}>
           <TopView />
           <SketchView paths={paths} index={drawIndex} />
+          <StarView />
           <BtnGroup />
         </View>
         <FooterSpring />
       </ScrollView>
     </SafeAreaView>
+  );
+};
+
+const StarView: React.FC = () => {
+  return (
+    <View style={styles.starContainer}>
+      <View style={styles.starRow}>
+        {gradeStarIcon(20, 20)}
+        {gradeStarIcon(20, 20)}
+        {gradeStarIcon(20, 20)}
+      </View>
+      <View style={styles.starContainer1}>
+        <Text style={styles.starTxt}>+300</Text>
+        <View
+          style={[
+            styles.starGrp,
+            centerAll,
+            {
+              backgroundColor: '#EFBB00',
+              borderColor: darkenColor('#EFBB00', 20),
+            },
+          ]}>
+          {starIcon(vw(7), vw(7))}
+        </View>
+      </View>
+    </View>
   );
 };
 
@@ -201,5 +229,38 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: '900',
     color: 'white',
+  },
+  starContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    rowGap: vh(1),
+  },
+  starRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 80, // Adjust the width as needed
+  },
+  starGrp: {
+    padding: vw(2),
+    borderRadius: vw(40),
+    zIndex: 2,
+    borderBottomWidth: 4,
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
+  },
+  starTxt: {
+    color: '#000000',
+    fontSize: 32,
+    fontWeight: '900',
+  },
+  starContainer1: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FEF9BD',
+    borderRadius: 20,
+    paddingHorizontal: vw(3),
+    paddingVertical: vh(0.5),
+    columnGap: vw(2),
   },
 });
