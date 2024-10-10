@@ -15,6 +15,11 @@ import {LessonHomeData} from '../../services/renderData';
 
 const LessonScreen = () => {
   useStatusBar('#899AF8');
+
+  const handlePress = (index: number) => {
+    console.log('Press', index);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
@@ -26,7 +31,11 @@ const LessonScreen = () => {
           <View style={styles.btnGroup}>
             {LessonHomeData.map((item, index) => {
               return (
-                <TouchableOpacity style={styles.btn} key={index}>
+                <TouchableOpacity
+                  disabled={index !== 4}
+                  onPress={() => handlePress(index)}
+                  style={styles.btn}
+                  key={index}>
                   <Image style={styles.btnImg} source={item} />
                 </TouchableOpacity>
               );
