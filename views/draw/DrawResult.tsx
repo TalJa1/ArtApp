@@ -10,7 +10,6 @@ import {
 } from '../../services/typeProps';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {Canvas} from '@benjeau/react-native-draw';
-import {vh} from '../../services/styleSheets';
 
 const DrawResult = () => {
   useStatusBar('white');
@@ -22,7 +21,6 @@ const DrawResult = () => {
       <ScrollView>
         <View>
           <SketchView paths={paths} />
-          <Text>DrawResult</Text>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -32,14 +30,7 @@ const DrawResult = () => {
 const SketchView: React.FC<SketchViewDrawResultProps> = ({paths}) => {
   return (
     <GestureHandlerRootView style={{flex: 1}}>
-      <Canvas
-        // ref={canvasRef}
-        height={vh(50)}
-        color={paths[0].color}
-        thickness={paths[0].thickness}
-        opacity={100}
-        initialPaths={paths}
-      />
+      <Canvas enabled={false} initialPaths={paths} />
     </GestureHandlerRootView>
   );
 };
