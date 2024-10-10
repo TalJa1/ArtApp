@@ -1,3 +1,5 @@
+import {PathType} from '@benjeau/react-native-draw';
+
 export interface StarGroupComponentProps {
   starCount: number;
   color?: string;
@@ -58,6 +60,7 @@ export interface BtnGroupProps {
   index: number;
   handleToggleEraser: () => void;
   handleToggleBrushProperties: () => void;
+  paths: PathType[];
 }
 
 export interface BtnGroupItem {
@@ -111,5 +114,12 @@ export interface MainSuggestionProps {
 export type RealSuggestionRoute = {
   RealSuggestion: {
     imgIndex: number;
+  };
+};
+
+export type DrawResultProps = {
+  DrawResult: {
+    paths: PathType[];
+    drawIndex: number;
   };
 };

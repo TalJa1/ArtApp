@@ -131,6 +131,7 @@ const DrawScreen = () => {
             index={index}
             handleToggleEraser={handleToggleEraser}
             handleToggleBrushProperties={handleToggleBrushProperties}
+            paths={paths}
           />
         </View>
         <FooterAutumn showIcon1={false} showIcon2={false} />
@@ -155,6 +156,7 @@ const BtnGroup: React.FC<BtnGroupProps> = ({
   handleToggleEraser,
   handleToggleBrushProperties,
   index,
+  paths,
 }) => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const BtnList: BtnGroupItem[] = BtnGroupList;
@@ -170,7 +172,7 @@ const BtnGroup: React.FC<BtnGroupProps> = ({
         handleToggleEraser();
         break;
       case 3:
-        console.log('Finish');
+        navigation.navigate('DrawResult', {paths: paths, drawIndex: index});
         break;
     }
   };
