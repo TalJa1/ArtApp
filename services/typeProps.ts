@@ -126,4 +126,5 @@ export type DrawResultProps = {
 
 export interface SketchViewDrawResultProps {
   paths: PathType[];
+  index: number;
 }
