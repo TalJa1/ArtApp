@@ -55,8 +55,8 @@ const TopView: React.FC = () => {
 const SketchView: React.FC<SketchViewDrawResultProps> = ({paths}) => {
   return (
     <View style={styles.sketchViewContainer}>
-      <GestureHandlerRootView style={{flex: 1}}>
-        <Canvas enabled={false} initialPaths={paths} />
+      <GestureHandlerRootView style={styles.centeredCanvasContainer}>
+        <Canvas enabled={false} initialPaths={paths} style={styles.canvas} />
       </GestureHandlerRootView>
     </View>
   );
@@ -71,11 +71,13 @@ const styles = StyleSheet.create({
   },
   sketchViewContainer: {
     width: vw(70),
-    height: vw(70),
+    height: vw(80),
     borderWidth: 3,
     borderColor: 'black',
     borderRadius: 20,
     overflow: 'hidden',
+    justifyContent: 'center', // Center vertically
+    alignItems: 'center', // Center horizontally
   },
   topViewContainer: {
     width: '100%',
@@ -104,5 +106,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#000000',
     fontWeight: '900',
+  },
+  centeredCanvasContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  canvas: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain', // Ensure the drawing is contained within the container
   },
 });
