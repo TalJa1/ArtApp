@@ -77,7 +77,7 @@ const Footer: React.FC<StartScreenFooterProps> = ({setCoins}) => {
   const handleBtnPress = (index: number) => {
     switch (index) {
       case 0:
-        console.log('Shopping');
+        setModalVisible(true);
         break;
       case 1:
         console.log('Multi');
@@ -86,7 +86,7 @@ const Footer: React.FC<StartScreenFooterProps> = ({setCoins}) => {
         console.log('Cart');
         break;
       case 3:
-        setModalVisible(true);
+        console.log('Coloring');
         break;
     }
   };
