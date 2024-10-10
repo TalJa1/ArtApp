@@ -31,7 +31,6 @@ const LessonDraw = () => {
   const [tool, setTool] = useState(DrawingTool.Brush);
   const [visibleBrushProperties, setVisibleBrushProperties] = useState(false);
   const [brush, setBrush] = useState<BrushItem[]>([]);
-  const [coins, setCoins] = useState<number>(0);
   const [paths, setPaths] = useState<any[]>([]);
 
   const handleToggleEraser = () => {
@@ -48,14 +47,6 @@ const LessonDraw = () => {
       .catch(() => {
         saveData('brushListStorage', BrushList);
         setBrush(BrushList);
-      });
-    await loadData<number>('CoinsStorage')
-      .then(dataCoins => {
-        setCoins(dataCoins);
-      })
-      .catch(() => {
-        setCoins(2000);
-        saveData('CoinsStorage', 2000);
       });
   };
 
@@ -158,7 +149,7 @@ const BtnGroup: React.FC<BtnGroupProps> = ({
         handleToggleEraser();
         break;
       case 2:
-        navigation.navigate('');
+        navigation.navigate('LessonResult', {paths: paths});
         break;
     }
   };

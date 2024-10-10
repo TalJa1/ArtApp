@@ -11,6 +11,7 @@ import DrawResult from './views/draw/DrawResult';
 import LessonScreen from './views/lession/LessonScreen';
 import LessonDetail from './views/lession/LessonDetail';
 import LessonDraw from './views/lession/LessonDraw';
+import LessonResult from './views/lession/LessonResult';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +26,11 @@ const App = () => {
           options={{headerShown: false}}
         />
         {/* lession view */}
+        <Stack.Screen
+          name="LessonResult"
+          component={LessonResult}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="LessonDraw"
           component={LessonDraw}
