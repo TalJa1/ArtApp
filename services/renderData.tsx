@@ -193,3 +193,30 @@ export const LessonHomeData = [
   require('../assets/lesson/5.png'),
   require('../assets/lesson/6.png'),
 ];
+
+export const LessonDetailData = [
+  {
+    title: 'Hươu cao cổ',
+    img: require('../assets/lesson/btn1.png'),
+  },
+  {
+    title: 'Voi',
+    img: require('../assets/lesson/btn2.png'),
+  },
+  {
+    title: 'Hổ',
+    img: require('../assets/lesson/btn3.png'),
+  },
+  {
+    title: 'Thỏ',
+    img: require('../assets/lesson/btn4.png'),
+  },
+  {
+    title: 'Khỉ',
+    img: require('../assets/lesson/btn5.png'),
+  },
+  {
+    title: 'Sư tử',
+    img: require('../assets/lesson/btn6.png'),
+  },
+];
