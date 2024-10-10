@@ -13,9 +13,16 @@ import useStatusBar from '../../services/useStatusBarCustom';
 import {vh, vw} from '../../services/styleSheets';
 import BackBtn from '../../components/extra/BackBtn';
 import {LessonDetailData} from '../../services/renderData';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const LessonDetail = () => {
   useStatusBar('#899AF8');
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+
+  const handleDraw = () => {
+    navigation.navigate('LessonDraw');
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -27,7 +34,11 @@ const LessonDetail = () => {
             <View style={styles.btnGroup}>
               {LessonDetailData.map((item, index) => {
                 return (
-                  <TouchableOpacity style={styles.btn} key={index}>
+                  <TouchableOpacity
+                    disabled={index !== 3}
+                    onPress={() => handleDraw()}
+                    style={styles.btn}
+                    key={index}>
                     <Image style={styles.btnImg} source={item.img} />
                     <Text style={styles.title}>{item.title}</Text>
                   </TouchableOpacity>
