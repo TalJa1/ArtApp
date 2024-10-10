@@ -12,12 +12,29 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import Header from '../../components/extra/Header';
 import {vw} from '../../services/styleSheets';
 import {LessonHomeData} from '../../services/renderData';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 const LessonScreen = () => {
   useStatusBar('#899AF8');
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
   const handlePress = (index: number) => {
-    console.log('Press', index);
+    switch (index) {
+      case 0:
+        break;
+      case 1:
+        break;
+      case 2:
+        break;
+      case 3:
+        break;
+      case 4:
+        navigation.navigate('LessonDetail');
+        break;
+      case 5:
+        break;
+    }
   };
 
   return (
