@@ -48,6 +48,7 @@ const DrawScreen = () => {
   const [visibleBrushProperties, setVisibleBrushProperties] = useState(false);
   const [brush, setBrush] = useState<BrushItem[]>([]);
   const [coins, setCoins] = useState<number>(0);
+  const [paths, setPaths] = useState<any[]>([]);
 
   const handleToggleEraser = () => {
     setTool(prev =>
@@ -101,6 +102,12 @@ const DrawScreen = () => {
     }
   };
 
+  const handlePathsChange = (newPaths: any[]) => {
+    setPaths(newPaths);
+    // Optionally, save the paths to storage or perform other actions
+    // saveData('userPaths', newPaths);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
@@ -115,6 +122,7 @@ const DrawScreen = () => {
               thickness={thickness}
               opacity={100}
               tool={tool}
+              onPathsChange={handlePathsChange}
             />
           </GestureHandlerRootView>
         </View>
