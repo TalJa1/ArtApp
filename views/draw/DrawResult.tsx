@@ -10,7 +10,7 @@ import {
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBarCustom';
-import {RouteProp, useRoute} from '@react-navigation/native';
+import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {
   DrawResultProps,
   SketchViewDrawResultProps,
@@ -20,6 +20,7 @@ import {Canvas} from '@benjeau/react-native-draw';
 import {vh, vw} from '../../services/styleSheets';
 import FooterSpring from '../../components/FooterSpring';
 import {homeIcon} from '../../assets/svgXml';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const DrawResult = () => {
   useStatusBar('white');
@@ -46,15 +47,23 @@ const DrawResult = () => {
 };
 
 const BtnGroup: React.FC = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+
   return (
     <View style={styles.btnContainer}>
-      <TouchableOpacity style={styles.homeBtn}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('StartScreen')}
+        style={styles.homeBtn}>
         {homeIcon(vw(7), vw(7))}
       </TouchableOpacity>
-      <TouchableOpacity style={styles.drawAgainBtn}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Sketh')}
+        style={styles.drawAgainBtn}>
         <Text style={styles.btnText}>Vẽ lại</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.goOnBtn}>
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        style={styles.goOnBtn}>
         <Text style={styles.btnText}>Tiếp tục vẽ</Text>
       </TouchableOpacity>
     </View>
