@@ -1,3 +1,4 @@
+/* eslint-disable no-bitwise */
 import {
   brush1Icon,
   brush2Icon,
