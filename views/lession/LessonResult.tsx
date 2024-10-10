@@ -1,9 +1,12 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+/* eslint-disable react-native/no-inline-styles */
+import {ScrollView, StyleSheet, View} from 'react-native';
 import React, {useCallback, useState} from 'react';
 import useStatusBar from '../../services/useStatusBarCustom';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {loadData, saveData} from '../../services/storage';
 import {useFocusEffect} from '@react-navigation/native';
+import BackBtn from '../../components/extra/BackBtn';
+import {vh, vw} from '../../services/styleSheets';
 
 const LessonResult = () => {
   useStatusBar('#899AF8');
@@ -28,9 +31,11 @@ const LessonResult = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <View>
-          <Text>Lesson Result</Text>
+      <ScrollView contentContainerStyle={{flexGrow: 1}}>
+        <View style={{flex: 1}}>
+          <View style={styles.top}>
+            <BackBtn />
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -43,5 +48,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#899AF8',
+  },
+  top: {
+    paddingHorizontal: vw(5),
+    paddingVertical: vh(2),
+    rowGap: vh(2),
+    height: vh(35),
+    width: vw(100),
+    overflow: 'hidden',
   },
 });
