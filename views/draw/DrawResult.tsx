@@ -7,10 +7,15 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useCallback, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBarCustom';
-import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
+import {
+  RouteProp,
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 import {
   DrawResultProps,
   SketchViewDrawResultProps,
@@ -22,6 +27,7 @@ import FooterSpring from '../../components/FooterSpring';
 import {gradeStarIcon, homeIcon, starIcon} from '../../assets/svgXml';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {darkenColor} from '../../services/renderData';
+import {loadData, saveData} from '../../services/storage';
 
 const DrawResult = () => {
   useStatusBar('white');
@@ -76,12 +82,33 @@ const StarView: React.FC = () => {
 
 const BtnGroup: React.FC = () => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  const [coins, setCoins] = useState<number>(0);
+
+  const fetchData = async () => {
+    await loadData<number>('CoinsStorage')
+      .then(dataCoins => {
+        setCoins(dataCoins);
+      })
+      .catch(() => {
+        setCoins(2000);
+        saveData('CoinsStorage', 2000);
+      });
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchData();
+    }, []),
+  );
+
+  const handleFinish = () => {
+    saveData('CoinsStorage', coins + 300);
+    navigation.navigate('StartScreen');
+  };
 
   return (
     <View style={styles.btnContainer}>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('StartScreen')}
-        style={styles.homeBtn}>
+      <TouchableOpacity onPress={handleFinish} style={styles.homeBtn}>
         {homeIcon(vw(7), vw(7))}
       </TouchableOpacity>
       <TouchableOpacity
@@ -231,10 +258,10 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   starContainer: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     rowGap: vh(1),
+    marginVertical: vh(2),
   },
   starRow: {
     flexDirection: 'row',
