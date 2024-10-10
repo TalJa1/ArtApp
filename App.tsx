@@ -8,6 +8,7 @@ import DrawScreen from './views/draw/DrawScreen';
 import Suggestion from './views/draw/Suggestion';
 import RealSuggestion from './views/draw/RealSuggestion';
 import DrawResult from './views/draw/DrawResult';
+import LessonScreen from './views/lession/LessonScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,13 @@ const App = () => {
           component={LoadingScreen}
           options={{headerShown: false}}
         />
+        {/* lession view */}
+        <Stack.Screen
+          name="LessonScreen"
+          component={LessonScreen}
+          options={{headerShown: false}}
+        />
+        {/* end lession view */}
         {/* Main View */}
         <Stack.Screen
           name="DrawResult"

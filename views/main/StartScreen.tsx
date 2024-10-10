@@ -72,6 +72,7 @@ const StartScreen = () => {
 };
 
 const Footer: React.FC<StartScreenFooterProps> = ({setCoins}) => {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const [modalVisible, setModalVisible] = useState(false);
   const [brush, setBrush] = useState<BrushItem[]>([]);
   const handleBtnPress = (index: number) => {
@@ -80,7 +81,7 @@ const Footer: React.FC<StartScreenFooterProps> = ({setCoins}) => {
         setModalVisible(true);
         break;
       case 1:
-        console.log('Multi');
+        navigation.navigate('LessonScreen');
         break;
       case 2:
         console.log('Cart');
