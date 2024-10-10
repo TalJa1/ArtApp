@@ -1,5 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBarCustom';
@@ -12,6 +19,7 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {Canvas} from '@benjeau/react-native-draw';
 import {vh, vw} from '../../services/styleSheets';
 import FooterSpring from '../../components/FooterSpring';
+import {homeIcon} from '../../assets/svgXml';
 
 const DrawResult = () => {
   useStatusBar('white');
@@ -29,10 +37,27 @@ const DrawResult = () => {
           }}>
           <TopView />
           <SketchView paths={paths} index={drawIndex} />
+          <BtnGroup />
         </View>
         <FooterSpring />
       </ScrollView>
     </SafeAreaView>
+  );
+};
+
+const BtnGroup: React.FC = () => {
+  return (
+    <View style={styles.btnContainer}>
+      <TouchableOpacity style={styles.homeBtn}>
+        {homeIcon(vw(7), vw(7))}
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.drawAgainBtn}>
+        <Text style={styles.btnText}>Vẽ lại</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.goOnBtn}>
+        <Text style={styles.btnText}>Tiếp tục vẽ</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
@@ -137,5 +162,35 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 24,
     fontWeight: '700',
+  },
+  btnContainer: {
+    flexDirection: 'row',
+    position: 'absolute',
+    bottom: vh(0),
+    justifyContent: 'space-between',
+  },
+  homeBtn: {
+    borderColor: '#EE7F68',
+    borderWidth: 2,
+    padding: vw(3),
+    borderRadius: 20,
+    marginHorizontal: vw(2),
+  },
+  drawAgainBtn: {
+    backgroundColor: '#7CBFF9',
+    padding: vw(3),
+    borderRadius: 20,
+    marginHorizontal: vw(2),
+  },
+  goOnBtn: {
+    backgroundColor: '#EF99DA',
+    padding: vw(3),
+    borderRadius: 20,
+    marginHorizontal: vw(2),
+  },
+  btnText: {
+    fontSize: 24,
+    fontWeight: '900',
+    color: 'white',
   },
 });

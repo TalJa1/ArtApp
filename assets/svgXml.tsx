@@ -9,6 +9,17 @@ export const test = (w?: any, h?: any, color?: any) => {
   return <SvgXml xml={xml} width={w} height={h} />;
 };
 
+export const homeIcon = (w?: any, h?: any, color?: any) => {
+  const xml = `<svg width="20" height="25" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0.0834963 10.5809C0.0834962 10.3157 0.188853 10.0613 0.37639 9.87377L9.29306 0.957107C9.68359 0.566583 10.3168 0.566582 10.7073 0.957107L19.6239 9.87377C19.8115 10.0613 19.9168 10.3157 19.9168 10.5809L19.9168 23.3333C19.9168 23.8856 19.4691 24.3333 18.9168 24.3333H1.0835C0.531219 24.3333 0.0835022 23.8856 0.083502 23.3333L0.0834963 10.5809Z" fill=${
+    color ?? '#EE7F68'
+  } style="fill:#EE7F68;fill:color(display-p3 0.9333 0.4980 0.4078);fill-opacity:1;"/>
+</svg>
+`;
+
+  return <SvgXml xml={xml} width={w} height={h} />;
+};
+
 export const penIcon = (w?: any, h?: any, color?: any) => {
   const xml = `<svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M16.4628 4.05725L3.715 16.8051C2.78191 17.7381 2.0452 18.8708 1.82092 20.1712C1.59446 21.4841 1.5191 23.1136 2.29613 23.8906C3.07316 24.6676 4.70258 24.5923 6.01556 24.3658C7.31595 24.1415 8.44858 23.4048 9.38167 22.4717L22.1295 9.72392M16.4628 4.05725C16.4628 4.05725 20.7128 -0.192749 23.5461 2.64058C26.3795 5.47392 22.1295 9.72392 22.1295 9.72392M16.4628 4.05725L22.1295 9.72392" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -17,7 +28,6 @@ export const penIcon = (w?: any, h?: any, color?: any) => {
 
   return <SvgXml xml={xml} width={w} height={h} />;
 };
-
 
 export const redoIcon = (w?: any, h?: any, color?: any) => {
   const xml = `<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
