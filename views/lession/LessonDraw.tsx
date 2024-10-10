@@ -102,16 +102,18 @@ const LessonDraw = () => {
           </View>
           <View style={styles.bottom}>
             <GestureHandlerRootView>
-              <Canvas
-                ref={canvasRef}
-                height={vh(45)}
-                width={vw(90)}
-                color={color}
-                thickness={thickness}
-                opacity={100}
-                tool={tool}
-                onPathsChange={handlePathsChange}
-              />
+              <View style={styles.canvasContainer}>
+                <Canvas
+                  ref={canvasRef}
+                  height={vh(45)}
+                  width={vw(90)}
+                  color={color}
+                  thickness={thickness}
+                  opacity={100}
+                  tool={tool}
+                  onPathsChange={handlePathsChange}
+                />
+              </View>
             </GestureHandlerRootView>
             <View>
               <BtnGroup
@@ -232,5 +234,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 3,
     borderLeftWidth: 1,
     borderRightWidth: 1,
+  },
+  canvasContainer: {
+    borderRadius: 20, // Adjust the value as needed
+    overflow: 'hidden', // Ensure the children respect the border radius
+    width: vw(90), // Match the Canvas width
+    height: vh(45), // Match the Canvas height
   },
 });
