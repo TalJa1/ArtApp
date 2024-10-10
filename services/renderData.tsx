@@ -184,3 +184,12 @@ export const darkenColor = (color: string, amount: number): string => {
     ((r << 16) | (g << 8) | b).toString(16).padStart(6, '0')
   );
 };
+
+export const LessonHomeData = [
+  require('../assets/lesson/1.png'),
+  require('../assets/lesson/2.png'),
+  require('../assets/lesson/3.png'),
+  require('../assets/lesson/4.png'),
+  require('../assets/lesson/5.png'),
+  require('../assets/lesson/6.png'),
+];
