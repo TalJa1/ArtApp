@@ -123,3 +123,7 @@ export type DrawResultProps = {
     drawIndex: number;
   };
 };
+
+export interface SketchViewDrawResultProps {
+  paths: PathType[];
+}

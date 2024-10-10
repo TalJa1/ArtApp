@@ -1,25 +1,46 @@
+/* eslint-disable react-native/no-inline-styles */
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import useStatusBar from '../../services/useStatusBarCustom';
 import {RouteProp, useRoute} from '@react-navigation/native';
-import {DrawResultProps} from '../../services/typeProps';
+import {
+  DrawResultProps,
+  SketchViewDrawResultProps,
+} from '../../services/typeProps';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {Canvas} from '@benjeau/react-native-draw';
+import {vh} from '../../services/styleSheets';
 
 const DrawResult = () => {
   useStatusBar('white');
   const route = useRoute<RouteProp<DrawResultProps, 'DrawResult'>>();
   const {paths, drawIndex} = route.params;
 
-  console.log('DrawResult', paths, drawIndex);
-
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <View>
+          <SketchView paths={paths} />
           <Text>DrawResult</Text>
         </View>
       </ScrollView>
     </SafeAreaView>
+  );
+};
+
+const SketchView: React.FC<SketchViewDrawResultProps> = ({paths}) => {
+  return (
+    <GestureHandlerRootView style={{flex: 1}}>
+      <Canvas
+        // ref={canvasRef}
+        height={vh(50)}
+        color={paths[0].color}
+        thickness={paths[0].thickness}
+        opacity={100}
+        initialPaths={paths}
+      />
+    </GestureHandlerRootView>
   );
 };
 
