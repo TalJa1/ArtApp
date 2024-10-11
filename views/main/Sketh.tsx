@@ -50,7 +50,7 @@ const Sketh = () => {
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View style={{flex: 1, paddingHorizontal: vw(5)}}>
-          <HeaderSketch coins={coins}/>
+          <HeaderSketch coins={coins} />
           <Main />
         </View>
         <FooterAutumn showIcon1={true} showIcon2={false} />
@@ -61,9 +61,8 @@ const Sketh = () => {
 
 const Main: React.FC = () => {
   const [level, setLevel] = useState(1);
-  const [sketchRender, setSketchRender] = useState<(SketchArtItem | null)[]>(
-    Array(16).fill(null),
-  );
+  const [sketchRender, setSketchRender] =
+    useState<(SketchArtItem | null)[]>(SketchArtList);
 
   const fetchData = async () => {
     await loadData<SketchArtItem[]>('sketchListStorage')
