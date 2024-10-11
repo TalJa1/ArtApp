@@ -14,6 +14,7 @@ import LessonDraw from './views/lession/LessonDraw';
 import LessonResult from './views/lession/LessonResult';
 import ColorHome from './views/coloring/ColorHome';
 import Coloring from './views/coloring/Coloring';
+import ResultColoring from './views/coloring/ResultColoring';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +29,11 @@ const App = () => {
           options={{headerShown: false}}
         />
         {/* ColoringView */}
+        <Stack.Screen
+          name="ResultColoring"
+          component={ResultColoring}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="Coloring"
           component={Coloring}

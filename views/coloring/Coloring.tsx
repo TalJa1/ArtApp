@@ -124,6 +124,7 @@ const Coloring = () => {
           paths={paths}
           handleClear={handleClear}
           handleUndo={handleUndo}
+          img={img}
         />
       </View>
       {visibleBrushProperties && (
@@ -148,6 +149,7 @@ const BtnGroup: React.FC<BtnGroupProps> = ({
   paths,
   handleClear,
   handleUndo,
+  img,
 }) => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const BtnList: BtnGroupItem[] = BtnGroupList2;
@@ -163,7 +165,7 @@ const BtnGroup: React.FC<BtnGroupProps> = ({
         handleClear();
         break;
       case 3:
-        navigation.navigate('DrawResult', {paths: paths, drawIndex: index});
+        navigation.navigate('ResultColoring', {paths: paths, drawIndex: index, img: img});
         break;
     }
   };

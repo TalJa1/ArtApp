@@ -49,6 +49,11 @@ export type DetailRouteParams = {
     img: any;
     index: number;
   };
+  ResultColoring: {
+    img: any;
+    paths: PathType[];
+    drawIndex: number;
+  };
 };
 
 export interface FooterAutumnProps {
@@ -66,6 +71,7 @@ export interface BtnGroupProps {
   paths: PathType[];
   handleClear: () => void;
   handleUndo: () => void;
+  img: any;
 }
 
 export interface BtnGroup1Props {
