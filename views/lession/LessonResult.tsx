@@ -10,6 +10,7 @@ import {vh, vw} from '../../services/styleSheets';
 import {LessonResultProps} from '../../services/typeProps';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {Canvas} from '@benjeau/react-native-draw';
+import StarResultView from '../../components/extra/StarResultView';
 
 const LessonResult = () => {
   useStatusBar('#899AF8');
@@ -49,6 +50,7 @@ const LessonResult = () => {
                 <Canvas initialPaths={paths} enabled={false} />
               </View>
             </GestureHandlerRootView>
+            <StarResultView showStar={false}/>
           </View>
         </View>
       </ScrollView>
