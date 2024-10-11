@@ -16,7 +16,7 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {Canvas, CanvasRef, DrawingTool} from '@benjeau/react-native-draw';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {DEFAULT_COLORS} from '@benjeau/react-native-draw-extras';
-import {BrushItem, BtnGroupItem, BtnGroupProps} from '../../services/typeProps';
+import {BrushItem, BtnGroup1Props, BtnGroupItem} from '../../services/typeProps';
 import {loadData, saveData} from '../../services/storage';
 import {BrushList, BtnGroupList1} from '../../services/renderData';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
@@ -134,7 +134,7 @@ const LessonDraw = () => {
   );
 };
 
-const BtnGroup: React.FC<BtnGroupProps> = ({
+const BtnGroup: React.FC<BtnGroup1Props> = ({
   handleToggleEraser,
   handleToggleBrushProperties,
   paths,
