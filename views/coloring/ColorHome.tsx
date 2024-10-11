@@ -24,16 +24,24 @@ const ColorHome = () => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-  const handleButtonClick = (image: any) => {
+  const handleButtonClick = (image: any, index: number) => {
     setSelectedImage(image);
+    setSelectedIndex(index);
     setModalVisible(true);
   };
 
   const handleCloseModal = () => {
     setModalVisible(false);
-    navigation.navigate('Coloring', {img: selectedImage});
+    if (selectedImage !== null && selectedIndex !== null) {
+      navigation.navigate('Coloring', {
+        img: selectedImage,
+        index: selectedIndex,
+      });
+    }
     setSelectedImage(null);
+    setSelectedIndex(null);
   };
 
   return (
@@ -50,7 +58,7 @@ const ColorHome = () => {
                 <TouchableOpacity
                   style={styles.btn}
                   key={index}
-                  onPress={() => handleButtonClick(item)}>
+                  onPress={() => handleButtonClick(item, index)}>
                   <Image style={styles.img} source={item} />
                 </TouchableOpacity>
               );

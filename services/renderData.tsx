@@ -6,6 +6,8 @@ import {
   brush4Icon,
   brush5Icon,
   brush6Icon,
+  ctrlYIcon,
+  ctrlZIcon,
   nextIcon,
   questionIcon,
   redoIcon,
@@ -122,6 +124,33 @@ export const BtnGroupList1 = [
   {
     img: null,
     icon: redoIcon(vw(8), vw(8)),
+    backColor: '#EF99DA',
+    borderColor: '#DB80C2',
+  },
+  {
+    img: null,
+    icon: nextIcon(vw(8), vw(8), 'white'),
+    backColor: '#EE7F68',
+    borderColor: '#DB664F',
+  },
+];
+
+export const BtnGroupList2 = [
+  {
+    img: require('../assets/mainSketh/paintIcon.png'),
+    icon: null,
+    backColor: '#7CBFF9',
+    borderColor: '#5CA7EF',
+  },
+  {
+    img: null,
+    icon: ctrlZIcon(vw(8), vw(8)),
+    backColor: '#EFBB00',
+    borderColor: '#F09D3C',
+  },
+  {
+    img: null,
+    icon: ctrlYIcon(vw(8), vw(8)),
     backColor: '#EF99DA',
     borderColor: '#DB80C2',
   },

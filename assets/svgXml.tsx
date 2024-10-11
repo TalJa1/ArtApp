@@ -9,6 +9,24 @@ export const test = (w?: any, h?: any, color?: any) => {
   return <SvgXml xml={xml} width={w} height={h} />;
 };
 
+export const ctrlZIcon = (w?: any, h?: any, color?: any) => {
+  const xml = `<svg width="30" height="31" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2.97275 20.1251C3.89137 22.7323 5.6325 24.9704 7.93378 26.5021C10.2351 28.0338 12.9718 28.7761 15.7318 28.6173C18.4917 28.4584 21.1252 27.407 23.2355 25.6214C25.3459 23.8358 26.8187 21.4128 27.4321 18.7175C28.0455 16.0221 27.7663 13.2004 26.6365 10.6775C25.5067 8.15464 23.5875 6.06725 21.1681 4.72988C18.7487 3.3925 15.9601 2.87759 13.2226 3.26271C8.6008 3.91293 5.54724 7.26286 2.25 10.2217M2.25 10.2217V1.72168M2.25 10.2217H10.75" stroke="white" style="stroke:white;stroke-opacity:1;" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
+  return <SvgXml xml={xml} width={w} height={h} />;
+};
+
+export const ctrlYIcon = (w?: any, h?: any, color?: any) => {
+  const xml = `<svg width="30" height="31" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M27.0272 20.1251C26.1086 22.7323 24.3675 24.9704 22.0662 26.5021C19.7649 28.0338 17.0282 28.7761 14.2682 28.6173C11.5083 28.4584 8.87481 27.407 6.76447 25.6214C4.65412 23.8358 3.18128 21.4128 2.56787 18.7175C1.95446 16.0221 2.2337 13.2004 3.36352 10.6775C4.49335 8.15464 6.41254 6.06725 8.83194 4.72988C11.2513 3.3925 14.0399 2.87759 16.7774 3.26271C21.3992 3.91293 24.4528 7.26286 27.75 10.2217M27.75 10.2217V1.72168M27.75 10.2217H19.25" stroke="white" style="stroke:white;stroke-opacity:1;" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
+  return <SvgXml xml={xml} width={w} height={h} />;
+};
+
 export const homeIcon = (w?: any, h?: any, color?: any) => {
   const xml = `<svg width="20" height="25" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M0.0834963 10.5809C0.0834962 10.3157 0.188853 10.0613 0.37639 9.87377L9.29306 0.957107C9.68359 0.566583 10.3168 0.566582 10.7073 0.957107L19.6239 9.87377C19.8115 10.0613 19.9168 10.3157 19.9168 10.5809L19.9168 23.3333C19.9168 23.8856 19.4691 24.3333 18.9168 24.3333H1.0835C0.531219 24.3333 0.0835022 23.8856 0.083502 23.3333L0.0834963 10.5809Z" fill=${

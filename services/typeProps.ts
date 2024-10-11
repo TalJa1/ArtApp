@@ -47,6 +47,7 @@ export type DetailRouteParams = {
   };
   Coloring: {
     img: any;
+    index: number;
   };
 };
 
