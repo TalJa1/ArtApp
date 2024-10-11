@@ -1,16 +1,29 @@
 /* eslint-disable react-native/no-inline-styles */
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useCallback, useState} from 'react';
 import useStatusBar from '../../services/useStatusBarCustom';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {loadData, saveData} from '../../services/storage';
-import {RouteProp, useFocusEffect, useRoute} from '@react-navigation/native';
+import {
+  RouteProp,
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 import BackBtn from '../../components/extra/BackBtn';
-import {vh, vw} from '../../services/styleSheets';
+import {centerAll, vh, vw} from '../../services/styleSheets';
 import {LessonResultProps} from '../../services/typeProps';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {Canvas} from '@benjeau/react-native-draw';
 import StarResultView from '../../components/extra/StarResultView';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const LessonResult = () => {
   useStatusBar('#899AF8');
@@ -50,11 +63,27 @@ const LessonResult = () => {
                 <Canvas initialPaths={paths} enabled={false} />
               </View>
             </GestureHandlerRootView>
-            <StarResultView showStar={false}/>
+            <StarResultView showStar={false} />
+            <BtnGroup />
           </View>
         </View>
       </ScrollView>
     </SafeAreaView>
+  );
+};
+
+const BtnGroup: React.FC = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+
+  return (
+    <View style={styles.btnGroupContainer}>
+      <TouchableOpacity style={[styles.backBtn, centerAll]}>
+        <Text style={styles.btnText}>Trở lại</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={[styles.colorAgainBtn, centerAll]}>
+        <Text style={styles.btnText}>Tô lại</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
@@ -131,5 +160,36 @@ const styles = StyleSheet.create({
     overflow: 'hidden', // Ensure the children respect the border radius
     width: vw(90), // Match the Canvas width
     height: vh(45), // Match the Canvas height
+  },
+  btnGroupContainer: {
+    flexDirection: 'row',
+    paddingHorizontal: vw(5),
+    width: '100%',
+    justifyContent: 'space-between',
+  },
+  backBtn: {
+    width: '30%',
+    height: vw(15),
+    borderRadius: 20,
+    backgroundColor: '#7CBFF9',
+    borderBottomWidth: 3,
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
+    borderColor: '#5CA7EF',
+  },
+  colorAgainBtn: {
+    width: '65%',
+    height: vw(15),
+    borderRadius: 20,
+    backgroundColor: '#EF99DA',
+    borderBottomWidth: 3,
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
+    borderColor: '#DB80C2',
+  },
+  btnText: {
+    fontSize: 24,
+    fontWeight: '900',
+    color: '#FFFFFF',
   },
 });
