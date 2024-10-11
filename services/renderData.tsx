@@ -133,7 +133,6 @@ export const BtnGroupList1 = [
   },
 ];
 
-
 export const colors = [
   '#FF0000',
   '#00FF00',
@@ -241,4 +240,13 @@ export const LessonDetailData = [
     title: 'Sư tử',
     img: require('../assets/lesson/btn6.png'),
   },
+];
+
+export const ColorHomeData = [
+  require('../assets/color/1.png'),
+  require('../assets/color/2.png'),
+  require('../assets/color/3.png'),
+  require('../assets/color/4.png'),
+  require('../assets/color/5.png'),
+  require('../assets/color/6.png'),
 ];
