@@ -2,6 +2,7 @@
 import {
   Animated,
   Image,
+  ImageBackground,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -44,12 +45,6 @@ const Coloring = () => {
   const [coins, setCoins] = useState<number>(0);
   const [paths, setPaths] = useState<any[]>([]);
 
-  const handleToggleEraser = () => {
-    setTool(prev =>
-      prev === DrawingTool.Brush ? DrawingTool.Eraser : DrawingTool.Brush,
-    );
-  };
-
   const fetchData = async () => {
     await loadData<BrushItem[]>('brushListStorage')
       .then(dataBrush => {
@@ -90,8 +85,6 @@ const Coloring = () => {
 
   const handlePathsChange = (newPaths: any[]) => {
     setPaths(newPaths);
-    // Optionally, save the paths to storage or perform other actions
-    // saveData('userPaths', newPaths);
   };
 
   const handleUndo = () => {
@@ -107,15 +100,20 @@ const Coloring = () => {
       <View style={{flex: 1, paddingHorizontal: vw(5), marginVertical: vh(2)}}>
         <BackBtn />
         <GestureHandlerRootView style={{flex: 1}}>
-          <Canvas
-            ref={canvasRef}
-            height={vh(50)}
-            color={color}
-            thickness={thickness}
-            opacity={100}
-            tool={tool}
-            onPathsChange={handlePathsChange}
-          />
+          <ImageBackground
+            source={img}
+            style={styles.imageBackground}
+            imageStyle={styles.imageStyle}>
+            <Canvas
+              ref={canvasRef}
+              height={vh(50)}
+              color={color}
+              thickness={thickness}
+              opacity={100}
+              tool={tool}
+              onPathsChange={handlePathsChange}
+            />
+          </ImageBackground>
         </GestureHandlerRootView>
         <BtnGroup
           index={0}
@@ -144,10 +142,10 @@ const BtnGroup: React.FC<BtnGroupProps> = ({
         handleToggleBrushProperties();
         break;
       case 1:
-        handleClear();
+        handleUndo();
         break;
       case 2:
-        handleUndo();
+        handleClear();
         break;
       case 3:
         navigation.navigate('DrawResult', {paths: paths, drawIndex: index});
@@ -187,6 +185,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
+  },
+  imageBackground: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  imageStyle: {
+    resizeMode: 'contain',
   },
   btnGroupContainer: {
     flexDirection: 'row',
