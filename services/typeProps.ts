@@ -45,6 +45,9 @@ export type DetailRouteParams = {
     data: SketchArtItem;
     index: number;
   };
+  Coloring: {
+    img: any;
+  };
 };
 
 export interface FooterAutumnProps {
