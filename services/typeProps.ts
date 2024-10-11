@@ -62,9 +62,10 @@ export interface TabTitleProps {
 
 export interface BtnGroupProps {
   index: number;
-  handleToggleEraser: () => void;
   handleToggleBrushProperties: () => void;
   paths: PathType[];
+  handleClear: () => void;
+  handleUndo: () => void;
 }
 
 export interface BtnGroupItem {

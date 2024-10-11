@@ -94,6 +94,14 @@ const Coloring = () => {
     // saveData('userPaths', newPaths);
   };
 
+  const handleUndo = () => {
+    canvasRef.current?.undo();
+  };
+
+  const handleClear = () => {
+    canvasRef.current?.clear();
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={{flex: 1, paddingHorizontal: vw(5), marginVertical: vh(2)}}>
@@ -111,9 +119,10 @@ const Coloring = () => {
         </GestureHandlerRootView>
         <BtnGroup
           index={0}
-          handleToggleEraser={handleToggleEraser}
           handleToggleBrushProperties={handleToggleBrushProperties}
           paths={paths}
+          handleClear={handleClear}
+          handleUndo={handleUndo}
         />
       </View>
     </SafeAreaView>
@@ -121,10 +130,11 @@ const Coloring = () => {
 };
 
 const BtnGroup: React.FC<BtnGroupProps> = ({
-  handleToggleEraser,
   handleToggleBrushProperties,
   index,
   paths,
+  handleClear,
+  handleUndo,
 }) => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const BtnList: BtnGroupItem[] = BtnGroupList2;
@@ -134,10 +144,10 @@ const BtnGroup: React.FC<BtnGroupProps> = ({
         handleToggleBrushProperties();
         break;
       case 1:
-        navigation.navigate('Suggestion', {imgIndex: index});
+        handleClear();
         break;
       case 2:
-        handleToggleEraser();
+        handleUndo();
         break;
       case 3:
         navigation.navigate('DrawResult', {paths: paths, drawIndex: index});
