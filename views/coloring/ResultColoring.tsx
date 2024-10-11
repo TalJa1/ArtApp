@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
-import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {Image, SafeAreaView, StyleSheet, View} from 'react-native';
 import React from 'react';
-import {ScrollView} from 'react-native-gesture-handler';
+import {ScrollView, GestureHandlerRootView} from 'react-native-gesture-handler';
 import useStatusBar from '../../services/useStatusBarCustom';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import {DetailRouteParams} from '../../services/typeProps';
@@ -9,14 +9,18 @@ import {DetailRouteParams} from '../../services/typeProps';
 const ResultColoring = () => {
   useStatusBar('#EF99DA');
   const route = useRoute<RouteProp<DetailRouteParams, 'ResultColoring'>>();
-  const {img, paths, drawIndex} = route.params;
+  const {img} = route.params;
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={{flexGrow: 1}}>
-        <View style={styles.canvasContainer}></View>
-      </ScrollView>
-    </SafeAreaView>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <SafeAreaView style={styles.container}>
+        <ScrollView contentContainerStyle={{flexGrow: 1}}>
+          <View style={styles.canvasContainer}>
+            <Image source={{uri: img}} style={styles.image} />
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </GestureHandlerRootView>
   );
 };
 
@@ -32,10 +36,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  imageBackground: {
+  image: {
     width: '100%',
     height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    resizeMode: 'contain',
   },
 });

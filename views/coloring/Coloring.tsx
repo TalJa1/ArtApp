@@ -31,12 +31,15 @@ import {BrushList, BtnGroupList2} from '../../services/renderData';
 import {DEFAULT_COLORS} from '@benjeau/react-native-draw-extras';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import BrushPropertiesComponent from '../../components/draw/BrushPropertiesComponent';
+import ViewShot, {captureRef} from 'react-native-view-shot';
 
 const Coloring = () => {
   useStatusBar('white');
   const route = useRoute<RouteProp<DetailRouteParams, 'Coloring'>>();
   const {img, index} = route.params;
   const canvasRef = useRef<CanvasRef>(null);
+  const viewShotRef = useRef(null);
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
   const [color, setColor] = useState(DEFAULT_COLORS[0][0][0]);
   const [thickness, setThickness] = useState(5);
@@ -94,64 +97,84 @@ const Coloring = () => {
     canvasRef.current?.clear();
   };
 
+  const handleCapture = async () => {
+    try {
+      const uri = await captureRef(viewShotRef, {
+        format: 'png',
+        quality: 1,
+      });
+      navigation.navigate('ResultColoring', {
+        img: uri,
+        paths: paths,
+        drawIndex: index,
+      });
+    } catch (error) {
+      console.error('Failed to capture screenshot', error);
+    }
+  };
+
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={{flex: 1, paddingHorizontal: vw(5), marginVertical: vh(2)}}>
-        <BackBtn />
-        <GestureHandlerRootView style={{flex: 1}}>
-          <View style={styles.canvasContainer}>
-            <ImageBackground
-              source={img} // Your image as the background
-              style={styles.imageBackground}
-              imageStyle={styles.imageStyle}>
-              {/* Canvas placed on top of the image */}
-              <Canvas
-                ref={canvasRef}
-                height={vh(50)} // You can adjust based on your UI
-                color={color}
-                thickness={thickness}
-                tool={DrawingTool.Brush}
-                onPathsChange={handlePathsChange}
-                opacity={100} // Keep opacity at 100% for the brush strokes
-                style={styles.canvas}
-              />
-            </ImageBackground>
-          </View>
-        </GestureHandlerRootView>
-        <BtnGroup
-          index={index}
-          handleToggleBrushProperties={handleToggleBrushProperties}
-          paths={paths}
-          handleClear={handleClear}
-          handleUndo={handleUndo}
-          img={img}
-        />
-      </View>
-      {visibleBrushProperties && (
-        <BrushPropertiesComponent
-          visibleBrushProperties={visibleBrushProperties}
-          setVisibleBrushProperties={setVisibleBrushProperties}
-          BrushList={brush}
-          setBrushList={setBrush}
-          brushColor={color}
-          setBrushColor={setColor}
-          thickness={thickness}
-          setThickness={setThickness}
-        />
-      )}
-    </SafeAreaView>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <SafeAreaView style={styles.container}>
+        <View
+          style={{flex: 1, paddingHorizontal: vw(5), marginVertical: vh(2)}}>
+          <BackBtn />
+          <ViewShot
+            ref={viewShotRef}
+            options={{format: 'png', quality: 1}}
+            style={{flex: 1}}>
+            <View style={styles.canvasContainer}>
+              <ImageBackground
+                source={img} // Your image as the background
+                style={styles.imageBackground}
+                imageStyle={styles.imageStyle}>
+                {/* Canvas placed on top of the image */}
+                <Canvas
+                  ref={canvasRef}
+                  height={vh(50)} // You can adjust based on your UI
+                  color={color}
+                  thickness={thickness}
+                  tool={DrawingTool.Brush}
+                  onPathsChange={handlePathsChange}
+                  opacity={100} // Keep opacity at 100% for the brush strokes
+                  style={styles.canvas}
+                />
+              </ImageBackground>
+            </View>
+          </ViewShot>
+          <BtnGroup
+            index={index}
+            handleToggleBrushProperties={handleToggleBrushProperties}
+            paths={paths}
+            handleClear={handleClear}
+            handleUndo={handleUndo}
+            handleCapture={handleCapture}
+            img={undefined}
+          />
+        </View>
+        {visibleBrushProperties && (
+          <BrushPropertiesComponent
+            visibleBrushProperties={visibleBrushProperties}
+            setVisibleBrushProperties={setVisibleBrushProperties}
+            BrushList={brush}
+            setBrushList={setBrush}
+            brushColor={color}
+            setBrushColor={setColor}
+            thickness={thickness}
+            setThickness={setThickness}
+          />
+        )}
+      </SafeAreaView>
+    </GestureHandlerRootView>
   );
 };
 
 const BtnGroup: React.FC<BtnGroupProps> = ({
   handleToggleBrushProperties,
-  index,
-  paths,
   handleClear,
   handleUndo,
-  img,
+  handleCapture,
 }) => {
-  const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const BtnList: BtnGroupItem[] = BtnGroupList2;
   const handlePress = (i: number) => {
     switch (i) {
@@ -165,7 +188,7 @@ const BtnGroup: React.FC<BtnGroupProps> = ({
         handleClear();
         break;
       case 3:
-        navigation.navigate('ResultColoring', {paths: paths, drawIndex: index, img: img});
+        handleCapture();
         break;
     }
   };

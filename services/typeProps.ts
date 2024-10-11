@@ -72,6 +72,7 @@ export interface BtnGroupProps {
   handleClear: () => void;
   handleUndo: () => void;
   img: any;
+  handleCapture: () => void;
 }
 
 export interface BtnGroup1Props {
