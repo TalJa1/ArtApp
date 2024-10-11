@@ -12,6 +12,7 @@ import LessonScreen from './views/lession/LessonScreen';
 import LessonDetail from './views/lession/LessonDetail';
 import LessonDraw from './views/lession/LessonDraw';
 import LessonResult from './views/lession/LessonResult';
+import ColorHome from './views/coloring/ColorHome';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +26,13 @@ const App = () => {
           component={LoadingScreen}
           options={{headerShown: false}}
         />
+        {/* ColoringView */}
+        <Stack.Screen
+          name="ColorHome"
+          component={ColorHome}
+          options={{headerShown: false}}
+        />
+        {/* end ColoringView */}
         {/* lession view */}
         <Stack.Screen
           name="LessonResult"

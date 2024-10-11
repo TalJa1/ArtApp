@@ -87,7 +87,7 @@ const Footer: React.FC<StartScreenFooterProps> = ({setCoins}) => {
         console.log('Cart');
         break;
       case 3:
-        console.log('Coloring');
+        navigation.navigate('ColorHome');
         break;
     }
   };
