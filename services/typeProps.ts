@@ -136,6 +136,6 @@ export interface HeaderInterface {
 
 export type LessonResultProps = {
   SuggestionItem: {
-    path: PathType[];
+    paths: PathType[];
   };
 };

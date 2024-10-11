@@ -8,12 +8,15 @@ import {RouteProp, useFocusEffect, useRoute} from '@react-navigation/native';
 import BackBtn from '../../components/extra/BackBtn';
 import {vh, vw} from '../../services/styleSheets';
 import {LessonResultProps} from '../../services/typeProps';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {Canvas} from '@benjeau/react-native-draw';
 
 const LessonResult = () => {
   useStatusBar('#899AF8');
   const [coins, setCoins] = useState<number>(0);
   const route = useRoute<RouteProp<LessonResultProps, 'SuggestionItem'>>();
-  const {path} = route.params;
+  const {paths} = route.params;
+  console.log('path', paths);
 
   const fetchData = async () => {
     await loadData<number>('CoinsStorage')
@@ -39,6 +42,13 @@ const LessonResult = () => {
           <View style={styles.top}>
             <BackBtn />
             <TopView />
+          </View>
+          <View style={styles.bottom}>
+            <GestureHandlerRootView>
+              <View style={styles.canvasContainer}>
+                <Canvas initialPaths={paths} enabled={false} />
+              </View>
+            </GestureHandlerRootView>
           </View>
         </View>
       </ScrollView>
@@ -86,7 +96,7 @@ const styles = StyleSheet.create({
   },
   topImg: {
     width: vw(30),
-    height: vw(25),
+    height: vw(30),
     resizeMode: 'contain',
   },
   topTextContainer: {
@@ -103,5 +113,21 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#000000',
     fontWeight: '900',
+  },
+  bottom: {
+    flex: 1,
+    borderWidth: 4,
+    borderColor: '#000',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    backgroundColor: '#EFBB00',
+    alignItems: 'center',
+    paddingVertical: vh(2),
+  },
+  canvasContainer: {
+    borderRadius: 20, // Adjust the value as needed
+    overflow: 'hidden', // Ensure the children respect the border radius
+    width: vw(90), // Match the Canvas width
+    height: vh(45), // Match the Canvas height
   },
 });

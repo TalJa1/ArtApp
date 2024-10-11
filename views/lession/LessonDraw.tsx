@@ -32,6 +32,7 @@ const LessonDraw = () => {
   const [visibleBrushProperties, setVisibleBrushProperties] = useState(false);
   const [brush, setBrush] = useState<BrushItem[]>([]);
   const [paths, setPaths] = useState<any[]>([]);
+  console.log('paths', paths);
 
   const handleToggleEraser = () => {
     setTool(prev =>
