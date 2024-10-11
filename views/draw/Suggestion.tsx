@@ -65,7 +65,7 @@ const Main: React.FC<MainSuggestionProps> = ({setCoins, coins, drawIndex}) => {
 
   const handleButtonClick = (index: number) => {
     setCoins(coins - 200);
-    // saveData('CoinsStorage', coins - 200);
+    saveData('CoinsStorage', coins - 200);
     setClickedIndex(index);
   };
 
