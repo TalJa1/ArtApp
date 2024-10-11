@@ -18,6 +18,7 @@ import {
 } from '@react-navigation/native';
 import {
   DrawResultProps,
+  SketchArtItem,
   SketchViewDrawResultProps,
 } from '../../services/typeProps';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
@@ -28,6 +29,7 @@ import {homeIcon} from '../../assets/svgXml';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {loadData, saveData} from '../../services/storage';
 import StarResultView from '../../components/extra/StarResultView';
+import {SketchArtList} from '../../services/renderData';
 
 const DrawResult = () => {
   useStatusBar('white');
@@ -45,8 +47,8 @@ const DrawResult = () => {
           }}>
           <TopView />
           <SketchView paths={paths} index={drawIndex} />
-          <StarResultView showStar={true}/>
-          <BtnGroup />
+          <StarResultView showStar={true} />
+          <BtnGroup drawIndex={drawIndex} />
         </View>
         <FooterSpring />
       </ScrollView>
@@ -54,9 +56,10 @@ const DrawResult = () => {
   );
 };
 
-const BtnGroup: React.FC = () => {
+const BtnGroup: React.FC<{drawIndex: number}> = ({drawIndex}) => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const [coins, setCoins] = useState<number>(0);
+  const [sketchList, setSketchList] = useState<SketchArtItem[]>([]);
 
   const fetchData = async () => {
     await loadData<number>('CoinsStorage')
@@ -66,6 +69,14 @@ const BtnGroup: React.FC = () => {
       .catch(() => {
         setCoins(2000);
         saveData('CoinsStorage', 2000);
+      });
+    await loadData<SketchArtItem[]>('sketchListStorage')
+      .then(dataSketch => {
+        setSketchList(dataSketch);
+      })
+      .catch(() => {
+        saveData('sketchListStorage', SketchArtList);
+        setSketchList(SketchArtList);
       });
   };
 
@@ -77,6 +88,9 @@ const BtnGroup: React.FC = () => {
 
   const handleFinish = () => {
     saveData('CoinsStorage', coins + 300);
+    const newSketchList = [...sketchList];
+    newSketchList[drawIndex].star = 3;
+    saveData('sketchListStorage', newSketchList);
     navigation.navigate('StartScreen');
   };
 
