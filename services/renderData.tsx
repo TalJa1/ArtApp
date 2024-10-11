@@ -145,14 +145,14 @@ export const BtnGroupList2 = [
   {
     img: null,
     icon: ctrlZIcon(vw(8), vw(8)),
-    backColor: '#EFBB00',
-    borderColor: '#F09D3C',
+    backColor: '#999999',
+    borderColor: '#999999',
   },
   {
     img: null,
     icon: ctrlYIcon(vw(8), vw(8)),
-    backColor: '#EF99DA',
-    borderColor: '#DB80C2',
+    backColor: '#999999',
+    borderColor: '#999999',
   },
   {
     img: null,

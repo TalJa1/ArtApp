@@ -68,6 +68,13 @@ export interface BtnGroupProps {
   handleUndo: () => void;
 }
 
+export interface BtnGroup1Props {
+  index: number;
+  handleToggleBrushProperties: () => void;
+  paths: PathType[];
+  handleToggleEraser: () => void;
+}
+
 export interface BtnGroupItem {
   img: any | null;
   icon: JSX.Element | null;

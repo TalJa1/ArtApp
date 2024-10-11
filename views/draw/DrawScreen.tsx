@@ -19,8 +19,8 @@ import {
 } from '@react-navigation/native';
 import {
   BrushItem,
+  BtnGroup1Props,
   BtnGroupItem,
-  BtnGroupProps,
   DetailRouteParams,
   TabTitleProps,
 } from '../../services/typeProps';
@@ -152,7 +152,7 @@ const DrawScreen = () => {
   );
 };
 
-const BtnGroup: React.FC<BtnGroupProps> = ({
+const BtnGroup: React.FC<BtnGroup1Props> = ({
   handleToggleEraser,
   handleToggleBrushProperties,
   index,

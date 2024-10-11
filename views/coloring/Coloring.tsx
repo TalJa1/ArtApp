@@ -30,6 +30,7 @@ import {loadData, saveData} from '../../services/storage';
 import {BrushList, BtnGroupList2} from '../../services/renderData';
 import {DEFAULT_COLORS} from '@benjeau/react-native-draw-extras';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import BrushPropertiesComponent from '../../components/draw/BrushPropertiesComponent';
 
 const Coloring = () => {
   useStatusBar('white');
@@ -39,10 +40,8 @@ const Coloring = () => {
 
   const [color, setColor] = useState(DEFAULT_COLORS[0][0][0]);
   const [thickness, setThickness] = useState(5);
-  const [tool, setTool] = useState(DrawingTool.Brush);
   const [visibleBrushProperties, setVisibleBrushProperties] = useState(false);
   const [brush, setBrush] = useState<BrushItem[]>([]);
-  const [coins, setCoins] = useState<number>(0);
   const [paths, setPaths] = useState<any[]>([]);
 
   const fetchData = async () => {
@@ -100,29 +99,45 @@ const Coloring = () => {
       <View style={{flex: 1, paddingHorizontal: vw(5), marginVertical: vh(2)}}>
         <BackBtn />
         <GestureHandlerRootView style={{flex: 1}}>
-          <ImageBackground
-            source={img}
-            style={styles.imageBackground}
-            imageStyle={styles.imageStyle}>
-            <Canvas
-              ref={canvasRef}
-              height={vh(50)}
-              color={color}
-              thickness={thickness}
-              opacity={100}
-              tool={tool}
-              onPathsChange={handlePathsChange}
-            />
-          </ImageBackground>
+          <View style={styles.canvasContainer}>
+            <ImageBackground
+              source={img} // Your image as the background
+              style={styles.imageBackground}
+              imageStyle={styles.imageStyle}>
+              {/* Canvas placed on top of the image */}
+              <Canvas
+                ref={canvasRef}
+                height={vh(50)} // You can adjust based on your UI
+                color={color}
+                thickness={thickness}
+                tool={DrawingTool.Brush}
+                onPathsChange={handlePathsChange}
+                opacity={100} // Keep opacity at 100% for the brush strokes
+                style={styles.canvas}
+              />
+            </ImageBackground>
+          </View>
         </GestureHandlerRootView>
         <BtnGroup
-          index={0}
+          index={index}
           handleToggleBrushProperties={handleToggleBrushProperties}
           paths={paths}
           handleClear={handleClear}
           handleUndo={handleUndo}
         />
       </View>
+      {visibleBrushProperties && (
+        <BrushPropertiesComponent
+          visibleBrushProperties={visibleBrushProperties}
+          setVisibleBrushProperties={setVisibleBrushProperties}
+          BrushList={brush}
+          setBrushList={setBrush}
+          brushColor={color}
+          setBrushColor={setColor}
+          thickness={thickness}
+          setThickness={setThickness}
+        />
+      )}
     </SafeAreaView>
   );
 };
@@ -186,13 +201,22 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
-  imageBackground: {
+  canvasContainer: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  imageBackground: {
+    width: '100%',
+    height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
   },
   imageStyle: {
     resizeMode: 'contain',
+  },
+  canvas: {
+    backgroundColor: 'transparent',
   },
   btnGroupContainer: {
     flexDirection: 'row',
