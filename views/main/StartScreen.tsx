@@ -115,6 +115,7 @@ const Footer: React.FC<StartScreenFooterProps> = ({setCoins}) => {
         {FourBtn.map((btn, index) => {
           return (
             <TouchableOpacity
+              disabled={index === 2}
               onPress={() => handleBtnPress(index)}
               key={index}
               style={styles.footerBtn}>
