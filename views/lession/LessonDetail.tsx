@@ -57,7 +57,7 @@ const Banner: React.FC = () => {
     <View style={styles.bannerContainer}>
       <Image
         style={styles.banner}
-        source={require('../../assets/lesson/5+.png')}
+        source={require('../../assets/lesson/bannerAnimal.png')}
       />
       <Image
         style={styles.icon}
