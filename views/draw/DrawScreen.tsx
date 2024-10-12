@@ -2,7 +2,6 @@
 import {
   Animated,
   Image,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -129,38 +128,36 @@ const DrawScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={{flexGrow: 1}}>
-        <View style={{flex: 1, marginBottom: vh(2), paddingHorizontal: vw(5)}}>
-          <HeaderSketch coins={coins} />
-          <TabTitle data={data} />
-          <GestureHandlerRootView style={{flex: 1}}>
-            <ViewShot
-              ref={viewShotRef}
-              options={{format: 'png', quality: 1}}
-              style={{flex: 1}}>
-              <Canvas
-                ref={canvasRef}
-                height={vh(50)}
-                color={color}
-                thickness={thickness}
-                opacity={100}
-                tool={tool}
-                onPathsChange={handlePathsChange}
-              />
-            </ViewShot>
-          </GestureHandlerRootView>
-        </View>
-        <View style={{paddingHorizontal: vw(5)}}>
-          <BtnGroup
-            index={index}
-            handleToggleEraser={handleToggleEraser}
-            handleToggleBrushProperties={handleToggleBrushProperties}
-            paths={paths}
-            handleCapture={handleCapture}
-          />
-        </View>
-        <FooterAutumn showIcon1={false} showIcon2={false} />
-      </ScrollView>
+      <View style={{flex: 1, marginBottom: vh(2), paddingHorizontal: vw(5)}}>
+        <HeaderSketch coins={coins} />
+        <TabTitle data={data} />
+        <GestureHandlerRootView style={{flex: 1}}>
+          <ViewShot
+            ref={viewShotRef}
+            options={{format: 'png', quality: 1}}
+            style={{flex: 1}}>
+            <Canvas
+              ref={canvasRef}
+              height={vh(50)}
+              color={color}
+              thickness={thickness}
+              opacity={100}
+              tool={tool}
+              onPathsChange={handlePathsChange}
+            />
+          </ViewShot>
+        </GestureHandlerRootView>
+      </View>
+      <View style={{paddingHorizontal: vw(5)}}>
+        <BtnGroup
+          index={index}
+          handleToggleEraser={handleToggleEraser}
+          handleToggleBrushProperties={handleToggleBrushProperties}
+          paths={paths}
+          handleCapture={handleCapture}
+        />
+      </View>
+      <FooterAutumn showIcon1={false} showIcon2={false} />
       {visibleBrushProperties && (
         <BrushPropertiesComponent
           visibleBrushProperties={visibleBrushProperties}

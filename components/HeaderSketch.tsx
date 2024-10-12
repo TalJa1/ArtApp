@@ -33,6 +33,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginVertical: vh(2),
+    marginVertical: vh(1),
   },
 });
