@@ -151,9 +151,7 @@ const CenterView: React.FC = () => {
   return (
     <View style={centerAll}>
       <Image
-        width={vw(80)}
-        height={vw(80)}
-        resizeMode="contain"
+        style={styles.centerImg}
         source={require('../../assets/start/start1.png')}
       />
       <TouchableOpacity
@@ -271,5 +269,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: vw(100),
     height: vh(100),
+  },
+  centerImg: {
+    width: vw(70),
+    height: vw(70),
+    resizeMode: 'contain',
   },
 });
