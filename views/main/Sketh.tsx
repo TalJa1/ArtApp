@@ -185,7 +185,7 @@ export const ArtTabRender: React.FC<ArtTabRenderProps> = ({data, index}) => {
             onPress={handleDraw}
             style={[styles.btnArt, centerAll]}>
             <View style={styles.starContainer}>{renderStars(data.star)}</View>
-            <Image source={data?.img} />
+            <Image style={styles.img} source={data?.img} />
           </TouchableOpacity>
           <SketchModalComponent
             visible={modalVisible}
@@ -275,5 +275,10 @@ const styles = StyleSheet.create({
     height: 10,
     borderRadius: 5,
     marginHorizontal: 5,
+  },
+  img: {
+    width: vw(11),
+    height: vw(11),
+    resizeMode: 'contain',
   },
 });
