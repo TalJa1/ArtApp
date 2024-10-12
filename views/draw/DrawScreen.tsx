@@ -138,7 +138,7 @@ const DrawScreen = () => {
             style={{flex: 1}}>
             <Canvas
               ref={canvasRef}
-              height={vh(45)}
+              height={vh(50)}
               color={color}
               thickness={thickness}
               opacity={100}
@@ -278,8 +278,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   btnGroupContainer: {
+    position: 'absolute',
+    bottom: vh(0),
+    alignSelf: 'center',
     flexDirection: 'row',
-    columnGap: vw(2),
+    columnGap: vw(4),
     backgroundColor: '#E5F0FE',
     paddingVertical: vh(1.5),
     paddingHorizontal: vw(4),
