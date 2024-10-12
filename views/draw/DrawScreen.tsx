@@ -131,14 +131,14 @@ const DrawScreen = () => {
       <View style={{flex: 1, marginBottom: vh(2), paddingHorizontal: vw(5)}}>
         <HeaderSketch coins={coins} />
         <TabTitle data={data} />
-        <GestureHandlerRootView style={{flex: 1}}>
+        <GestureHandlerRootView style={[{flex: 1}, centerAll]}>
           <ViewShot
             ref={viewShotRef}
             options={{format: 'png', quality: 1}}
             style={{flex: 1}}>
             <Canvas
               ref={canvasRef}
-              height={vh(50)}
+              height={vh(45)}
               color={color}
               thickness={thickness}
               opacity={100}
