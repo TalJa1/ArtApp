@@ -37,7 +37,7 @@ export default StarResultView;
 
 const styles = StyleSheet.create({
   starContainer: {
-    justifyContent: 'center',
+    flex: 1,
     alignItems: 'center',
     rowGap: vh(1),
     marginVertical: vh(2),

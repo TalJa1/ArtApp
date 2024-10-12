@@ -213,8 +213,6 @@ const styles = StyleSheet.create({
   },
   btnContainer: {
     flexDirection: 'row',
-    position: 'absolute',
-    bottom: vh(0),
     justifyContent: 'space-between',
   },
   homeBtn: {
