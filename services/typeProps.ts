@@ -80,6 +80,7 @@ export interface BtnGroup1Props {
   handleToggleBrushProperties: () => void;
   paths: PathType[];
   handleToggleEraser: () => void;
+  handleCapture: () => void;
 }
 
 export interface BtnGroupItem {
@@ -140,12 +141,14 @@ export type DrawResultProps = {
   DrawResult: {
     paths: PathType[];
     drawIndex: number;
+    img: any;
   };
 };
 
 export interface SketchViewDrawResultProps {
   paths: PathType[];
   index: number;
+  img: any;
 }
 
 export interface HeaderInterface {

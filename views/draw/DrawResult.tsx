@@ -21,8 +21,6 @@ import {
   SketchArtItem,
   SketchViewDrawResultProps,
 } from '../../services/typeProps';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import {Canvas} from '@benjeau/react-native-draw';
 import {vh, vw} from '../../services/styleSheets';
 import FooterSpring from '../../components/FooterSpring';
 import {homeIcon} from '../../assets/svgXml';
@@ -34,7 +32,7 @@ import {SketchArtList} from '../../services/renderData';
 const DrawResult = () => {
   useStatusBar('white');
   const route = useRoute<RouteProp<DrawResultProps, 'DrawResult'>>();
-  const {paths, drawIndex} = route.params;
+  const {img, paths, drawIndex} = route.params;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -46,7 +44,7 @@ const DrawResult = () => {
             paddingHorizontal: vw(5),
           }}>
           <TopView />
-          <SketchView paths={paths} index={drawIndex} />
+          <SketchView paths={paths} index={drawIndex} img={img} />
           <StarResultView showStar={true} />
           <BtnGroup drawIndex={drawIndex} />
         </View>
@@ -129,16 +127,14 @@ const TopView: React.FC = () => {
   );
 };
 
-const SketchView: React.FC<SketchViewDrawResultProps> = ({paths, index}) => {
+const SketchView: React.FC<SketchViewDrawResultProps> = ({img, index}) => {
   return (
     <View style={{alignItems: 'center'}}>
       <View style={styles.SketchIndexContainer}>
         <Text style={styles.SketchIndexTxt}>{index}</Text>
       </View>
       <View style={styles.sketchViewContainer}>
-        <GestureHandlerRootView style={styles.centeredCanvasContainer}>
-          <Canvas enabled={false} initialPaths={paths} style={styles.canvas} />
-        </GestureHandlerRootView>
+        <Image source={{uri: img}} style={styles.image} />
       </View>
     </View>
   );
@@ -194,10 +190,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  canvas: {
+  image: {
     width: '100%',
     height: '100%',
-    resizeMode: 'contain', // Ensure the drawing is contained within the container
+    resizeMode: 'contain',
   },
   SketchIndexContainer: {
     position: 'absolute',

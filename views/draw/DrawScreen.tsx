@@ -34,6 +34,7 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import BrushPropertiesComponent from '../../components/draw/BrushPropertiesComponent';
 import {loadData, saveData} from '../../services/storage';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import ViewShot, {captureRef} from 'react-native-view-shot';
 
 const DrawScreen = () => {
   useStatusBar('white');
@@ -48,6 +49,8 @@ const DrawScreen = () => {
   const [visibleBrushProperties, setVisibleBrushProperties] = useState(false);
   const [brush, setBrush] = useState<BrushItem[]>([]);
   const [coins, setCoins] = useState<number>(0);
+  const viewShotRef = useRef(null);
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const [paths, setPaths] = useState<any[]>([]);
 
   const handleToggleEraser = () => {
@@ -108,6 +111,22 @@ const DrawScreen = () => {
     // saveData('userPaths', newPaths);
   };
 
+  const handleCapture = async () => {
+    try {
+      const uri = await captureRef(viewShotRef, {
+        format: 'png',
+        quality: 1,
+      });
+      navigation.navigate('DrawResult', {
+        img: uri,
+        paths: paths,
+        drawIndex: index,
+      });
+    } catch (error) {
+      console.error('Failed to capture screenshot', error);
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
@@ -115,15 +134,20 @@ const DrawScreen = () => {
           <HeaderSketch coins={coins} />
           <TabTitle data={data} />
           <GestureHandlerRootView style={{flex: 1}}>
-            <Canvas
-              ref={canvasRef}
-              height={vh(50)}
-              color={color}
-              thickness={thickness}
-              opacity={100}
-              tool={tool}
-              onPathsChange={handlePathsChange}
-            />
+            <ViewShot
+              ref={viewShotRef}
+              options={{format: 'png', quality: 1}}
+              style={{flex: 1}}>
+              <Canvas
+                ref={canvasRef}
+                height={vh(50)}
+                color={color}
+                thickness={thickness}
+                opacity={100}
+                tool={tool}
+                onPathsChange={handlePathsChange}
+              />
+            </ViewShot>
           </GestureHandlerRootView>
         </View>
         <View style={{paddingHorizontal: vw(5)}}>
@@ -132,6 +156,7 @@ const DrawScreen = () => {
             handleToggleEraser={handleToggleEraser}
             handleToggleBrushProperties={handleToggleBrushProperties}
             paths={paths}
+            handleCapture={handleCapture}
           />
         </View>
         <FooterAutumn showIcon1={false} showIcon2={false} />
@@ -156,7 +181,7 @@ const BtnGroup: React.FC<BtnGroup1Props> = ({
   handleToggleEraser,
   handleToggleBrushProperties,
   index,
-  paths,
+  handleCapture,
 }) => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const BtnList: BtnGroupItem[] = BtnGroupList;
@@ -172,7 +197,7 @@ const BtnGroup: React.FC<BtnGroup1Props> = ({
         handleToggleEraser();
         break;
       case 3:
-        navigation.navigate('DrawResult', {paths: paths, drawIndex: index});
+        handleCapture();
         break;
     }
   };
