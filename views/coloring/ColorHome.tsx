@@ -32,7 +32,7 @@ const ColorHome = () => {
     setModalVisible(true);
   };
 
-  const handleCloseModal = () => {
+  const handleCloseAndNavigateModal = () => {
     setModalVisible(false);
     if (selectedImage !== null && selectedIndex !== null) {
       navigation.navigate('Coloring', {
@@ -40,6 +40,12 @@ const ColorHome = () => {
         index: selectedIndex,
       });
     }
+    setSelectedImage(null);
+    setSelectedIndex(null);
+  };
+
+  const handleCloseModal = () => {
+    setModalVisible(false);
     setSelectedImage(null);
     setSelectedIndex(null);
   };
@@ -86,7 +92,7 @@ const ColorHome = () => {
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={[styles.modalButton, centerAll]}
-                    onPress={() => handleCloseModal()}>
+                    onPress={() => handleCloseAndNavigateModal()}>
                     <Text style={styles.modalButtonText}>Tô lại</Text>
                   </TouchableOpacity>
                 </View>
