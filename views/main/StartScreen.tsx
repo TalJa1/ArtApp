@@ -64,14 +64,14 @@ const StartScreen = () => {
           </View>
           <Header coins={coins} setCoins={setCoins} />
           <CenterView />
-          <Footer setCoins={setCoins} />
+          <Footer setCoins={setCoins} coins={coins}/>
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
 
-const Footer: React.FC<StartScreenFooterProps> = ({setCoins}) => {
+const Footer: React.FC<StartScreenFooterProps> = ({setCoins, coins}) => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const [modalVisible, setModalVisible] = useState(false);
   const [brush, setBrush] = useState<BrushItem[]>([]);
@@ -140,6 +140,7 @@ const Footer: React.FC<StartScreenFooterProps> = ({setCoins}) => {
         BrushListData={brush}
         setBrushList={setBrush}
         setCoins={setCoins}
+        coins={coins}
       />
     </View>
   );

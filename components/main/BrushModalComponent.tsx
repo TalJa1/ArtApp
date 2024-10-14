@@ -20,6 +20,7 @@ const BrushModalComponent: React.FC<BrushModalProps> = ({
   BrushListData,
   setBrushList,
   setCoins,
+  coins,
 }) => {
   const [selectedBrushIndex, setSelectedBrushIndex] = useState<number | null>(
     null,
@@ -108,8 +109,8 @@ const BrushModalComponent: React.FC<BrushModalProps> = ({
               </View>
               <StarModalGroupComponent
                 starCount={BrushListData[selectedBrushIndex].price}
-                borderColor={selectedBrushIndex !== 2 ? '#E0E0E0' : '#FEF9BD'}
-                color={selectedBrushIndex !== 2 ? '#999999' : '#EFBB00'}
+                borderColor={BrushList[selectedBrushIndex].price > coins ? '#E0E0E0' : '#FEF9BD'}
+                color={BrushList[selectedBrushIndex].price > coins ? '#999999' : '#EFBB00'}
               />
             </View>
           )}
@@ -117,7 +118,7 @@ const BrushModalComponent: React.FC<BrushModalProps> = ({
             style={styles.closeButton}
             onPress={() => {
               if (selectedBrushIndex !== null) {
-                selectedBrushIndex !== 2
+                BrushList[selectedBrushIndex].price > coins
                   ? handleBackClick()
                   : handleActiveBrush();
               } else {
@@ -126,7 +127,7 @@ const BrushModalComponent: React.FC<BrushModalProps> = ({
             }}>
             <Text style={styles.closeButtonText}>
               {selectedBrushIndex !== null
-                ? selectedBrushIndex !== 2
+                ? BrushList[selectedBrushIndex].price > coins
                   ? 'Trở lại'
                   : 'Mua'
                 : 'Đóng'}

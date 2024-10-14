@@ -20,6 +20,7 @@ export interface BrushModalProps {
   BrushListData: BrushItem[];
   setBrushList: (list: BrushItem[]) => void;
   setCoins: (coins: number) => void;
+  coins: number;
 }
 
 export interface SketchArtItem {
@@ -108,6 +109,7 @@ export interface StartScreenHeaderProps {
 
 export interface StartScreenFooterProps {
   setCoins: (coins: number) => void;
+  coins: number;
 }
 
 export type SuggestionProps = {
