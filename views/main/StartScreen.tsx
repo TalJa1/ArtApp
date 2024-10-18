@@ -272,8 +272,8 @@ const styles = StyleSheet.create({
     height: vh(100),
   },
   centerImg: {
-    width: vw(70),
-    height: vw(70),
+    width: vw(65),
+    height: vw(65),
     resizeMode: 'contain',
   },
 });

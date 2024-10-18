@@ -35,9 +35,7 @@ const LoadingScreen = () => {
           <Text style={styles.txt}>Vui từng khoảnh khắc</Text>
         </View>
         <Image
-          width={vw(70)}
-          height={vw(70)}
-          resizeMode="cover"
+          style={styles.centerImg}
           source={require('../../assets/loading/loadingImage.png')}
         />
       </ImageBackground>
@@ -57,5 +55,10 @@ const styles = StyleSheet.create({
     color: '#000',
     fontSize: 24,
     fontWeight: 'bold',
+  },
+  centerImg: {
+    width: vw(65),
+    height: vw(65),
+    resizeMode: 'contain',
   },
 });
